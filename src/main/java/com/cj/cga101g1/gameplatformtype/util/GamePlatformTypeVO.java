@@ -1,10 +1,13 @@
 package com.cj.cga101g1.gameplatformtype.util;
 
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "gameplatformtype")
+@Component
 public class GamePlatformTypeVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

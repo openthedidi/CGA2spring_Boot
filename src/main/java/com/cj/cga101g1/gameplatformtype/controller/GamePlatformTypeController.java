@@ -20,9 +20,7 @@ public class GamePlatformTypeController {
 
     @PostMapping("/newType")
     public GamePlatformTypeVO newType(@RequestBody GamePlatformTypeVO gamePlatformTypeVO){
-        System.out.println(gamePlatformTypeVO.getGamePlatformName());
-        gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
-        return gamePlatformTypeVO;
+        return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
     }
 
     @GetMapping("/getOneType/{gamePlatformNo}")

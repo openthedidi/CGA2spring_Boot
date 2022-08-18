@@ -18,4 +18,9 @@ public class ProductServiceImpl implements ProductService{
         return productDao.findByPrimaryKey(ProductNo);
 
     }
+
+    @Override
+    public String showSelledCount() {
+        return productDao.showSelledCount();
+    }
 }

@@ -10,8 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-
-@RestController("/CGA101G1/product")
+@RequestMapping("CGA101G1/product")
+@RestController
 @Validated
 public class ProductController {
 
@@ -41,4 +41,9 @@ public class ProductController {
     }
 
 
+    @GetMapping("/showSelledCount")
+    public String showSelledCount(){
+        String result = productService.showSelledCount();
+        return result;
+    }
 }

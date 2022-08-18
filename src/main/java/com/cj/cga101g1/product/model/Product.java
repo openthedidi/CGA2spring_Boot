@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
-    @JsonProperty("productNumber")
+//    @JsonProperty("productNumber")
     private Integer productNo;
     private Integer gameTypeNo;
     private Integer gamePlatformNo;

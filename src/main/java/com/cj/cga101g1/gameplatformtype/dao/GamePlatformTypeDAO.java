@@ -16,8 +16,12 @@ public interface GamePlatformTypeDAO {
     /******  查詢一個PlatformType由完整名稱  ********/
     public GamePlatformTypeVO getType(String gamePlatformTypeName);
 
-    /******  查詢一個PlatformType由完整名稱  ********/
+    /******  查詢一個PlatformType由關鍵字名稱  ********/
     public List<GamePlatformTypeVO> getTypeByKeyword(String keyword);
+
+    /******  查詢全部的PlatformType  ********/
+    public List<GamePlatformTypeVO> getAllType();
+
 
     /******  修改一個PlatformType由PK  ********/
     public GamePlatformTypeVO updateOneType(GamePlatformTypeVO gamePlatformTypeVO);

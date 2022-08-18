@@ -1,8 +1,15 @@
 package com.cj.cga101g1.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
+    @JsonProperty("productNumber")
     private Integer productNo;
     private Integer gameTypeNo;
     private Integer gamePlatformNo;

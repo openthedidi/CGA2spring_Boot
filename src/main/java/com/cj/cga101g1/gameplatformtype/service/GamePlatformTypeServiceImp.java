@@ -35,6 +35,11 @@ public class GamePlatformTypeServiceImp implements GamePlatformTypeService{
     }
 
     @Override
+    public List<GamePlatformTypeVO> getAllType() {
+        return gamePlatformTypeDAO.getAllType();
+    }
+
+    @Override
     public GamePlatformTypeVO updateOneType(GamePlatformTypeVO gamePlatformTypeVO2) {
         GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeDAO.updateOneType(gamePlatformTypeVO2);
         return gamePlatformTypeDAO.updateOneType(gamePlatformTypeVO);

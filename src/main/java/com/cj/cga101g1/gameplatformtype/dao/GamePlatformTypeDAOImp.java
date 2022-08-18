@@ -4,6 +4,7 @@ import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +54,14 @@ public class GamePlatformTypeDAOImp implements GamePlatformTypeDAO{
     @Override
     public List<GamePlatformTypeVO> getTypeByKeyword(String keyword) {
         return gamePlatformTypeRepository.FindByKeywordName(keyword);
+    }
+
+    @Override
+    public List<GamePlatformTypeVO> getAllType() {
+        Iterable <GamePlatformTypeVO> iterable = gamePlatformTypeRepository.findAll();
+        List<GamePlatformTypeVO> result = new ArrayList<>();
+        iterable.forEach(result::add);
+        return result;
     }
 
 }

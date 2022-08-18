@@ -12,23 +12,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/GameType")
+@RequestMapping("/CGA101G1/gametype")
 @RestController
 public class GameTypeController {
 
     @Autowired
     private GameTypeVO gameTypeVO;
-
     @Autowired
     private GameTypeService gameTypeService;
 
-
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    @Autowired
-    private GameTypeRowMapper gameTypeRowMapper;
-    @Autowired
-    private GameTypeResultSetExtractor gameTypeResultSetExtractor;
 
     @PostMapping("/newGameType")
     public GameTypeVO newGameType(@RequestBody GameTypeVO gameTypeVO1){
@@ -43,8 +35,8 @@ public class GameTypeController {
         return listR;
     }
 
-    @GetMapping("/getGametypes")
-    public List<GameTypeVO> getGameTypes(){
+    @GetMapping("/getAllGameType")
+    public List<GameTypeVO> getAllGameType(){
         List<GameTypeVO> list = gameTypeService.getAllGameTypes();
         return  list;
     }

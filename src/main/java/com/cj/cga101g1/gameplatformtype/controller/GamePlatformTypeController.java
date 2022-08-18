@@ -5,13 +5,16 @@ package com.cj.cga101g1.gameplatformtype.controller;
 import com.cj.cga101g1.gameplatformtype.service.GamePlatformTypeService;
 import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gamePlatformType")
+@RequestMapping("CGA101G1/gameplatformtype")
 public class GamePlatformTypeController {
 
     @Autowired
@@ -23,10 +26,17 @@ public class GamePlatformTypeController {
         return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
     }
 
+    @GetMapping("/getAllGamePlatformType")
+    public ResponseEntity<List<GamePlatformTypeVO>> getAllType(){
+        List<GamePlatformTypeVO> list=  gamePlatformTypeService.getAllType();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
     @GetMapping("/getOneType/{gamePlatformNo}")
     public GamePlatformTypeVO getOneType(@PathVariable Integer gamePlatformNo){
         return gamePlatformTypeService.getOneType(gamePlatformNo);
     }
+
 
     @GetMapping("/getOneTypeByName/{gamePlatformName}")
     public GamePlatformTypeVO getOneTypeByName(@PathVariable String gamePlatformName){
@@ -63,6 +73,15 @@ public class GamePlatformTypeController {
         }else {
             return "DB無此ID："+gamePlatformNo+"的種類";
         }
+    }
+
+    /** 測試利用resttemplate發請求 **/
+    @GetMapping("/useResttemplate")
+    public String useResttemplate(){
+        RestTemplate restTemplate = new RestTemplate();
+        GamePlatformTypeVO gamePlatformTypeVO =
+                restTemplate.getForObject("https://mocki.io/v1/476013b9-4c92-41e8-8e08-08b3ffb28447",GamePlatformTypeVO.class);
+        return gamePlatformTypeVO.getGamePlatformName();
     }
 
 }

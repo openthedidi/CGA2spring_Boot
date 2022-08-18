@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockReset;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -38,7 +39,7 @@ class GamePlatformTypeControllerTest {
                 .andExpect(jsonPath("$.gamePlatformName",equalTo("Switch")))
                 .andReturn();
         String responseBody = mvcResult.getResponse().getContentAsString();
-        System.out.println(responseBody);
+//        System.out.println(responseBody);
         assertEquals("application/json",
                 mvcResult.getResponse().getContentType());
     }
@@ -60,7 +61,13 @@ class GamePlatformTypeControllerTest {
 
 
     @Test
-    void getOneTypeByName() {
+    void getOneTypeByName() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/gamePlatformType/getOneTypeByName/PS4");
+
+       mockMvc.perform(requestBuilder)
+                .andDo(print())
+                .andExpect(jsonPath("$.gamePlatformName",equalTo("PS4")))
+                .andReturn();
     }
 
     @Test

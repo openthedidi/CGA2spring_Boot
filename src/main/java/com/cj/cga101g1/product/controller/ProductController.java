@@ -6,37 +6,14 @@ import com.cj.cga101g1.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-@RestController
+
+@RestController("/CGA101G1/product")
 @Validated
 public class ProductController {
-
-    @Autowired
-    private Method01 method01;
-
-
-    @PostMapping("/newMethod")
-    public Method01 newMethod(@RequestBody Method01 method01){
-        return  method01;
-    }
-
-
-
-
-
-
 
     @Autowired
     private ProductService productService;
@@ -52,10 +29,6 @@ public class ProductController {
        }
     }
 
-
-
-
-
     @GetMapping("/products")//從requst的名字取值
     public ResponseEntity<Product> getProductByParaName(@RequestParam(name="productNo") Integer productNo){
         Product product = productService.findByPrimaryKey(productNo);
@@ -66,4 +39,6 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+
 }

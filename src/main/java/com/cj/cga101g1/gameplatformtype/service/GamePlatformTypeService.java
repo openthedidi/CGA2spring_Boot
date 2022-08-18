@@ -19,6 +19,11 @@ public interface GamePlatformTypeService {
     /******  查詢一個PlatformType由完整名稱  ********/
     public List<GamePlatformTypeVO> getOneTypeByKeyName(String keyName);
 
+
+    /******  查詢全部的PlatformType  ********/
+    public List<GamePlatformTypeVO> getAllType();
+
+
     /******  修改一個PlatformType由PK  ********/
     public GamePlatformTypeVO updateOneType(GamePlatformTypeVO gamePlatformTypeVO);
 

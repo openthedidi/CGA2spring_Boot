@@ -37,6 +37,17 @@ class GamePlatformTypeServiceImpMockTest {
 
     @Test
     void newPlatformType() {
+        GamePlatformTypeVO gamePlatformTypeVO_Mock = new GamePlatformTypeVO();
+        gamePlatformTypeVO_Mock.setGamePlatformName("Mock");
+        gamePlatformTypeVO_Mock.setGamePlatformNo(556688);
+        Mockito.when(gamePlatformTypeDAO.newType(Mockito.any(GamePlatformTypeVO.class))).thenReturn(gamePlatformTypeVO_Mock);
+        GamePlatformTypeVO gamePlatformTypeVOIn = new GamePlatformTypeVO();
+        gamePlatformTypeVOIn.setGamePlatformNo(5588);
+        gamePlatformTypeVOIn.setGamePlatformName("NoMock");
+        GamePlatformTypeVO gamePlatformTypeResult =
+                gamePlatformTypeService.newPlatformType(gamePlatformTypeVOIn);
+        assertEquals("556688",gamePlatformTypeResult.getGamePlatformNo());
+
     }
 
     @Test

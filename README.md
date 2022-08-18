@@ -1,3 +1,11 @@
 # CGA2spring_Boot
 
-練習RESTful API 及Spring_Boot開發專案
+利用Spring_Boot改寫養成班專案
+
+範圍：
+
+實作RESTful API
+
+Sprin data JPA
+
+Uint Test(JUint 5)

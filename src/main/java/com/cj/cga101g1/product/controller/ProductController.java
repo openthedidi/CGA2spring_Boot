@@ -51,7 +51,7 @@ public class ProductController {
 
 
     @GetMapping("/showPageProduct")
-    public ResponseEntity<List<Object>> showPageProduct(@RequestParam (defaultValue = "1") String Page){
+    public ResponseEntity<List<Object>> showPageProduct(@RequestParam (defaultValue = "0") String Page){
             Integer page = Integer.valueOf(Page);
             List<Object> list = productService.getAllSelledProductsByMap(page);
             return ResponseEntity.status(HttpStatus.OK).body(list);

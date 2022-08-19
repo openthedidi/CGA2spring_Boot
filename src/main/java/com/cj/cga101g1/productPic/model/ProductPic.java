@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class ProductPic {
     private Integer productPicNO;
     private Integer productNO;
-    private Byte productPicContent;
+    private byte[] productPicContent;
 
     public Integer getProductPicNO() {
         return productPicNO;
@@ -25,11 +25,11 @@ public class ProductPic {
         this.productNO = productNO;
     }
 
-    public Byte getProductPicContent() {
+    public byte[] getProductPicContent() {
         return productPicContent;
     }
 
-    public void setProductPicContent(Byte productPicContent) {
+    public void setProductPicContent(byte[] productPicContent) {
         this.productPicContent = productPicContent;
     }
 }

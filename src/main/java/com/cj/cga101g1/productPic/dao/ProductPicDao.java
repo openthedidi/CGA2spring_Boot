@@ -1,8 +1,10 @@
 package com.cj.cga101g1.productPic.dao;
 
-public class ProductPicDao {
+import com.cj.cga101g1.productPic.model.ProductPic;
 
-    private Integer productNo;
-    private Integer productPicNo;
-    private byte[] productPicContentByte ;
+public interface ProductPicDao {
+    ProductPic getOneCoverByProductNo(Integer productNO);
+
+    ProductPic getOneCoverByProductPicNo(Integer ProductPicNo);
+
 }

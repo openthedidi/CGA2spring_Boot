@@ -47,7 +47,6 @@ public class ProductDaoImpl implements  ProductDao{
          final String ShowInSellCount =
                 "SELECT count(productNo) FROM product where ProductState = 1 ;";
         Integer result=(Integer) namedParameterJdbcTemplate.query(ShowInSellCount,productResultSetExtractor);
-        System.out.println(result);
         return result.toString();
     }
 
@@ -57,7 +56,11 @@ public class ProductDaoImpl implements  ProductDao{
                 + "join gameplatformtype b on a.gamePlatformNo = b.gamePlatformNo "
                 + "where ProductState = 1 order by productNo desc limit :page ,9 ";
         Map<String,Object> mapQ = new HashMap<>();
-        mapQ.put("page",page);
+        if(page<=0) {
+            mapQ.put("page",0);
+        }else {
+            mapQ.put("page",(page-1)*9);
+        }
         SqlRowSet sqlRowSet= namedParameterJdbcTemplate.queryForRowSet(sql,mapQ);
         List<Object> list = new ArrayList<>();
         while(sqlRowSet.next()){

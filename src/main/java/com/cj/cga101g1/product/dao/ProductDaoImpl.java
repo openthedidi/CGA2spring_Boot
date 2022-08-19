@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import javax.sql.RowSet;
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class ProductDaoImpl implements  ProductDao{
@@ -34,7 +34,6 @@ public class ProductDaoImpl implements  ProductDao{
 
         Map<String,Object> map = new HashMap<>();
         map.put("productNo",productNo);
-
         List<Product>list = namedParameterJdbcTemplate.query(GET_ONE,map,new ProductRowMapper());
         if(list.size()>0){
             return list.get(0);
@@ -50,5 +49,29 @@ public class ProductDaoImpl implements  ProductDao{
         Integer result=(Integer) namedParameterJdbcTemplate.query(ShowInSellCount,productResultSetExtractor);
         System.out.println(result);
         return result.toString();
+    }
+
+    @Override
+    public List<Object> getPageInSellByMap(Integer page) {
+        final String sql = "SELECT a.productNo,a.gameTypeNo,a.gamePlatformNo,a.productName,a.productPrice,b.GamePlatformName FROM product a  "
+                + "join gameplatformtype b on a.gamePlatformNo = b.gamePlatformNo "
+                + "where ProductState = 1 order by productNo desc limit :page ,9 ";
+        Map<String,Object> mapQ = new HashMap<>();
+        mapQ.put("page",page);
+        SqlRowSet sqlRowSet= namedParameterJdbcTemplate.queryForRowSet(sql,mapQ);
+        List<Object> list = new ArrayList<>();
+        while(sqlRowSet.next()){
+            Map<String,Object> map = new HashMap<>();
+            map.put("productNo", sqlRowSet.getObject(1));
+            map.put("gameTypeNo", sqlRowSet.getObject(2));
+            map.put("gamePlatformTypeName", sqlRowSet.getObject(6));
+            map.put("productName", sqlRowSet.getObject(4));
+            map.put("productPrice", sqlRowSet.getObject(5));
+            map.put("imgURL","/CGA101G1/product/showOneCover?ProductNO="+sqlRowSet.getObject(1));
+            list.add(map);
+        }
+
+
+        return list;
     }
 }

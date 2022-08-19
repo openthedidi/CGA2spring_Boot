@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequestMapping("CGA101G1/product")
 @RestController
@@ -45,5 +47,13 @@ public class ProductController {
     public String showSelledCount(){
         String result = productService.showSelledCount();
         return result;
+    }
+
+
+    @GetMapping("/showPageProduct")
+    public ResponseEntity<List<Object>> showPageProduct(@RequestParam (defaultValue = "1") String Page){
+            Integer page = Integer.valueOf(Page);
+            List<Object> list = productService.getAllSelledProductsByMap(page);
+            return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }

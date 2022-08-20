@@ -27,4 +27,9 @@ public interface ProductService {
     String showSellCountByMoney(Integer lowPrice, Integer highPrice);
     /**** show出特定金額範圍的上架商品的資訊 ****/
     List<Object> showInSellByMapAndMoney(Integer lowPrice, Integer highPrice, Integer page);
+
+    /**** show出符合關鍵字的上架商品的數量 ****/
+    String showSellProductByKeyWordPages(String keyWord);
+    /**** show出符合關鍵字的上架商品的資訊 ****/
+    List<Object> showSellProductByKeyWord(String keyWord, Integer page);
 }

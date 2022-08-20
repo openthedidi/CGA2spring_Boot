@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products/{productNo}")//直接填入參數
+    @GetMapping("/products/{productNo}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productNo){
        Product product = productService.findByPrimaryKey(productNo);
 
@@ -32,7 +32,7 @@ public class ProductController {
        }
     }
 
-    @GetMapping("/products")//從requst的名字取值
+    @GetMapping("/products")
     public ResponseEntity<Product> getProductByParaName(@RequestParam(name="productNo") Integer productNo){
         Product product = productService.findByPrimaryKey(productNo);
         if(product!=null){
@@ -90,6 +90,18 @@ public class ProductController {
                                                                 @RequestParam Integer highPrice,
                                                                    @RequestParam Integer Page){
         List<Object> list = productService.showInSellByMapAndMoney(lowPrice,highPrice,Page);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/showSellProductByKeyWordPages")
+    public String showSellProductByKeyWordPages(@RequestParam String keyWord){
+        String result = productService.showSellProductByKeyWordPages(keyWord);
+        return result;
+    }
+    @GetMapping("/showSellProductByKeyWord")
+    public ResponseEntity<List<Object>> showSellProductByKeyWord(@RequestParam String keyWord,
+                                                                @RequestParam Integer Page){
+        List<Object> list = productService.showSellProductByKeyWord(keyWord,Page);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }

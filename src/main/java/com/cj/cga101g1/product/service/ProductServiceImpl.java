@@ -60,4 +60,14 @@ public class ProductServiceImpl implements ProductService{
     public List<Object> showInSellByMapAndMoney(Integer lowPrice, Integer highPrice, Integer page) {
         return productDao.showInSellByMapAndMoney(lowPrice,highPrice,page);
     }
+
+    @Override
+    public String showSellProductByKeyWordPages(String keyWord) {
+        return productDao.showSellProductByKeyWordPages(keyWord);
+    }
+
+    @Override
+    public List<Object> showSellProductByKeyWord(String keyWord, Integer page) {
+        return productDao.showSellProductByKeyWord(keyWord,page);
+    }
 }

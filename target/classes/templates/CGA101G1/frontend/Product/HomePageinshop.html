@@ -662,7 +662,7 @@
                         sendURL = '/CGA101G1/product/showSellProductByKeyWordPages?keyWord=' + `${keyWord}`;
                         //先取頁數
                         axios({
-                            method: 'post',
+                            method: 'get',
                             url: sendURL,
                         })
                             .then((response) => {
@@ -670,7 +670,7 @@
                                 getKeyDataURL = '/CGA101G1/product/showSellProductByKeyWord?keyWord=' + `${keyWord}` + '&Page=' + `${this.page}`;
                                 //開始抓數據
                                 axios({
-                                    method: 'post',
+                                    method: 'get',
                                     url: getKeyDataURL,
                                 })
                                     .then((response) => {

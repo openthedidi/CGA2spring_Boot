@@ -21,4 +21,8 @@ public interface ProductDao {
     String showSellCountByMoney(Integer lowPrice, Integer highPrice);
 
     List<Object> showInSellByMapAndMoney(Integer lowPrice, Integer highPrice, Integer page);
+
+    String showSellProductByKeyWordPages(String keyWord);
+
+    List<Object> showSellProductByKeyWord(String keyWord, Integer page);
 }

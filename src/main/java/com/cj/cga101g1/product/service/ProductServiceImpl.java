@@ -40,4 +40,24 @@ public class ProductServiceImpl implements ProductService{
     public List<Object> showSellAndPlatformProduct(Integer gamePlatformNo,Integer Page) {
         return productDao.showSellAndPlatformProduct(gamePlatformNo,Page);
     }
+
+    @Override
+    public String showSellAndGameTypeProductPages(Integer gameTypeNo) {
+        return productDao.showSellAndGameTypeProductPages(gameTypeNo);
+    }
+
+    @Override
+    public List<Object> showSellAndGameTypeProduct(Integer gameTypeNo, Integer page) {
+        return productDao.showSellAndGameTypeProduct(gameTypeNo,page);
+    }
+
+    @Override
+    public String showSellCountByMoney(Integer lowPrice, Integer highPrice) {
+        return productDao.showSellCountByMoney(lowPrice,highPrice);
+    }
+
+    @Override
+    public List<Object> showInSellByMapAndMoney(Integer lowPrice, Integer highPrice, Integer page) {
+        return productDao.showInSellByMapAndMoney(lowPrice,highPrice,page);
+    }
 }

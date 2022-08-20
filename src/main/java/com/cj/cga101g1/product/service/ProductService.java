@@ -17,4 +17,14 @@ public interface ProductService {
     String showSelledCountByPlatFormType(Integer gamePlatformNo);
     /**** show出特定遊戲平台的上架商品的資訊 ****/
     List<Object> showSellAndPlatformProduct(Integer gamePlatformNo,Integer Page);
+
+    /**** show出特定遊戲種類的上架商品的數量 ****/
+    String showSellAndGameTypeProductPages(Integer gameTypeNo);
+    /**** show出特定遊戲種類的上架商品的資訊 ****/
+    List<Object> showSellAndGameTypeProduct(Integer gameTypeNo, Integer page);
+
+    /**** show出特定金額範圍的上架商品的數量 ****/
+    String showSellCountByMoney(Integer lowPrice, Integer highPrice);
+    /**** show出特定金額範圍的上架商品的資訊 ****/
+    List<Object> showInSellByMapAndMoney(Integer lowPrice, Integer highPrice, Integer page);
 }

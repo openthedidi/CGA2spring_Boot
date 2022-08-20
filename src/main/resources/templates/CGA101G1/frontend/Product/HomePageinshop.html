@@ -614,7 +614,7 @@
                         this.jsonData = [];
                         //先取頁數
                         axios({
-                            method: 'post',
+                            method: 'get',
                             url: '/CGA101G1/product/showSellAndGameTypeProductPages?gameTypeNo=' + `${gameTypeNoURL}`,
                         })
                             .then((response) => {
@@ -622,7 +622,7 @@
                                 this.pages = response.data;
                                 //開始抓資料放在頁面上
                                 axios({
-                                    method: 'post',
+                                    method: 'get',
                                     url: '/CGA101G1/product/showSellAndGameTypeProduct?gameTypeNo=' + `${gameTypeNoURL}` + '&Page=' + `${this.page}`,
                                 })
                                     .then((response) => {
@@ -639,14 +639,14 @@
 
                         //先取頁數
                         axios({
-                            method: 'post',
+                            method: 'get',
                             url: sendURL,
                         })
                             .then((response) => {
                                 this.pages = response.data;
                                 //開始抓數據
                                 axios({
-                                    method: 'post',
+                                    method: 'get',
                                     url: `/CGA101G1/product/showInSellByMapAndMoney?lowPrice=${lowPrice}&highPrice=${highPrice}&Page=${this.page}`,
                                 })
                                     .then((response) => {

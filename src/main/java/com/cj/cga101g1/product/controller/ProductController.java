@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 
@@ -34,7 +35,6 @@ public class ProductController {
     @GetMapping("/products")//從requst的名字取值
     public ResponseEntity<Product> getProductByParaName(@RequestParam(name="productNo") Integer productNo){
         Product product = productService.findByPrimaryKey(productNo);
-
         if(product!=null){
             return ResponseEntity.status(HttpStatus.OK).body(product);
         }else {
@@ -64,6 +64,32 @@ public class ProductController {
     public ResponseEntity<List<Object>> showSellAndPlatformProduct(@RequestParam Integer gamePlatformNo,
                                              @RequestParam Integer Page){
         List<Object> list = productService.showSellAndPlatformProduct(gamePlatformNo,Page);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/showSellAndGameTypeProductPages")
+    public String showSellAndGameTypeProductPages(@RequestParam Integer gameTypeNo){
+        String result = productService.showSellAndGameTypeProductPages(gameTypeNo);
+        return result;
+    }
+    @GetMapping("/showSellAndGameTypeProduct")
+    public ResponseEntity<List<Object>> showSellAndGameTypeProduct(@RequestParam Integer gameTypeNo,
+                                                                   @RequestParam Integer Page){
+        List<Object> list = productService.showSellAndGameTypeProduct(gameTypeNo,Page);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/showSellCountByMoney")
+    public String showSellCountByMoney(@RequestParam Integer lowPrice,
+                                       @RequestParam Integer highPrice){
+        String result = productService.showSellCountByMoney(lowPrice,highPrice);
+        return result;
+    }
+    @GetMapping("/showInSellByMapAndMoney")
+    public ResponseEntity<List<Object>> showInSellByMapAndMoney(@RequestParam Integer lowPrice,
+                                                                @RequestParam Integer highPrice,
+                                                                   @RequestParam Integer Page){
+        List<Object> list = productService.showInSellByMapAndMoney(lowPrice,highPrice,Page);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }

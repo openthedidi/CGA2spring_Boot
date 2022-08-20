@@ -28,6 +28,8 @@ public class ProductDaoImpl implements  ProductDao{
     private ProductResultSetExtractor productResultSetExtractor;
     @Autowired
     private OrderDetailService orderDetailService;
+    @Autowired
+    private  GamePlatformTypeDAO gamePlatformTypeDAO;
 
     final private String ShowInSellCount =
             "SELECT count(productNo) FROM product where ProductState = 1 ;";
@@ -116,9 +118,96 @@ public class ProductDaoImpl implements  ProductDao{
             Integer productNo =(Integer) sqlRowSet.getObject(1);
             map.put("productNo", productNo);
             map.put("gameTypeNo", sqlRowSet.getObject(2));
-//            GamePlatformTypeDAO gamePlatformTypeDAO = new GamePlatformTypeDAOImp();
-//            GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeDAO.getType(sqlRowSet.getInt(3));
-//            map.put("gamePlatformTypeName", gamePlatformTypeVO.getGamePlatformName());
+            GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeDAO.getType(sqlRowSet.getInt(3));
+            map.put("gamePlatformTypeName", gamePlatformTypeVO.getGamePlatformName());
+            map.put("productName", sqlRowSet.getObject(5));
+            map.put("productPrice", sqlRowSet.getObject(6));
+            map.put("imgURL","/CGA101G1/product/showOneCover?ProductNO="+sqlRowSet.getObject(1));
+            Map<String,Object> orderDetailResult = orderDetailService.showCaledCommentByProductNo(productNo);
+            map.put("avgCommentStar",orderDetailResult.get("avgCommentStar"));
+            list.add(map);
+        }
+
+        return list;
+    }
+
+    @Override
+    public String showSellAndGameTypeProductPages(Integer gameTypeNo) {
+        String appendSql = "and gameTypeNo = :gameTypeNo ;";
+        StringBuilder stringBuilder = new StringBuilder(ShowInSellCount);
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append(appendSql);
+        Map<String,Object> map = new HashMap<>();
+        map.put("gameTypeNo",gameTypeNo);
+        Integer result=(Integer) namedParameterJdbcTemplate.query(stringBuilder.toString(),map,productResultSetExtractor);
+        return result.toString();
+    }
+
+    @Override
+    public List<Object> showSellAndGameTypeProduct(Integer gameTypeNo, Integer page) {
+        final String sql =
+                "SELECT productNo,gameTypeNo,gamePlatformNo,gameCompanyNo,productName,productPrice FROM product where ProductState = 1 and gameTypeNo = :gameTypeNo order by productNo desc limit  :Page , 9;";
+        Map<String,Object> mapQ = new HashMap<>();
+        mapQ.put("gameTypeNo",gameTypeNo);
+        if(page<=0) {
+            mapQ.put("Page",0);
+        }else {
+            mapQ.put("Page",(page-1)*9);
+        }
+        SqlRowSet sqlRowSet= namedParameterJdbcTemplate.queryForRowSet(sql,mapQ);
+        List<Object> list = new ArrayList<>();
+        while(sqlRowSet.next()){
+            Map<String,Object> map = new HashMap<>();
+            Integer productNo =(Integer) sqlRowSet.getObject(1);
+            map.put("productNo", productNo);
+            map.put("gameTypeNo", sqlRowSet.getObject(2));
+            GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeDAO.getType(sqlRowSet.getInt(3));
+            map.put("gamePlatformTypeName", gamePlatformTypeVO.getGamePlatformName());
+            map.put("productName", sqlRowSet.getObject(5));
+            map.put("productPrice", sqlRowSet.getObject(6));
+            map.put("imgURL","/CGA101G1/product/showOneCover?ProductNO="+sqlRowSet.getObject(1));
+            Map<String,Object> orderDetailResult = orderDetailService.showCaledCommentByProductNo(productNo);
+            map.put("avgCommentStar",orderDetailResult.get("avgCommentStar"));
+            list.add(map);
+        }
+
+        return list;
+    }
+
+    @Override
+    public String showSellCountByMoney(Integer lowPrice, Integer highPrice) {
+        String appendSql = "and productPrice between :lowPrice and :highPrice";
+        StringBuilder stringBuilder = new StringBuilder(ShowInSellCount);
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append(appendSql);
+        Map<String,Object> map = new HashMap<>();
+        map.put("lowPrice",lowPrice);
+        map.put("highPrice",highPrice);
+        Integer result=(Integer) namedParameterJdbcTemplate.query(stringBuilder.toString(),map,productResultSetExtractor);
+        return result.toString();
+    }
+
+    @Override
+    public List<Object> showInSellByMapAndMoney(Integer lowPrice, Integer highPrice, Integer page) {
+        final String sql =
+                "SELECT productNo,gameTypeNo,gamePlatformNo,gameCompanyNo,productName,productPrice FROM product where ProductState = 1 and productPrice between :lowPrice and :highPrice order by productNo desc limit  :Page , 9;";
+        Map<String,Object> mapQ = new HashMap<>();
+        mapQ.put("lowPrice",lowPrice);
+        mapQ.put("highPrice",highPrice);
+        if(page<=0) {
+            mapQ.put("Page",0);
+        }else {
+            mapQ.put("Page",(page-1)*9);
+        }
+        SqlRowSet sqlRowSet= namedParameterJdbcTemplate.queryForRowSet(sql,mapQ);
+        List<Object> list = new ArrayList<>();
+        while(sqlRowSet.next()){
+            Map<String,Object> map = new HashMap<>();
+            Integer productNo =(Integer) sqlRowSet.getObject(1);
+            map.put("productNo", productNo);
+            map.put("gameTypeNo", sqlRowSet.getObject(2));
+            GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeDAO.getType(sqlRowSet.getInt(3));
+            map.put("gamePlatformTypeName", gamePlatformTypeVO.getGamePlatformName());
             map.put("productName", sqlRowSet.getObject(5));
             map.put("productPrice", sqlRowSet.getObject(6));
             map.put("imgURL","/CGA101G1/product/showOneCover?ProductNO="+sqlRowSet.getObject(1));

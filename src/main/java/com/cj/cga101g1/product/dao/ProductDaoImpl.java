@@ -1,17 +1,17 @@
 package com.cj.cga101g1.product.dao;
 
+import com.cj.cga101g1.orderdetail.service.OrderDetailService;
 import com.cj.cga101g1.product.model.Product;
 import com.cj.cga101g1.product.model.ProductResultSetExtractor;
 import com.cj.cga101g1.product.model.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import javax.sql.RowSet;
-import java.sql.ResultSet;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 @Component
@@ -23,6 +23,8 @@ public class ProductDaoImpl implements  ProductDao{
 
     @Autowired
     private ProductResultSetExtractor productResultSetExtractor;
+    @Autowired
+    private OrderDetailService orderDetailService;
 
 
     @Override
@@ -65,12 +67,15 @@ public class ProductDaoImpl implements  ProductDao{
         List<Object> list = new ArrayList<>();
         while(sqlRowSet.next()){
             Map<String,Object> map = new HashMap<>();
-            map.put("productNo", sqlRowSet.getObject(1));
+            Integer productNo =(Integer) sqlRowSet.getObject(1);
+            map.put("productNo", productNo);
             map.put("gameTypeNo", sqlRowSet.getObject(2));
             map.put("gamePlatformTypeName", sqlRowSet.getObject(6));
             map.put("productName", sqlRowSet.getObject(4));
             map.put("productPrice", sqlRowSet.getObject(5));
             map.put("imgURL","/CGA101G1/product/showOneCover?ProductNO="+sqlRowSet.getObject(1));
+            Map<String,Object> orderDetailResult = orderDetailService.showCaledCommentByProductNo(productNo);
+            map.put("avgCommentStar",orderDetailResult.get("avgCommentStar"));
             list.add(map);
         }
 

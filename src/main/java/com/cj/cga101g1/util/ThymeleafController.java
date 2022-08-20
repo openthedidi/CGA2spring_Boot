@@ -11,8 +11,8 @@ public class ThymeleafController {
         return "home";
     }
 
-    @GetMapping("/Product/HomePageinshop")
+    @GetMapping("/CGA101G1/frontend/Product/HomePageinshop.html")
     public String HomePageinshop(){
-        return "/Product/HomePageinshop";
+        return "/CGA101G1/frontend/Product/HomePageinshop";
     }
 }

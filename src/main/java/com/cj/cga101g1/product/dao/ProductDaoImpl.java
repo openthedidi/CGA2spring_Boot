@@ -1,5 +1,8 @@
 package com.cj.cga101g1.product.dao;
 
+import com.cj.cga101g1.gameplatformtype.dao.GamePlatformTypeDAO;
+import com.cj.cga101g1.gameplatformtype.dao.GamePlatformTypeDAOImp;
+import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
 import com.cj.cga101g1.orderdetail.service.OrderDetailService;
 import com.cj.cga101g1.product.model.Product;
 import com.cj.cga101g1.product.model.ProductResultSetExtractor;
@@ -26,6 +29,8 @@ public class ProductDaoImpl implements  ProductDao{
     @Autowired
     private OrderDetailService orderDetailService;
 
+    final private String ShowInSellCount =
+            "SELECT count(productNo) FROM product where ProductState = 1 ;";
 
     @Override
     public Product findByPrimaryKey(Integer productNo) {
@@ -46,8 +51,6 @@ public class ProductDaoImpl implements  ProductDao{
 
     @Override
     public String showSelledCount() {
-         final String ShowInSellCount =
-                "SELECT count(productNo) FROM product where ProductState = 1 ;";
         Integer result=(Integer) namedParameterJdbcTemplate.query(ShowInSellCount,productResultSetExtractor);
         return result.toString();
     }
@@ -79,6 +82,50 @@ public class ProductDaoImpl implements  ProductDao{
             list.add(map);
         }
 
+
+        return list;
+    }
+
+    @Override
+    public String showSelledCountByPlatFormType(Integer gamePlatformNo) {
+        String appendSql = "and GamePlatformNo = :gamePlatformNo ;";
+        StringBuilder stringBuilder = new StringBuilder(ShowInSellCount);
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append(appendSql);
+        Map<String,Object> map = new HashMap<>();
+        map.put("gamePlatformNo",gamePlatformNo);
+        Integer result=(Integer) namedParameterJdbcTemplate.query(stringBuilder.toString(),map,productResultSetExtractor);
+        return result.toString();
+    }
+
+    @Override
+    public List<Object> showSellAndPlatformProduct(Integer gamePlatformNo,Integer Page) {
+        final String sql =
+                "SELECT productNo,gameTypeNo,gamePlatformNo,gameCompanyNo,productName,productPrice FROM product where ProductState = 1 and GamePlatformNo = :gamePlatformNo order by productNo desc limit  :Page , 9;";
+        Map<String,Object> mapQ = new HashMap<>();
+        mapQ.put("gamePlatformNo",gamePlatformNo);
+        if(Page<=0) {
+            mapQ.put("Page",0);
+        }else {
+            mapQ.put("Page",(Page-1)*9);
+        }
+        SqlRowSet sqlRowSet= namedParameterJdbcTemplate.queryForRowSet(sql,mapQ);
+        List<Object> list = new ArrayList<>();
+        while(sqlRowSet.next()){
+            Map<String,Object> map = new HashMap<>();
+            Integer productNo =(Integer) sqlRowSet.getObject(1);
+            map.put("productNo", productNo);
+            map.put("gameTypeNo", sqlRowSet.getObject(2));
+//            GamePlatformTypeDAO gamePlatformTypeDAO = new GamePlatformTypeDAOImp();
+//            GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeDAO.getType(sqlRowSet.getInt(3));
+//            map.put("gamePlatformTypeName", gamePlatformTypeVO.getGamePlatformName());
+            map.put("productName", sqlRowSet.getObject(5));
+            map.put("productPrice", sqlRowSet.getObject(6));
+            map.put("imgURL","/CGA101G1/product/showOneCover?ProductNO="+sqlRowSet.getObject(1));
+            Map<String,Object> orderDetailResult = orderDetailService.showCaledCommentByProductNo(productNo);
+            map.put("avgCommentStar",orderDetailResult.get("avgCommentStar"));
+            list.add(map);
+        }
 
         return list;
     }

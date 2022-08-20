@@ -42,18 +42,28 @@ public class ProductController {
         }
     }
 
-
     @GetMapping("/showSelledCount")
     public String showSelledCount(){
         String result = productService.showSelledCount();
         return result;
     }
-
-
     @GetMapping("/showPageProduct")
     public ResponseEntity<List<Object>> showPageProduct(@RequestParam (defaultValue = "0") String Page){
             Integer page = Integer.valueOf(Page);
             List<Object> list = productService.getAllSelledProductsByMap(page);
             return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/showSellAndPlatFormTypeProductPages")
+    public String showSellAndPlatFormTypeProductPages(@RequestParam Integer gamePlatformNo){
+        String result = productService.showSelledCountByPlatFormType(gamePlatformNo);
+        return result;
+    }
+
+    @GetMapping("/showSellAndPlatformProduct")
+    public ResponseEntity<List<Object>> showSellAndPlatformProduct(@RequestParam Integer gamePlatformNo,
+                                             @RequestParam Integer Page){
+        List<Object> list = productService.showSellAndPlatformProduct(gamePlatformNo,Page);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }

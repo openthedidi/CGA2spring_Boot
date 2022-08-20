@@ -30,4 +30,14 @@ public class ProductServiceImpl implements ProductService{
     public List<Object> getAllSelledProductsByMap(Integer page) {
         return productDao.getPageInSellByMap(page);
     }
+
+    @Override
+    public String showSelledCountByPlatFormType(Integer gamePlatformNo) {
+        return productDao.showSelledCountByPlatFormType(gamePlatformNo);
+    }
+
+    @Override
+    public List<Object> showSellAndPlatformProduct(Integer gamePlatformNo,Integer Page) {
+        return productDao.showSellAndPlatformProduct(gamePlatformNo,Page);
+    }
 }

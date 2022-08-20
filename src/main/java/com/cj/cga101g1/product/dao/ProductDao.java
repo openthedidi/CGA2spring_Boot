@@ -10,4 +10,7 @@ public interface ProductDao {
     String showSelledCount();
     List<Object> getPageInSellByMap(Integer page);
 
+    String showSelledCountByPlatFormType(Integer gamePlatformNo);
+
+    List<Object> showSellAndPlatformProduct(Integer gamePlatformNo,Integer Page);
 }

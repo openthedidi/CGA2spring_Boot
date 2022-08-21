@@ -6,4 +6,5 @@ public interface MemberDao {
     Mem getMemByMemNo(Integer memNo);
     Mem newMem(Mem mem);
     Mem getMemByMemEmail(String memEmail);
+    Mem memEdit(Mem mem);
 }

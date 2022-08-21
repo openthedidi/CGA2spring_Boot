@@ -3,6 +3,7 @@ package com.cj.cga101g1.member.controller;
 
 import com.cj.cga101g1.member.service.MemberService;
 import com.cj.cga101g1.member.util.Mem;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,11 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK).body(memberService.getMemByMemEmail(email));
     }
 
+    @PutMapping("/MemEditServlet/{memNo}")
+    public ResponseEntity<Mem> memEdit(@RequestBody @Valid Mem mem,
+                                       @PathVariable Integer memNo){
+        Mem memResult =memberService.memEdit(memNo,mem);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(memResult);
+    };
 
 }

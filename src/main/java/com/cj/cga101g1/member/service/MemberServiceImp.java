@@ -26,4 +26,10 @@ public class MemberServiceImp implements MemberService{
     public Mem getMemByMemEmail(String memEmail) {
         return memberDao.getMemByMemEmail(memEmail);
     }
+
+    @Override
+    public Mem memEdit(Integer memNo,Mem mem) {
+        Mem memQuery = memberDao.getMemByMemNo(memNo);
+        return memberDao.memEdit(memQuery);
+    }
 }

@@ -8,4 +8,7 @@ public interface MemberService {
 
     /** 查會員byEmail **/
     Mem getMemByMemEmail(String memEmail);
+
+    /** 更新會員資料  **/
+    Mem memEdit(Integer memNo,Mem mem);
 }

@@ -20,4 +20,14 @@ public class ThymeleafController {
     public String HomePageinProduct(){
         return "/CGA101G1/frontend/Product/HomePageinProduct";
     }
+
+    @GetMapping("/CGA101G1/frontend/memLogin/login.html")
+    public String login(){
+        return "/CGA101G1/frontend/memLogin/login";
+    }
+
+    @GetMapping("/CGA101G1/frontend/mem/register.html")
+    public String register(){
+        return "/CGA101G1/frontend/mem/register";
+    }
 }

@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService{
 
 
     @Override
-    public Product findByPrimaryKey(Integer ProductNo) {
+    public Object findByPrimaryKey(Integer ProductNo) {
         return productDao.findByPrimaryKey(ProductNo);
 
     }

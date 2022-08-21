@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 @Component
 public class ProductPicDaoImp implements ProductPicDao{
 
@@ -43,5 +42,22 @@ public class ProductPicDaoImp implements ProductPicDao{
         }else {
             return null;
         }
+    }
+
+    @Override
+    public List<ProductPic> findByPrimaryKeyInBase64(Integer productNo) {
+        String sql =
+                "select ProductNo,ProductPicNO,ProductPicContent from productpic where ProductNo = :ProductNo";
+        Map<String,Object>map = new HashMap<>();
+        map.put("ProductNo",productNo);
+        List<ProductPic> list= namedParameterJdbcTemplate.query(sql,map,productPicRowMapper);
+        List<ProductPic> listResult= new ArrayList<>();
+        for(ProductPic productPic:list) {
+            byte[] imageBytes = productPic.getProductPicContent();
+            String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+            productPic.setProductPicContentBase64(imageBase64);
+            listResult.add(productPic);
+        }
+        return listResult;
     }
 }

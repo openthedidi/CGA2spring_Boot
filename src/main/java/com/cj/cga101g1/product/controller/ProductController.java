@@ -21,25 +21,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products/{productNo}")
-    public ResponseEntity<Product> getProduct(@PathVariable Integer productNo){
-       Product product = productService.findByPrimaryKey(productNo);
-
-       if(product!=null){
-           return ResponseEntity.status(HttpStatus.OK).body(product);
+    @GetMapping("/OneProductDetail")
+    public ResponseEntity<Object> getProduct(@RequestParam Integer ProductNo){
+        Object Object = productService.findByPrimaryKey(ProductNo);
+       if(Object!=null){
+           return ResponseEntity.status(HttpStatus.OK).body(Object);
        }else {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
        }
-    }
-
-    @GetMapping("/products")
-    public ResponseEntity<Product> getProductByParaName(@RequestParam(name="productNo") Integer productNo){
-        Product product = productService.findByPrimaryKey(productNo);
-        if(product!=null){
-            return ResponseEntity.status(HttpStatus.OK).body(product);
-        }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
     }
 
     @GetMapping("/showSelledCount")

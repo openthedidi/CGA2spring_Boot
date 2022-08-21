@@ -8,6 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
+
 @RestController
 @RequestMapping("CGA101G1/product")
 public class ProductPicController {
@@ -31,5 +34,9 @@ public class ProductPicController {
         return productPic.getProductPicContent();
     };
 
+    @GetMapping("/ProductPicAll")
+    public List<ProductPic> productPicAll(@RequestParam Integer ProductNo){
+       return productPicService.productAllPics(ProductNo);
+    }
 
 }

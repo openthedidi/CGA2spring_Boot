@@ -5,7 +5,8 @@ import com.cj.cga101g1.product.model.Product;
 import java.util.List;
 
 public interface ProductService {
-    Product findByPrimaryKey(Integer ProductNo);
+    /*******  查詢單一商品資訊  *******/
+    Object findByPrimaryKey(Integer ProductNo);
 
     /**** show出沒有經過篩選的上架商品的數量 ****/
     String showSelledCount();

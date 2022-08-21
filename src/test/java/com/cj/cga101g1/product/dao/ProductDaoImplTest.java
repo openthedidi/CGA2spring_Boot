@@ -15,7 +15,7 @@ class ProductDaoImplTest {
 
     @Test
     public void findByPrimaryKey(){
-        Product product= productDao.findByPrimaryKey(21001);
+        Product product=(Product) productDao.findByPrimaryKey(21001);
 
         assertNotNull(product);
         assertEquals(1600,product.getProductPrice());

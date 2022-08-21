@@ -1,6 +1,8 @@
 package com.cj.cga101g1.product.dao;
 
+import com.cj.cga101g1.gamecompany.dao.GameCompanyDao;
 import com.cj.cga101g1.gameplatformtype.dao.GamePlatformTypeDAO;
+import com.cj.cga101g1.gametype.dao.GameTypeDAO;
 import com.cj.cga101g1.orderdetail.service.OrderDetailService;
 import com.cj.cga101g1.product.model.Product;
 import com.cj.cga101g1.product.model.ProductResultSetExtractor;
@@ -25,13 +27,18 @@ public class ProductDaoImpl implements  ProductDao{
     @Autowired
     private  GamePlatformTypeDAO gamePlatformTypeDAO;
     @Autowired
+    private GameTypeDAO gameTypeDAO;
+    @Autowired
+    private GameCompanyDao gameCompanyDao;
+
+    @Autowired
     private  ProductUtil productUtil;
 
     final private String ShowInSellCount =
             "SELECT count(productNo) FROM product where ProductState = 1 ;";
 
     @Override
-    public Product findByPrimaryKey(Integer productNo) {
+    public Map<String,Object> findByPrimaryKey(Integer productNo) {
         final String GET_ONE =
                 "SELECT productNo,gameTypeNo,gamePlatformNo,gameCompanyNo," +
                         "productName,productPrice,productState,itemProdDescription,upcNum " +
@@ -40,11 +47,15 @@ public class ProductDaoImpl implements  ProductDao{
         Map<String,Object> map = new HashMap<>();
         map.put("productNo",productNo);
         List<Product>list = namedParameterJdbcTemplate.query(GET_ONE,map,new ProductRowMapper());
-        if(list.size()>0){
-            return list.get(0);
-        }else {
-            return null;
-        }
+        Product productVO =list.get(0);
+        map.put("productName", productVO.getProductName());
+        map.put("productNo", productVO.getProductNo().toString());
+        map.put("gameTypeName", gameTypeDAO.getGameType(productVO.getGameTypeNo()).getGameTypeName());
+        map.put("gamePlatformName", gamePlatformTypeDAO.getType(productVO.getGamePlatformNo()).getGamePlatformName());
+        map.put("gameCompanyName", gameCompanyDao.findByNo(productVO.getGameCompanyNo()).getGameCompanyName());
+        map.put("itemProdDescription", productVO.getItemProdDescription());
+        map.put("productPrice", productVO.getProductPrice().toString());
+        return map;
     }
 
     @Override
@@ -55,7 +66,7 @@ public class ProductDaoImpl implements  ProductDao{
 
     @Override
     public List<Object> getPageInSellByMap(Integer page) {
-        final String sql = "SELECT a.productNo,a.gameTypeNo,a.gamePlatformNo,a.productName,a.productPrice,b.GamePlatformName FROM product a  "
+        final String sql = "SELECT a.productNo,a.gameTypeNo,a.gamePlatformNo,a.gameCompanyNo,a.productName,a.productPrice,b.GamePlatformName FROM product a  "
                 + "join gameplatformtype b on a.gamePlatformNo = b.gamePlatformNo "
                 + "where ProductState = 1 order by productNo desc limit :Page ,9 ";
         Map<String,Object> mapQ = new HashMap<>();

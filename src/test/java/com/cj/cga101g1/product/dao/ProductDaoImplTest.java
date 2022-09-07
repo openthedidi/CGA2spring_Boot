@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductDaoImplTest {
 
     @Autowired
-    private  ProductDao productDao;
+    private ProductDao productDao;
 
     @Test
     public void findByPrimaryKey(){

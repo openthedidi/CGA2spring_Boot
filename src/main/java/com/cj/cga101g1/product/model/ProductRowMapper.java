@@ -16,7 +16,11 @@ public class ProductRowMapper implements RowMapper {
         product.setGameCompanyNo(rs.getInt("GameCompanyNo"));
         product.setProductName(rs.getString("ProductName"));
         product.setProductPrice(rs.getInt("ProductPrice"));
-        product.setProductState(rs.getInt("ProductState"));
+
+        Integer productStatus = rs.getInt("ProductState");
+        product.setProductStatusCategory(ProductStatusCategory.valueOf(productStatus.toString()));
+
+//        product.setProductState(rs.getInt("ProductState"));
         product.setItemProdDescription(rs.getString("ItemProdDescription"));
         product.setUpcNum(rs.getString("UpcNum"));
 

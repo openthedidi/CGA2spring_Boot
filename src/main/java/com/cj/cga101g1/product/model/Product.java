@@ -17,6 +17,7 @@ public class Product {
     private String productName;
     private Integer productPrice;
     private Integer productState;
+    private ProductStatusCategory productStatusCategory;
     private Timestamp soldTime;
     private Timestamp launchedTime;
     private String itemProdDescription;
@@ -110,5 +111,11 @@ public class Product {
         this.upcNum = upcNum;
     }
 
+    public ProductStatusCategory getProductStatusCategory() {
+        return productStatusCategory;
+    }
 
+    public void setProductStatusCategory(ProductStatusCategory productStatusCategory) {
+        this.productStatusCategory = productStatusCategory;
+    }
 }

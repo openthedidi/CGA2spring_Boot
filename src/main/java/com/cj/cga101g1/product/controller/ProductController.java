@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
-
 @RequestMapping("CGA101G1/product")
+///*** war檔用的網址 ****/
+//@RequestMapping("product")
 @RestController
 @Validated
 public class ProductController {
@@ -74,6 +75,11 @@ public class ProductController {
         String result = productService.showSellCountByMoney(lowPrice,highPrice);
         return result;
     }
+
+
+
+    //    @CrossOrigin(value = "http://localhost:8080")
+    //    解決" 跨域資源共享”（Cross-origin resource sharing）的另一個方式
     @GetMapping("/showInSellByMapAndMoney")
     public ResponseEntity<List<Object>> showInSellByMapAndMoney(@RequestParam Integer lowPrice,
                                                                 @RequestParam Integer highPrice,

@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CGA101G1" target="11" />
+      <module name="CGA101G1" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

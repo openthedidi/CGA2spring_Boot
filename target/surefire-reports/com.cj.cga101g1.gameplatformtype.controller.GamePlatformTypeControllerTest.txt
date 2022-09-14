@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: com.cj.cga101g1.gameplatformtype.controller.GamePlatformTypeControllerTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 1.885 s <<< FAILURE! - in com.cj.cga101g1.gameplatformtype.controller.GamePlatformTypeControllerTest
+getOneType  Time elapsed: 0.074 s  <<< FAILURE!
+java.lang.AssertionError: Response status expected:<200> but was:<404>
+	at com.cj.cga101g1.gameplatformtype.controller.GamePlatformTypeControllerTest.getOneType(GamePlatformTypeControllerTest.java:37)
+
+getOneTypeByName  Time elapsed: 0.054 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "$.gamePlatformName"
+	at com.cj.cga101g1.gameplatformtype.controller.GamePlatformTypeControllerTest.getOneTypeByName(GamePlatformTypeControllerTest.java:69)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at com.cj.cga101g1.gameplatformtype.controller.GamePlatformTypeControllerTest.getOneTypeByName(GamePlatformTypeControllerTest.java:69)
+
+newType  Time elapsed: 0.097 s  <<< FAILURE!
+java.lang.AssertionError: Response status expected:<200> but was:<404>
+	at com.cj.cga101g1.gameplatformtype.controller.GamePlatformTypeControllerTest.newType(GamePlatformTypeControllerTest.java:58)
+

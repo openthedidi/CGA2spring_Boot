@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.cj.cga101g1.product.dao.ProductDaoImplTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.034 s <<< FAILURE! - in com.cj.cga101g1.product.dao.ProductDaoImplTest
+findByPrimaryKey  Time elapsed: 0.017 s  <<< ERROR!
+java.lang.IllegalArgumentException: No enum constant com.cj.cga101g1.product.model.ProductStatusCategory.1
+	at com.cj.cga101g1.product.dao.ProductDaoImplTest.findByPrimaryKey(ProductDaoImplTest.java:18)
+

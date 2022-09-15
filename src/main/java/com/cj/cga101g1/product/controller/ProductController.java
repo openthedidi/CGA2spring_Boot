@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
-@RequestMapping("CGA101G1/product")
+//@RequestMapping("CGA101G1/product")
 ///*** war檔用的網址 ****/
-//@RequestMapping("product")
+@RequestMapping("product")
 @RestController
 @Validated
 public class ProductController {

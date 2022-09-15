@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/CGA101G1/gametype")
+@RequestMapping("gametype")
 @RestController
 public class GameTypeController {
 

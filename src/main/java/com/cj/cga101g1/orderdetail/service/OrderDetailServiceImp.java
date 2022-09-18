@@ -1,6 +1,7 @@
 package com.cj.cga101g1.orderdetail.service;
 
 import com.cj.cga101g1.orderdetail.dao.OrderDetailDao;
+import com.cj.cga101g1.orderdetail.util.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +17,10 @@ public class OrderDetailServiceImp implements OrderDetailService{
     @Override
     public Map<String, Object> showCaledCommentByProductNo(Integer productNo) {
         return orderDetailDao.showCaledCommentByProductNo(productNo);
+    }
+
+    @Override
+    public void createOne(Integer orderNo, OrderDetail orderDetail) {
+
     }
 }

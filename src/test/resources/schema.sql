@@ -1,8 +1,8 @@
-CREATE SCHEMA IF not exists CGA101G1;
-set schema CGA101G1;
+-- CREATE SCHEMA IF not exists CGA101G1;
+-- set schema CGA101G1;
 
 
-CREATE TABLE IF NOT exists `gameplatformtype` (
+CREATE TABLE  gameplatformtype (
                         `GamePlatformNo` int NOT NULL AUTO_INCREMENT,
                         `GamePlatformName`  varchar(20) NOT NULL,
                         PRIMARY KEY (`GamePlatformNo`)

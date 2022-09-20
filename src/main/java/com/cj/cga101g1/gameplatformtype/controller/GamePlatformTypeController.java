@@ -65,13 +65,12 @@ public class GamePlatformTypeController {
     }
 
     @DeleteMapping("/deleteType/{gamePlatformNo}")
-    public String deleteType(@PathVariable Integer gamePlatformNo){
-
+    public ResponseEntity<?> deleteType(@PathVariable Integer gamePlatformNo){
         GamePlatformTypeVO gamePlatformTypeVO = gamePlatformTypeService.getOneType(gamePlatformNo);
         if(gamePlatformTypeVO.getGamePlatformNo()!=000){
-        return gamePlatformTypeService.deleteOneType(gamePlatformTypeService.getOneType(gamePlatformNo));
+        return ResponseEntity.status(HttpStatus.OK).body(null);
         }else {
-            return "DB無此ID："+gamePlatformNo+"的種類";
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
 

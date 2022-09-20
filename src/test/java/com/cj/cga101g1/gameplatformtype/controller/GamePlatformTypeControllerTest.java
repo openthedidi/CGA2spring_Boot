@@ -26,7 +26,7 @@ class GamePlatformTypeControllerTest {
 
     @Test
     void getOneType() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/gamePlatformType/getOneType/64001");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/gameplatformtype/getOneType/{gamePlatformNo}",64001);
 
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
                 .andDo(print())
@@ -34,8 +34,7 @@ class GamePlatformTypeControllerTest {
                 .andExpect(jsonPath("$.gamePlatformName",notNullValue()))
                 .andExpect(jsonPath("$.gamePlatformName",equalTo("Switch")))
                 .andReturn();
-        String responseBody = mvcResult.getResponse().getContentAsString();
-//        System.out.println(responseBody);
+
         assertEquals("application/json",
                 mvcResult.getResponse().getContentType());
     }
@@ -44,7 +43,7 @@ class GamePlatformTypeControllerTest {
     @Test
     void newType() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                        .post("/gamePlatformType/newType")
+                        .post("/gameplatformtype/newType")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\n" +
                                 "  \"gamePlatformName\":\"GBA\"\n" +
@@ -58,11 +57,11 @@ class GamePlatformTypeControllerTest {
 
     @Test
     void getOneTypeByName() throws Exception {
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/gamePlatformType/getOneTypeByName/PS4");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/gameplatformtype/getOneTypeByName/Switch");
 
        mockMvc.perform(requestBuilder)
                 .andDo(print())
-                .andExpect(jsonPath("$.gamePlatformName",equalTo("PS4")))
+                .andExpect(jsonPath("$.gamePlatformName",equalTo("Switch")))
                 .andReturn();
     }
 
@@ -71,10 +70,27 @@ class GamePlatformTypeControllerTest {
     }
 
     @Test
-    void updateOneType() {
+    void updateOneType() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put("/gameplatformtype/updateOneType/{gamePlatformNo}",64001)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "  \"gamePlatformName\":\"GBA\"\n" +
+                        "}");
+        mockMvc.perform(requestBuilder)
+                .andDo(print())
+                .andExpect(status().is(200))
+                .andExpect(jsonPath("$.gamePlatformName",equalTo("GBA")));
     }
 
+    @Transactional
     @Test
-    void deleteType() {
+    void deleteType() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/gameplatformtype/deleteType/{gamePlatformNo}",64001);
+
+        mockMvc.perform(requestBuilder)
+                .andDo(print())
+                .andExpect(status().is(200))
+                .andReturn();
     }
 }

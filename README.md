@@ -8,7 +8,7 @@
 安裝docker後，進行佈署。
 
 
-2. 撰寫單元測試：分別測試Spring MVC架構，包含controller層、service層及modle層。
+2. 撰寫單元測試：分別測試Spring MVC架構，包含controller層、service層及modle層，使用H2DB搭配初始化的.sql檔進行測試。
 
 
 

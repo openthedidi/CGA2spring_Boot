@@ -9,6 +9,17 @@ public interface MemberService {
     /** 查會員byEmail **/
     Mem getMemByMemEmail(String memEmail);
 
+    /** 查會員byAccount **/
+    Mem getMemByMemAccount(String Account);
+
     /** 更新會員資料  **/
     Mem memEdit(Integer memNo,Mem mem);
+
+    /** 登入 **/
+    Mem login(Mem mem);
+
+    /**  展示會員個人資料  **/
+    Mem getMemSelfInfo(Mem memVO);
+    /**  展示會員個人頭貼  **/
+    byte[] showMemSelfPic(Integer memNo);
 }

@@ -1,4 +1,4 @@
-package com.cj.cga101g1.util;
+package com.cj.cga101g1.util.Interceptors;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

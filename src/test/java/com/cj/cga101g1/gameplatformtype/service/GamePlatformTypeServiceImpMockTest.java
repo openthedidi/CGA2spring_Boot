@@ -111,6 +111,7 @@ class GamePlatformTypeServiceImpMockTest {
         gamePlatformTypeVO_Mock.setGamePlatformNo(64001);
         gamePlatformTypeVO_Mock.setGamePlatformName("PS4");
         Mockito.when(gamePlatformTypeDAO.deleteOneType(gamePlatformTypeVO_Mock)).thenReturn("delete success");
+
         String result = gamePlatformTypeService.deleteOneType(gamePlatformTypeVO_Mock);
         assertEquals("delete success",result);
 

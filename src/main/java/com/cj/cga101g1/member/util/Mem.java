@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 @Entity
 @Table(name = "mem")
-public class Mem {
+public class Mem extends MemCore{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MemNo")

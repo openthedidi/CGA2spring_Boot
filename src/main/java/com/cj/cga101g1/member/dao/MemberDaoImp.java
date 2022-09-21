@@ -31,6 +31,26 @@ public class MemberDaoImp implements MemberDao{
         return memResult;
     }
 
+    @Override
+    public Mem login(Mem mem) {
+        return memberRepository.findByAccount(mem.getMemAccount(),mem.getMemPassword());
+    }
+
+    @Override
+    public Mem getMemByMemAccount(String account) {
+        return memberRepository.findByAccount(account);
+    }
+
+    @Override
+    public Mem getMemSelfInfo(Mem mem) {
+        return memberRepository.findById(mem.getMemNo()).orElse(null);
+    }
+
+    @Override
+    public byte[] showMemSelfPic(Integer memNo) {
+        return memberRepository.findMemPicByMemNo(memNo);
+    }
+
     @Transactional
     @Override
     public Mem newMem(Mem mem) {

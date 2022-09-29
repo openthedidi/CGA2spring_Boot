@@ -4,6 +4,7 @@ package com.cj.cga101g1.gameplatformtype.controller;
 
 import com.cj.cga101g1.gameplatformtype.service.GamePlatformTypeService;
 import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
+import com.cj.cga101g1.util.PropertiesConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -95,6 +96,15 @@ public class GamePlatformTypeController {
         GamePlatformTypeVO gamePlatformTypeVO =
                 restTemplate.getForObject("https://mocki.io/v1/476013b9-4c92-41e8-8e08-08b3ffb28447",GamePlatformTypeVO.class);
         return gamePlatformTypeVO.getGamePlatformName();
+    }
+
+    @GetMapping("/config")
+    public ResponseEntity<?> configProperties(){
+        PropertiesConfig propertiesConfig = new PropertiesConfig();
+        propertiesConfig.setUrl("jdbc:mysql://127.0.0.1:3306/cga101g1?serverTimezone=Asia/Taipei&characterEncoding=utf-8");
+        propertiesConfig.setUsername("openthedidi");
+        propertiesConfig.setPassword("bird");
+        return ResponseEntity.status(200).body(gamePlatformTypeService.getOneType(64003));
     }
 
 }

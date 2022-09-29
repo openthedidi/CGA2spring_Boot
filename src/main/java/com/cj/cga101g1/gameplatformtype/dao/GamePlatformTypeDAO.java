@@ -1,17 +1,19 @@
 package com.cj.cga101g1.gameplatformtype.dao;
 
 import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
+import com.cj.cga101g1.util.exceptionHandler.ResourceNotFoundException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
 public interface GamePlatformTypeDAO {
 
     /******  新增一個PlatformType  ********/
-    public GamePlatformTypeVO newType(GamePlatformTypeVO gamePlatformTypeVO);
+    public GamePlatformTypeVO newType(GamePlatformTypeVO gamePlatformTypeVO) throws RuntimeException, SQLException;
 
     /******  查詢一個PlatformType由PK  ********/
-    public GamePlatformTypeVO getType(Integer gamePlatformTypeNo);
+    public GamePlatformTypeVO getType(Integer gamePlatformTypeNo)throws ResourceNotFoundException;
 
     /******  查詢一個PlatformType由完整名稱  ********/
     public GamePlatformTypeVO getType(String gamePlatformTypeName);

@@ -5,6 +5,7 @@ import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -14,7 +15,7 @@ public class GamePlatformTypeServiceImp implements GamePlatformTypeService{
     private GamePlatformTypeDAO gamePlatformTypeDAO;
 
     @Override
-    public GamePlatformTypeVO newPlatformType(GamePlatformTypeVO gamePlatformTypeVO) {
+    public GamePlatformTypeVO newPlatformType(GamePlatformTypeVO gamePlatformTypeVO) throws RuntimeException, SQLException {
         gamePlatformTypeDAO.newType(gamePlatformTypeVO);
         return gamePlatformTypeVO;
     }

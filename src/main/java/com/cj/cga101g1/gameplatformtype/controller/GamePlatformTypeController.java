@@ -10,7 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -19,11 +20,22 @@ public class GamePlatformTypeController {
 
     @Autowired
     private GamePlatformTypeService gamePlatformTypeService;
-
+    @Autowired
+    private GamePlatformTypeVO gamePlatformTypeVO;
 
     @PostMapping("/newType")
-    public GamePlatformTypeVO newType(@RequestBody GamePlatformTypeVO gamePlatformTypeVO){
-        return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
+    public GamePlatformTypeVO newType(@RequestBody @Valid GamePlatformTypeVO gamePlatformTypeVO){
+        try {
+            return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }catch (NullPointerException nullPointerException){
+            throw new RuntimeException("參數有問題： "
+                    + nullPointerException.getMessage());
+        }finally {
+            this.gamePlatformTypeVO.setGamePlatformName("請聯絡管理員");
+            return this.gamePlatformTypeVO;
+        }
     }
 
     @GetMapping("/getAllGamePlatformType")
@@ -33,8 +45,10 @@ public class GamePlatformTypeController {
     }
 
     @GetMapping("/getOneType/{gamePlatformNo}")
-    public GamePlatformTypeVO getOneType(@PathVariable Integer gamePlatformNo){
-        return gamePlatformTypeService.getOneType(gamePlatformNo);
+    public ResponseEntity<GamePlatformTypeVO> getOneType(@PathVariable Integer gamePlatformNo){
+        gamePlatformTypeVO=gamePlatformTypeService.getOneType(gamePlatformNo);
+            return ResponseEntity.status(200).body(gamePlatformTypeVO);
+
     }
 
 

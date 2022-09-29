@@ -2,13 +2,14 @@ package com.cj.cga101g1.gameplatformtype.service;
 
 import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
 public interface GamePlatformTypeService {
 
     /******  新增一個PlatformType  ********/
-    public GamePlatformTypeVO newPlatformType(GamePlatformTypeVO gamePlatformTypeVO);
+    public GamePlatformTypeVO newPlatformType(GamePlatformTypeVO gamePlatformTypeVO) throws RuntimeException, SQLException;
 
     /******  查詢一個PlatformType由PK  ********/
     public GamePlatformTypeVO getOneType(Integer gamePlatformTypeNo);

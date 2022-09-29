@@ -13,33 +13,21 @@ import java.util.Date;
 public class Mem extends MemCore{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MemNo")
     private Integer memNo;
     @NotNull(message = "MemAccount不可為null")
     @NotBlank(message = "MemAccount不可是空白")
-    @Column(name = "MemAccount")
     private String memAccount;
     @NotNull(message = "Password不可為null")
     @NotBlank(message = "Password不可是空白")
-    @Column(name = "MemPassword")
     private String memPassword;
-    @Column(name = "MemStatus")
     private Integer memStatus;
-    @Column(name = "MemVrfed")
     private Integer memVrfed;
-    @Column(name = "MemNoVrftime")
     private Date memNoVrftime;
-    @Column(name = "MemName")
     private String memName;
-    @Column(name = "MemMobile")
     private String memMobile;
-    @Column(name = "MemCity")
     private String memCity;
-    @Column(name = "MemDist")
     private String memDist;
-    @Column(name = "MemAdd")
     private String memAdd;
-    @Column(name = "MemEmail")
     private String memEmail;
     @Column(name = "MemBirth")
     private Date memBirth;

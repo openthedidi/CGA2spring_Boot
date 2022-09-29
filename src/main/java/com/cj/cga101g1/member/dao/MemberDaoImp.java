@@ -43,7 +43,7 @@ public class MemberDaoImp implements MemberDao{
 
     @Override
     public Mem getMemSelfInfo(Mem mem) {
-        return memberRepository.findById(mem.getMemNo()).orElse(null);
+        return memberRepository.getMemSelfInfo(mem.getMemNo());
     }
 
     @Override

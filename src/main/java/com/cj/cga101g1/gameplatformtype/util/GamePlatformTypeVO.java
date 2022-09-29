@@ -4,6 +4,7 @@ package com.cj.cga101g1.gameplatformtype.util;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "gameplatformtype")
@@ -14,6 +15,7 @@ public class GamePlatformTypeVO {
     @Column(name = "GamePlatformNo")
     private Integer gamePlatformNo;
 
+    @NotNull
     @Column(name = "GamePlatformName")
     private String gamePlatformName;
 

@@ -1,26 +1,52 @@
--- CREATE SCHEMA IF not exists CGA101G1;
--- set schema CGA101G1;
+CREATE SCHEMA IF not exists CGA101G1;
+set schema CGA101G1;
+
+-- CREATE TABLE IF NOT exists `mem` (
+--                        `MemNo` int NOT NULL AUTO_INCREMENT COMMENT ,
+--                        `MemAccount` varchar(20) NOT NULL,
+--                        `MemPassword` varchar(20) NOT NULL,
+--                        `MemStatus` int NOT NULL DEFAULT '1' COMMENT ,
+--                        `MemVrfed` int NOT NULL DEFAULT '0' COMMENT ,
+--                        `MemNoVrftime` timestamp NULL DEFAULT NULL COMMENT ,
+--                        `MemName` varchar(100) NOT NULL,
+--                        `MemMobile` varchar(10) NOT NULL,
+--                        `MemCity` varchar(20) DEFAULT NULL,
+--                        `MemDist` varchar(20) DEFAULT NULL,
+--                        `MemAdd` varchar(100) DEFAULT NULL,
+--                        `MemEmail` varchar(50) NOT NULL,
+--                        `MemBirth` date DEFAULT NULL,
+--                        `MemJoinTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT ,
+--                        `CreditcardNo` varchar(20) DEFAULT NULL,
+--                        `CreditcardDate` varchar(4) DEFAULT NULL,
+--                        `CreditcardSecurityNo` varchar(3) DEFAULT NULL,
+--                        `BankAccount` varchar(20) DEFAULT NULL,
+--                        `BankAccountOwner` varchar(10) DEFAULT NULL,
+--                        `UserStatus` int NOT NULL DEFAULT '0' COMMENT ,
+--                        `MyPic` mediumblob,
+--                        `IsMute` int DEFAULT '0' COMMENT,
+--                        PRIMARY KEY (`MemNo`),
+-- };
 
 
-CREATE TABLE  gameplatformtype (
+CREATE TABLE IF NOT exists CGA101G1.gameplatformtype (
                         `GamePlatformNo` int NOT NULL AUTO_INCREMENT,
                         `GamePlatformName`  varchar(20) NOT NULL,
                         PRIMARY KEY (`GamePlatformNo`)
 );
 
-CREATE TABLE IF NOT exists `gametype` (
+CREATE TABLE IF NOT exists CGA101G1.gametype (
                             `GameTypeNo` int NOT NULL AUTO_INCREMENT,
                             `GameTypeName` varchar(20) NOT NULL,
                             PRIMARY KEY (`GameTypeNo`)
 );
 
-CREATE TABLE IF NOT exists `gamecompany` (
+CREATE TABLE IF NOT exists CGA101G1.gamecompany (
                                `GameCompanyNo` int NOT NULL AUTO_INCREMENT,
                                `GameCompanyName` varchar(20) NOT NULL,
                                PRIMARY KEY (`GameCompanyNo`)
 );
 
-CREATE TABLE IF NOT exists `product` (
+CREATE TABLE IF NOT exists CGA101G1.product (
                            `ProductNo` int NOT NULL AUTO_INCREMENT,
                            `GameTypeNo` int NOT NULL,
                            `GamePlatformNo` int NOT NULL,
@@ -40,3 +66,20 @@ CREATE TABLE IF NOT exists `product` (
 --                            CONSTRAINT `GamePlatformNo_product` FOREIGN KEY (`GamePlatformNo`) REFERENCES `gameplatformtype` (`GamePlatformNo`),
 --                            CONSTRAINT `GameTypeNo_product` FOREIGN KEY (`GameTypeNo`) REFERENCES `gametype` (`GameTypeNo`)
 );
+
+-- CREATE TABLE CGA101G1.order (
+--                          `OrderNo` int NOT NULL AUTO_INCREMENT,
+--                          `MemNo` int NOT NULL,
+--                          `MemCouponNo` int DEFAULT NULL,
+--                          `TranTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--                          `OrderTotalPrice` int NOT NULL COMMENT,
+--                          `OrderState` int NOT NULL COMMENT,
+--                          `PickupMethod` int DEFAULT NULL COMMENT,
+--                          `ShippingFee` int DEFAULT NULL COMMENT ,
+--                          `TrackingNum` varchar(15) DEFAULT NULL,
+--                          `ReceiverName` varchar(10) NOT NULL,
+--                          `ReceiverAddress` varchar(100) DEFAULT NULL,
+--                          `ReceiverPhone` varchar(10) NOT NULL,
+--                          `PickupTime` timestamp NULL DEFAULT NULL,
+--                          PRIMARY KEY (`OrderNo`)
+-- };

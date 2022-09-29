@@ -99,6 +99,8 @@ public class MemberController {
 
     @PostMapping("/MemSelfInfo")
     public ResponseEntity<Mem> getMemSelfInfo(HttpSession session){
+        Mem mem = (Mem)session.getAttribute("memVO");
+        System.out.println("目前session的會員號碼是： "+mem.getMemNo());
         return ResponseEntity.status(HttpStatus.OK).body(memberService.getMemSelfInfo((Mem)session.getAttribute("memVO")));
     }
 

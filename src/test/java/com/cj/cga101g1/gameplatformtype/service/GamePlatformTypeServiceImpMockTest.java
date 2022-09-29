@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +51,7 @@ class GamePlatformTypeServiceImpMockTest {
     }
 
     @Test
-    void newPlatformType() {
+    void newPlatformType() throws SQLException {
         Mockito.when(gamePlatformTypeDAO.newType(gamePlatformTypeVO_Mock)).thenReturn(gamePlatformTypeVO_Mock);
         GamePlatformTypeVO gamePlatformTypeVOIn = new GamePlatformTypeVO();
         gamePlatformTypeVOIn.setGamePlatformNo(556);

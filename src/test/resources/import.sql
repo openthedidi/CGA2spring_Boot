@@ -1,3 +1,4 @@
+
 INSERT INTO gameplatformtype VALUES (64001,'Switch');
 INSERT INTO gametype (gameTypeNo,gameTypeName) VALUES (63001,'動作'),(63002,'動作冒險'),(63003,'冒險	'),(63004,'大型多人在線'),(63005,'角色扮演'),(63006,'模擬'),(63007,'戰略'),(63008,'交通工具模擬'),(63009,'運動'),(63010,'射擊'),(63011,'懸疑'),(63012,'恐怖'),(63013,'好恐怖');
 INSERT INTO gamecompany (gameCompanyNo,gameCompanyName) VALUES (61001,'RockstarGames'),(61002,'Imagineer'),(61003,'2K'),(61004,'SEGA'),(61005,'Capcom'),(61006,'Sony Entertainment'),(61007,'Xbox Game Studios'),(61008,'Ubisoft'),(61009,'Saber Interactive'),(61014,'大宇資訊'),(61015,'FromSoftware'),(61016,'Quantic Dream'),(61019,'Rockstar');

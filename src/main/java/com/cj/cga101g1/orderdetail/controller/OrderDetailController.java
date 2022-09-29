@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("CGA101G1/orderDetail")
+@RequestMapping("orderDetail")
 public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;

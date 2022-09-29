@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource",
+      "type": "com.cj.cga101g1.util.PropertiesConfig",
+      "sourceType": "com.cj.cga101g1.util.PropertiesConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.datasource.password",
+      "type": "java.lang.String",
+      "sourceType": "com.cj.cga101g1.util.PropertiesConfig"
+    },
+    {
+      "name": "spring.datasource.url",
+      "type": "java.lang.String",
+      "sourceType": "com.cj.cga101g1.util.PropertiesConfig"
+    },
+    {
+      "name": "spring.datasource.username",
+      "type": "java.lang.String",
+      "sourceType": "com.cj.cga101g1.util.PropertiesConfig"
+    }
+  ],
+  "hints": []
+}

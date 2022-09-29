@@ -25,18 +25,20 @@ public class GamePlatformTypeController {
     private GamePlatformTypeVO gamePlatformTypeVO;
 
     @PostMapping("/newType")
-    public GamePlatformTypeVO newType(@RequestBody @Valid GamePlatformTypeVO gamePlatformTypeVO){
-        try {
-            return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }catch (NullPointerException nullPointerException){
-            throw new RuntimeException("參數有問題： "
-                    + nullPointerException.getMessage());
-        }finally {
-            this.gamePlatformTypeVO.setGamePlatformName("請聯絡管理員");
-            return this.gamePlatformTypeVO;
-        }
+    public GamePlatformTypeVO newType(@RequestBody @Valid GamePlatformTypeVO gamePlatformTypeVO) throws SQLException {
+        return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
+
+//        try {
+//            return gamePlatformTypeService.newPlatformType(gamePlatformTypeVO);
+//        } catch (SQLException sqlException) {
+//            sqlException.printStackTrace();
+//        }catch (NullPointerException nullPointerException){
+//            throw new RuntimeException("參數有問題： "
+//                    + nullPointerException.getMessage());
+//        }finally {
+//            this.gamePlatformTypeVO.setGamePlatformName("請聯絡管理員");
+//            return this.gamePlatformTypeVO;
+//        }
     }
 
     @GetMapping("/getAllGamePlatformType")

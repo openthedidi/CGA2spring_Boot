@@ -3,8 +3,10 @@ package com.cj.cga101g1.member.util;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Component
@@ -24,10 +26,14 @@ public class Mem extends MemCore{
     private Integer memVrfed;
     private Date memNoVrftime;
     private String memName;
+
+    @Pattern(regexp="^09[0-9]{8}",message="手機格式不正確")
     private String memMobile;
     private String memCity;
     private String memDist;
     private String memAdd;
+    @Email
+    @NotNull(message = "Email需填寫")
     private String memEmail;
     @Column(name = "MemBirth")
     private Date memBirth;

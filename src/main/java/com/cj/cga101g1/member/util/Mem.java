@@ -1,5 +1,10 @@
 package com.cj.cga101g1.member.util;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -7,12 +12,17 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Entity
 @Table(name = "mem")
-public class Mem extends MemCore{
+@Getter
+@Setter
+public class Mem extends MemCore  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer memNo;
@@ -231,5 +241,49 @@ public class Mem extends MemCore{
 
     public void setIsMute(Integer isMute) {
         this.isMute = isMute;
+    }
+
+    /**
+     *     根据自定义逻辑来返回用户权限，如果用户权限返回空或者和拦截路径对应权限不同，验证不通过
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        List<String> roles = new ArrayList<>();
+        System.out.println("role000888"+roles);
+        for (String role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role+"role"));
+        }
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.memPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.memAccount;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

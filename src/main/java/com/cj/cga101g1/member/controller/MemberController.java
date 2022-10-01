@@ -3,12 +3,16 @@ package com.cj.cga101g1.member.controller;
 
 import com.cj.cga101g1.member.service.MemberService;
 import com.cj.cga101g1.member.util.Mem;
+import com.cj.cga101g1.util.jwt.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.message.AuthException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +28,8 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private UserDetailsService jwtUserSecurityService;
 
 
     @PostMapping("/LoginServlet")
@@ -70,6 +76,24 @@ public class MemberController {
         return ResponseEntity.status(200).body(memResult);
     }
 
+    @PostMapping("/jwt/login")
+    public ResponseEntity<String> loginByJWT(@RequestBody Mem mem){
+        Mem memResult;
+        if(memberService.getMemByMemAccount(mem.getMemAccount()) == null||mem.getMemPassword()==null) {
+            try {
+                jwtUserSecurityService.loadUserByUsername(mem.getUsername());
+            }catch (UsernameNotFoundException e){
+                return ResponseEntity.status(404).body(e.getMessage());
+            }
+        }
+        memResult = (Mem) jwtUserSecurityService.loadUserByUsername(mem.getUsername());
+        JwtTokenUtils jwtToken = new JwtTokenUtils();
+        String token = jwtToken.createToken(memResult.getUsername(),"000",false); // 取得token
+        return ResponseEntity.status(200).body(token);
+    }
+
+
+
     @GetMapping("/logoutServlet")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -102,6 +126,27 @@ public class MemberController {
         Mem mem = (Mem)session.getAttribute("memVO");
         System.out.println("目前session的會員號碼是： "+mem.getMemNo());
         return ResponseEntity.status(HttpStatus.OK).body(memberService.getMemSelfInfo((Mem)session.getAttribute("memVO")));
+    }
+
+    /**
+     * 先從Request的Header中取kye為Authorization之value的token
+     * 再進行驗證。
+     */
+    @PostMapping("/jwt/MemSelfInfo")
+    public ResponseEntity<Mem> getMemSelfInfoByJwt(@RequestHeader("Authorization") String token) throws AuthException {
+        JwtTokenUtils jwtToken = new JwtTokenUtils();
+        if(jwtToken.validateToken(token)) {
+            String memAccount = jwtToken.getUsername(token);
+            Mem mem = memberService.getMemSelfInfo(memberService.getMemByMemAccount(memAccount));
+            mem.setMessage("成功");
+            mem.setSuccessful(true);
+            return ResponseEntity.status(HttpStatus.OK).body(mem);
+        }else{
+            Mem mem = new Mem();
+            mem.setSuccessful(false);
+            mem.setMessage("未獲得許可");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mem);
+        }
     }
 
     @GetMapping(value = "/MemSelfPicServlet",produces = MediaType.IMAGE_GIF_VALUE)

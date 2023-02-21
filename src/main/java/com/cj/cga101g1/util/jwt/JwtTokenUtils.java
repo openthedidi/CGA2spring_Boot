@@ -6,7 +6,9 @@ import io.jsonwebtoken.*;
 import javax.security.auth.message.AuthException;
 import java.util.Date;
 import java.util.HashMap;
-
+/**
+ * JWT參數設定
+ */
 public class JwtTokenUtils {
 
     public static final String TOKEN_HEADER = "Authorization";
@@ -21,7 +23,9 @@ public class JwtTokenUtils {
     private static final long EXPIRATION = 3600L;
     // 過期時間是604800秒，相當於7天
     private static final long EXPIRATION_REMEMBER = 604800L;
-    // 創建token
+    /**
+     * 創立JWT Token
+     */
     public static String createToken(String username, String role, boolean isRememberMe) {
         long expiration = isRememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
         HashMap<String, Object> map = new HashMap<>();

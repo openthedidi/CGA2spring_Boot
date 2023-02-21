@@ -9,8 +9,15 @@ public interface MemberService {
     /** 查會員byEmail **/
     Mem getMemByMemEmail(String memEmail);
 
-    /** 查會員byAccount **/
+    /**
+     * 查會員藉由帳號
+     * **/
     Mem getMemByMemAccount(String Account);
+
+    /**
+     * 查會員藉由帳號與密碼
+     * **/
+    Mem getMemByMemAccountAndPassword(String Account, String password);
 
     /** 更新會員資料  **/
     Mem memEdit(Integer memNo,Mem mem);

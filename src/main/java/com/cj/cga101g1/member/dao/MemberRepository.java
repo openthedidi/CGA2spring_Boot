@@ -14,7 +14,7 @@ public interface MemberRepository extends CrudRepository<Mem,Integer> {
     Mem findByAccount(String  account);
 
     @Query(value ="select * from mem where memAccount = ?1 and memPassword = ?2",nativeQuery = true)
-    Mem findByAccount(String  account,String memPassword);
+    Mem findByAccountAndPassword(String  account,String memPassword);
 
 //    @Query(value ="select  memNo, memAccount, memPassword, memStatus,memVrfed, memNoVrftime, memName, memMobile, memCity, memDist, memAdd," +
 //            " memEmail, memBirth, memJoinTime, creditcardNo, creditcardDate, creditcardSecurityNo, bankAccount, bankAccountOwner, userStatus, isMute " +

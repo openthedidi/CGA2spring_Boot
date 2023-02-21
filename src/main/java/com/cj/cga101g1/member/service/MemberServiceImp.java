@@ -35,6 +35,11 @@ public class MemberServiceImp implements MemberService{
     }
 
     @Override
+    public Mem getMemByMemAccountAndPassword(String Account, String password) {
+        return memberDao.getMemByMemAccountAndPassword(Account,password);
+    }
+
+    @Override
     public Mem memEdit(Integer memNo,Mem mem) {
         Mem memQuery = memberDao.getMemByMemNo(memNo);
         return memberDao.memEdit(memQuery);

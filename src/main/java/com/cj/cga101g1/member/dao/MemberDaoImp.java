@@ -33,12 +33,17 @@ public class MemberDaoImp implements MemberDao{
 
     @Override
     public Mem login(Mem mem) {
-        return memberRepository.findByAccount(mem.getMemAccount(),mem.getMemPassword());
+        return memberRepository.findByAccountAndPassword(mem.getMemAccount(),mem.getMemPassword());
     }
 
     @Override
     public Mem getMemByMemAccount(String account) {
         return memberRepository.findByAccount(account);
+    }
+
+    @Override
+    public Mem getMemByMemAccountAndPassword(String account, String password) {
+        return memberRepository.findByAccountAndPassword(account,password);
     }
 
     @Override

@@ -9,6 +9,7 @@ public interface MemberDao {
     Mem memEdit(Mem mem);
     Mem login(Mem mem);
     Mem getMemByMemAccount(String account);
+    Mem getMemByMemAccountAndPassword(String account,String password);
     Mem getMemSelfInfo(Mem mem);
     byte[] showMemSelfPic(Integer memNo);
 }

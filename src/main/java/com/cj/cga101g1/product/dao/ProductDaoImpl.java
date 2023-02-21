@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 
 @Component
@@ -22,6 +24,7 @@ public class ProductDaoImpl implements  ProductDao{
 
     @Autowired
     private ProductResultSetExtractor productResultSetExtractor;
+
     @Autowired
     private OrderDetailService orderDetailService;
     @Autowired
@@ -157,5 +160,23 @@ public class ProductDaoImpl implements  ProductDao{
         Map<String,Object> mapQ = new HashMap<>();
         mapQ.put("keyWord","%"+keyWord+"%");
         return productUtil.pageCalculate(page,sql,mapQ,namedParameterJdbcTemplate,gamePlatformTypeDAO,orderDetailService);
+    }
+
+    @Transactional
+    @Override
+    public void createProduct(Product productVO) {
+        System.out.println("createProduct");
+        final String sql =
+                "insert into product(gameTypeNo,gamePlatformNo,gameCompanyNo,productName,productPrice,productState,itemProdDescription,upcNum) VALUES (:gameTypeNo,:gamePlatformNo,:gameCompanyNo,:productName,:productPrice,:productState,:itemProdDescription,:upcNum);";
+        Map<String,Object> map = new HashMap<>();
+        map.put("productName", productVO.getProductName());
+        map.put("gameTypeNo",  productVO.getGameTypeNo());
+        map.put("gamePlatformNo", productVO.getGamePlatformNo());
+        map.put("gameCompanyNo", productVO.getGameCompanyNo());
+        map.put("itemProdDescription", productVO.getItemProdDescription());
+        map.put("productPrice", productVO.getProductPrice().toString());
+        map.put("productState", productVO.getProductState());
+        map.put("upcNum", productVO.getUpcNum());
+        namedParameterJdbcTemplate.update(sql,map);
     }
 }

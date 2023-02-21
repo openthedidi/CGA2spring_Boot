@@ -33,4 +33,7 @@ public interface ProductService {
     String showSellProductByKeyWordPages(String keyWord);
     /**** show出符合關鍵字的上架商品的資訊 ****/
     List<Object> showSellProductByKeyWord(String keyWord, Integer page);
+
+    /**** 新增商品 ****/
+    Product createProduct(Product product);
 }

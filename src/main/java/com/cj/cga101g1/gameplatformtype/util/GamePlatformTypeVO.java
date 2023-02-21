@@ -5,11 +5,12 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "gameplatformtype")
 @Component
-public class GamePlatformTypeVO {
+public class GamePlatformTypeVO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GamePlatformNo")

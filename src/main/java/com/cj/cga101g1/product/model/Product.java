@@ -3,23 +3,33 @@ package com.cj.cga101g1.product.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Product {
+public class Product extends ProductErrorMessage implements Serializable {
 //    @JsonProperty("productNumber")
     private Integer productNo;
+    @NotNull
     private Integer gameTypeNo;
+    @NotNull
     private Integer gamePlatformNo;
+    @NotNull
     private Integer gameCompanyNo;
+    @NotNull
     private String productName;
+    @NotNull
     private Integer productPrice;
+    @NotNull
     private Integer productState;
     private ProductStatusCategory productStatusCategory;
     private Timestamp soldTime;
     private Timestamp launchedTime;
+    @NotNull
     private String itemProdDescription;
+    @NotNull
     private String upcNum;
 
     public Integer getProductNo() {

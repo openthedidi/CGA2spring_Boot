@@ -26,4 +26,6 @@ public interface ProductDao {
     String showSellProductByKeyWordPages(String keyWord);
 
     List<Object> showSellProductByKeyWord(String keyWord, Integer page);
+
+    void createProduct(Product product);
 }

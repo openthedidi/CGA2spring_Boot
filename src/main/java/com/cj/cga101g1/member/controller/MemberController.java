@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.message.AuthException;
@@ -23,13 +24,19 @@ import java.io.IOException;
 
 
 @RequestMapping("mem")
-@RestController
+@Controller
 public class MemberController {
     @Autowired
     private MemberService memberService;
 
     @Autowired
     private UserDetailsService jwtUserSecurityService;
+
+    @GetMapping("/testHtml")
+    public String test(){
+        return "CGA101G1/frontend/mem/index";
+    }
+
 
 
     @PostMapping("/LoginServlet")
@@ -89,7 +96,7 @@ public class MemberController {
         memResult = (Mem) jwtUserSecurityService.loadUserByUsername(mem.getUsername());
         JwtTokenUtils jwtToken = new JwtTokenUtils();
         String token = jwtToken.createToken(memResult.getUsername(),"000",false); // 取得token
-        return ResponseEntity.status(200).body(token);
+        return ResponseEntity.ok(token);
     }
 
 

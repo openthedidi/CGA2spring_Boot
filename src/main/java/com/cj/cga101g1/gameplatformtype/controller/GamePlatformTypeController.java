@@ -6,6 +6,7 @@ import com.cj.cga101g1.gameplatformtype.service.GamePlatformTypeService;
 import com.cj.cga101g1.gameplatformtype.util.GamePlatformTypeVO;
 import com.cj.cga101g1.util.PropertiesConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,14 @@ import java.util.List;
 public class GamePlatformTypeController {
 
     @Autowired
+    @Qualifier("GamePlatformTypeServiceImp")
     private GamePlatformTypeService gamePlatformTypeService;
+
+    @Autowired
+    @Qualifier("GamePlatformTypeServiceImpRedisVer")
+    private GamePlatformTypeService GamePlatformTypeServiceImpRedisVer;
+
+
     @Autowired
     private GamePlatformTypeVO gamePlatformTypeVO;
 
@@ -109,4 +117,30 @@ public class GamePlatformTypeController {
         return ResponseEntity.status(200).body(gamePlatformTypeService.getOneType(64003));
     }
 
+
+
+    @GetMapping("/getOneTypeByKeyName/redis/{KeyName}")
+    public List<GamePlatformTypeVO> getOneTypeByKeyNameRedis(@PathVariable String KeyName){
+        return GamePlatformTypeServiceImpRedisVer.getOneTypeByKeyName(KeyName);
+    }
+
+    @PutMapping("/updateOneType/redis/{gamePlatformNo}")
+    public GamePlatformTypeVO updateOneTypeByRedis(@PathVariable Integer gamePlatformNo,
+                                            @RequestBody GamePlatformTypeVO gamePlatformTypeVO){
+
+        gamePlatformTypeVO.setGamePlatformNo(gamePlatformNo);
+        /*****  先進行查詢看是否存在DB上，如果DB沒有也不能新增的動作  ****/
+        GamePlatformTypeVO gamePlatformTypeVOQuery = GamePlatformTypeServiceImpRedisVer.getOneType(gamePlatformNo);
+        if(gamePlatformTypeVOQuery.getGamePlatformNo()!=000) {
+            return GamePlatformTypeServiceImpRedisVer.updateOneType(gamePlatformTypeVO);
+        }else{
+            return gamePlatformTypeVOQuery;
+        }
+    }
+
+    @GetMapping("/getAllGamePlatformType/redis")
+    public ResponseEntity<List<GamePlatformTypeVO>> getAllTypeByRedis(){
+        List<GamePlatformTypeVO> list=  GamePlatformTypeServiceImpRedisVer.getAllType();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 }

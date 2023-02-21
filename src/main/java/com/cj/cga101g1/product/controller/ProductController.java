@@ -4,12 +4,15 @@ import com.cj.cga101g1.product.model.Product;
 import com.cj.cga101g1.product.service.Method01;
 import com.cj.cga101g1.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
 import java.util.List;
 
 //@RequestMapping("CGA101G1/product")
@@ -20,7 +23,12 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
+    @Qualifier("ProductServiceImp")
     private ProductService productService;
+
+    @Autowired
+    @Qualifier("ProductServiceImpRedisVer")
+    private ProductService productServiceImpRedisVer;
 
     @GetMapping("/OneProductDetail")
     public ResponseEntity<Object> getProduct(@RequestParam Integer ProductNo){
@@ -42,6 +50,13 @@ public class ProductController {
             Integer page = Integer.valueOf(Page);
             List<Object> list = productService.getAllSelledProductsByMap(page);
             return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/showPageProduct/redis")
+    public ResponseEntity<List<Object>> showPageProductByRedis(@RequestParam (defaultValue = "0") String Page){
+        Integer page = Integer.valueOf(Page);
+        List<Object> list = productServiceImpRedisVer.getAllSelledProductsByMap(page);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping("/showSellAndPlatFormTypeProductPages")
@@ -98,6 +113,12 @@ public class ProductController {
                                                                 @RequestParam Integer Page){
         List<Object> list = productService.showSellProductByKeyWord(keyWord,Page);
         return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @Transactional
+    @PostMapping("/newProduct")
+    public ResponseEntity<Product> newProduct(@RequestBody @Valid Product product){
+        return ResponseEntity.ok(productService.createProduct(product));
     }
 
 }

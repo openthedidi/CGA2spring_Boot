@@ -2,14 +2,19 @@ package com.cj.cga101g1.product.service;
 
 
 import com.cj.cga101g1.product.dao.ProductDao;
-
+import com.cj.cga101g1.product.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class ProductServiceImpl implements ProductService{
+@Component("ProductServiceImpRedisVer")
+@CacheConfig(cacheNames = "productService")
+public class ProductServiceImpRedis implements ProductService{
     @Autowired
     private ProductDao productDao;
 
@@ -26,6 +31,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Cacheable(key = "#p0")
     public List<Object> getAllSelledProductsByMap(Integer page) {
         return productDao.getPageInSellByMap(page);
     }
@@ -68,5 +74,12 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Object> showSellProductByKeyWord(String keyWord, Integer page) {
         return productDao.showSellProductByKeyWord(keyWord,page);
+    }
+
+    @Override
+    @CachePut(key = "#p0")
+    public Product createProduct(Product product) {
+        productDao.createProduct(product);
+        return product;
     }
 }

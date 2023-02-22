@@ -30,4 +30,9 @@ public class ThymeleafController {
     public String register(){
         return "/CGA101G1/frontend/mem/register";
     }
+
+    @GetMapping("/CGA101G1/frontend/mem/updateMemberData.html")
+    public String updateMemberData(){
+        return "/CGA101G1/frontend/mem/updateMemberData";
+    }
 }

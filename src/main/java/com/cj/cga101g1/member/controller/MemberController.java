@@ -84,6 +84,7 @@ public class MemberController {
         try {
             memResult = (Mem)  jwtUserSecurityService.loadUserByUserPassword(mem.getMemAccount(),mem.getMemPassword());
         } catch (UsernameNotFoundException e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(404).body(e.getMessage());
         }
         JwtTokenUtils jwtToken = new JwtTokenUtils();

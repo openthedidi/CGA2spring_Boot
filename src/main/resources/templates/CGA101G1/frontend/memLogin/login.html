@@ -307,24 +307,21 @@
 
                     $.ajax({
                         type: 'POST',
-                        // url: "/CGA101G1/mem/LoginServlet",
                         url: "/mem/jwt/login",
-                        contentType: "application/json",
+                        xhrFields: {
+                            withCredentials: true,// 允许cookie跨域发送
+                            responseType:"text"
+
+                        },
+                        contentType: "application/json",//指定發送給server端的類型
                         data: JSON.stringify({
                             memAccount: this.memAccount,
                             memPassword: this.memPassword1
                         }),
                         success: data => {
                             console.log(data);
-                            // const { successful, message, initlocation } = data;
-                            // if (successful) {
                             if (data != null) {
-                                // let { memNo, memName, memStatus, memVrfed } = data;
-                                // sessionStorage.setItem("memNo", memNo);
-                                // sessionStorage.setItem("memName", memName);
-                                // sessionStorage.setItem("memStatus", memStatus);
-                                // sessionStorage.setItem("memVrfed", memVrfed);
-                                document.cookie = data; //在瀏覽器上存token
+                                localStorage.setItem("token", data); //在瀏覽器上存token
                                 swal("歡迎光臨買鳳(ﾉ>ω<)ﾉ", "", "success")
                                     // .then(function () {
                                     //     if (initlocation !== undefined) {

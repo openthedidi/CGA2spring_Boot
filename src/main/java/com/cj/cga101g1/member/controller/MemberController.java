@@ -89,6 +89,7 @@ public class MemberController {
         }
         JwtTokenUtils jwtToken = new JwtTokenUtils();
         String token = jwtToken.createToken(memResult.getUsername(), "000", false); // 取得token
+//        token = "token=" + token + "; path=/; secure; HttpOnly";
         return ResponseEntity.ok(token);
     }
 
@@ -132,17 +133,20 @@ public class MemberController {
      */
     @PostMapping("/jwt/MemSelfInfo")
     public ResponseEntity<Mem> getMemSelfInfoByJwt(@RequestHeader("Authorization") String token) throws AuthException {
+        System.out.println("開始取會員資料");
         JwtTokenUtils jwtToken = new JwtTokenUtils();
         if (jwtToken.validateToken(token)) {
             String memAccount = jwtToken.getUsername(token);
             Mem mem = memberService.getMemSelfInfo(memberService.getMemByMemAccount(memAccount));
             mem.setMessage("成功");
             mem.setSuccessful(true);
+            System.out.println("驗證成功");
             return ResponseEntity.status(HttpStatus.OK).body(mem);
         } else {
             Mem mem = new Mem();
             mem.setSuccessful(false);
             mem.setMessage("未獲得許可");
+            System.out.println("驗正失敗");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mem);
         }
     }

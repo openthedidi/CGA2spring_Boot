@@ -323,13 +323,14 @@
                             if (data != null) {
                                 localStorage.setItem("token", data); //在瀏覽器上存token
                                 swal("歡迎光臨買鳳(ﾉ>ω<)ﾉ", "", "success")
-                                    // .then(function () {
-                                    //     if (initlocation !== undefined) {
-                                    //         location = initlocation;
-                                    //     } else {
-                                    //         location = "/CGA101G1/frontend/HomePage/HomePage.html";
-                                    //     }
-                                    // })
+                                    .then(function () {
+                                        // if (initlocation !== undefined) {
+                                        //     location = initlocation;
+                                        // } else {
+                                        //     location = "/CGA101G1/frontend/HomePage/HomePage.html";
+                                        // }
+                                        window.location.href = "/CGA101G1/frontend/mem/updateMemberData.html";
+                                    })
                             } else {
                                 this.isShow = !this.isShow;
                                 this.errMsg1 = message;

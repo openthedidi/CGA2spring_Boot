@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.security.auth.message.AuthException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -105,6 +106,8 @@ public class MemberController {
     }
 
 
+
+
     @PostMapping("/RegisterServlet")
     public ResponseEntity<Mem> register(@RequestBody @Valid Mem mem) {
         Mem memResult = memberService.newMember(mem);
@@ -154,16 +157,27 @@ public class MemberController {
     @GetMapping(value = "/MemSelfPicServlet", produces = MediaType.IMAGE_GIF_VALUE)
     public @ResponseBody
     byte[] showMemSelfPic(@RequestParam Integer memNo) {
+        System.out.println("showMemSelfPic");
         return memberService.showMemSelfPic(memNo);
     }
 
-    ;
 
-    @PutMapping("/MemEditServlet/{memNo}")
+    @PutMapping("/memEdit/{memNo}")
     public ResponseEntity<Mem> memEdit(@RequestBody @Valid Mem mem,
-                                       @PathVariable Integer memNo) {
-        Mem memResult = memberService.memEdit(memNo, mem);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(memResult);
+                                       @PathVariable Integer memNo,
+                                       @RequestHeader("Authorization") String token) throws AuthException {
+        JwtTokenUtils jwtToken = new JwtTokenUtils();
+        if (jwtToken.validateToken(token)) {
+            System.out.println("token 驗證通過");
+            Mem memResult = memberService.memEdit(memNo, mem);
+            return ResponseEntity.status(HttpStatus.OK).body(memResult);
+        } else {
+            mem.setSuccessful(false);
+            mem.setMessage("未獲得許可");
+            System.out.println("驗正失敗");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mem);
+        }
+//        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @PostMapping("/memSessionTest")

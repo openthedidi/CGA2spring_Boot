@@ -27,7 +27,8 @@ public class MemberDaoImp implements MemberDao{
     @Transactional
     @Override
     public Mem memEdit(Mem mem) {
-        Mem memResult = memberRepository.save(mem);
+        memberRepository.editMem(mem.getMemName(),mem.getMemMobile(),mem.getMemEmail(),mem.getMemNo());
+        Mem memResult = memberRepository.findById(mem.getMemNo()).orElse(null);
         return memResult;
     }
 

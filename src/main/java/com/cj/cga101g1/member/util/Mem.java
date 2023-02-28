@@ -26,11 +26,11 @@ public class Mem extends MemCore  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer memNo;
-    @NotNull(message = "MemAccount不可為null")
-    @NotBlank(message = "MemAccount不可是空白")
+//    @NotNull(message = "MemAccount不可為null")
+//    @NotBlank(message = "MemAccount不可是空白")
     private String memAccount;
-    @NotNull(message = "Password不可為null")
-    @NotBlank(message = "Password不可是空白")
+//    @NotNull(message = "Password不可為null")
+//    @NotBlank(message = "Password不可是空白")
     private String memPassword;
     private Integer memStatus;
     private Integer memVrfed;

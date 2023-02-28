@@ -3,6 +3,7 @@ package com.cj.cga101g1.util;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Controller
 public class ThymeleafController {
@@ -33,6 +34,6 @@ public class ThymeleafController {
 
     @GetMapping("/CGA101G1/frontend/mem/updateMemberData.html")
     public String updateMemberData(){
-        return "/CGA101G1/frontend/mem/updateMemberData";
+            return "/CGA101G1/frontend/mem/updateMemberData";
     }
 }

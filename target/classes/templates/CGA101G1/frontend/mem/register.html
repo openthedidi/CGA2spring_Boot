@@ -10,6 +10,9 @@
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- custom css file link -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="../../../css/allStyle.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/headerStyle.css">
@@ -29,6 +32,9 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="../../../assets/css/style01.css">
     <link rel="stylesheet" href="/CGA101G1/frontend/mem/css/MemStyle.css">
+
+
+
 </head>
 
 <body>
@@ -158,9 +164,21 @@
                                     <div class="form-group mb-3">
                                         <label for="memBirth" class="form-label">出生年月日:<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" id="memBirth" class="form-control" placeholder="您的出生年月日"
-                                            style="text-transform: none;">
-                                        <label id="d1" style="color: red; font-size: 15;"></label>
+<!--                                        <input type="text" id="memBirth" class="form-control" placeholder="您的出生年月日"-->
+<!--                                            style="text-transform: none;">-->
+<!--                                        <label id="d1" style="color: red; font-size: 15;"></label>-->
+                                        <div class="input-group date" id='date1'>
+
+                                            　　<input type="text" class="form-control" />
+
+                                            　　<span class="input-group-addon">
+
+                                            　　　<i class="glyphicon glyphicon-calendar"></i>
+
+                                            　　</span>
+                                        </div>
+
+
                                     </div>
                                     <div class="city-selector-set">
                                         <div class="form-group mb-3">
@@ -291,37 +309,62 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.1/dist/tw-city-selector.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/CGA101G1/datetimepicker/jquery.datetimepicker.css" />
-    <script src="/CGA101G1/datetimepicker/jquery.js"></script>
-    <script src="/CGA101G1/datetimepicker/jquery.datetimepicker.full.js"></script>
+<!--    <link rel="stylesheet" type="text/css" href="/CGA101G1/datetimepicker/jquery.datetimepicker.css" />-->
+<!--    <script src="/CGA101G1/datetimepicker/jquery.js"></script>-->
+<!--    <script src="/CGA101G1/datetimepicker/jquery.datetimepicker.full.js"></script>-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+
     <script>
         //日期
-        $.datetimepicker.setLocale('zh'); // kr ko ja en
-        $('#memBirth').datetimepicker({
-            theme: '',          //theme: 'dark',
-            timepicker: false,   //timepicker: false,
-            step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
-            format: 'Y-m-d ',
-            value: new Date()
-            //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
-            //startDate:	        '2022/07/10',  // 起始日
-            //minDate:           '-1970-01-01', // 去除今日(不含)之前
-            //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+        $('#date1').datetimepicker({
+            date:null, //一開始輸入框的日期為空
+            format: 'YYYY-MM-DD', //日期的顯示格式
+            locale: moment.locale('zh-tw'), //國別
+            // daysOfWeekDisabled: [0, 6], //隱藏的天數0為周日6為星期六
+            // minDate: moment().add(1,'days'), //顯示最小天數
+            // maxDate: moment().add(30,'days'), //顯示最大天數，30為最大的顯示範圍為一個月為限
+            // disabledDates:
+            //     [ //隱藏的日期
+            //         moment().add(1,'days'), //前一日
+            //         moment().add(2,'days'), //前二日
+            //         '2021-10-10', //特別日期
+            //         '2021-12-25'
+            //     ]
         });
-        var somedate2 = new Date();
-        $('#memBirth').datetimepicker({
-            beforeShowDay: function (date) {
-                if (date.getYear() > somedate2.getYear() ||
-                    (date.getYear() == somedate2.getYear() && date.getMonth() > somedate2.getMonth()) ||
-                    (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-                ) {
-                    return [false, ""]
-                }
-                return [true, ""];
-            }
-        });
+        // $.datetimepicker.setLocale('zh'); // kr ko ja en
+        // $('#memBirth').datetimepicker({
+        //     theme: '',          //theme: 'dark',
+        //     timepicker: false,   //timepicker: false,
+        //     step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+        //     format: 'Y-m-d ',
+        //     value: new Date()
+        //     //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+        //     //startDate:	        '2022/07/10',  // 起始日
+        //     //minDate:           '-1970-01-01', // 去除今日(不含)之前
+        //     //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+        // });
+        // var somedate2 = new Date();
+        // $('#memBirth').datetimepicker({
+        //     beforeShowDay: function (date) {
+        //         if (date.getYear() > somedate2.getYear() ||
+        //             (date.getYear() == somedate2.getYear() && date.getMonth() > somedate2.getMonth()) ||
+        //             (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+        //         ) {
+        //             return [false, ""]
+        //         }
+        //         return [true, ""];
+        //     }
+        // });
         //居住地
         new TwCitySelector({
             el: '.city-selector-set',

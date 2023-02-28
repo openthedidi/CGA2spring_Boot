@@ -11,24 +11,23 @@
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- custom css file link -->
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/css/allStyle.css">
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/css/style.css">
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/css/headerStyle.css">
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/css/footerStyle.css">
-
+    <link rel="stylesheet" href="../../../css/allStyle.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/headerStyle.css">
+    <link rel="stylesheet" href="../../../css/footerStyle.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/CGA101G1/frontend/mainCss/images/logo.png">
+    <link rel="shortcut icon" href="../../../images/logo.png">
     <!-- Fonts CSS -->
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/assets/vendor/fonts/fonts.css">
+    <link rel="stylesheet" href="../../../assets/vendor/fonts/fonts.css">
     <!-- Bootstrap-icons CSS -->
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/assets/vendor/bootstrap/icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../assets/vendor/bootstrap/icons/bootstrap-icons.css">
     <!--Magnific-Popup CSS -->
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/assets/vendor/magnific/magnific-popup.css">
+    <link rel="stylesheet" href="../../../assets/vendor/magnific/magnific-popup.css">
     <!-- Slick CSS -->
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/assets/vendor/slick/slick.css">
+    <link rel="stylesheet" href="../../../assets/vendor/slick/slick.css">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="/CGA101G1/frontend/mainCss/assets/css/style01.css">
+    <link rel="stylesheet" href="../../../assets/css/style01.css">
     <link rel="stylesheet" type="text/css" href="/CGA101G1/datetimepicker/jquery.datetimepicker.css" />
     <link rel="stylesheet" href="/CGA101G1/frontend/mem/css/MemStyle.css">
 </head>
@@ -105,8 +104,7 @@
                         <div class="bg-white border border-bottom-0 shadow-lg">
                             <div class="d-flex p-3 align-items-center">
                                 <div class="avatar avatar-lg rounded-circle" id="Pinf">
-                                    <img src="/CGA101G1/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt=""
-                                        id="imgPinf">
+                                    <img src="/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt="" id="imgPinf">
                                 </div>
                                 <div class="col ps-3">
                                     <h6 class="m-0" id="Ninf"></h6>
@@ -196,10 +194,14 @@
                                     </a>
                                 </li>
                                 <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/mem/logoutServlet">
-                                        <i class="bi bi-box-arrow-left me-2"></i>登出
-                                    </a>
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/mem/logoutServlet">-->
+<!--                                        <i class="bi bi-box-arrow-left me-2"></i>登出-->
+<!--                                    </a>-->
+                                    <button type="button" class="nav-link-style d-flex align-items-center p-3" style="color:black"
+                                            id="btnLogout">
+                                        登出
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -280,15 +282,16 @@
                                                             <div class="form-group mb-3">
                                                                 <label for="memCity" class="form-label">居住縣市:<span
                                                                         class="text-danger">*</span></label>
-                                                                <select class="county" id="memCity"
-                                                                    class="form-control"></select>
+                                                                <select class="county" id="memCity"></select>
+                                                                <!--                                                                    class="form-control"-->
+                                                                <!--                                                                ></select>-->
                                                             </div>
 
                                                             <div class="form-group mb-3">
                                                                 <label for="memDist" class="form-label">鄉/鎮/市/區:<span
                                                                         class="text-danger">*</span></label>
-                                                                <select class="district" id="memDist"
-                                                                    class="form-control"></select>
+                                                                <select class="district" id="memDist"></select>
+                                                                <!--                                                                    class="form-control"></select>-->
                                                             </div>
                                                         </div>
 
@@ -298,6 +301,22 @@
                                                                 class="form-control" style="text-transform: none;">
                                                             <label id="l6" style="color: red; font-size: 15;"></label>
                                                         </div>
+                                                        <div style="display: none;">
+                                                            <label for="memNo" class="form-label">會員編號:
+                                                            </label>
+                                                            <input type="text" name="memNo" id="memNo"
+                                                                class="form-control" style="text-transform: none; background-color: #d1d1d1;border: 1px solid #aeb4be;
+                                                                appearance: none;
+                                                                border-radius: 4px; line-height: 3.2; ">
+                                                            <label id="lubMemNo"
+                                                                style="color: red; font-size: 15;"></label>
+                                                        </div>
+                                                        <div class="form-group text-center">
+                                                            <button type="button" class="btn btn-primary w-100" id="btn1">
+                                                                確認修改
+                                                            </button>
+                                                        </div>
+
 
 
                                                     </div>
@@ -325,8 +344,9 @@
                                                                 class="form-control" style="text-transform: none;">
                                                             <label id="d1" style="color: red; font-size: 15;"></label>
                                                         </div>
+                                                        <div style="display: none">
                                                         <div>
-                                                            <!-- class="form-group col-md-12" -->
+                                                             class="form-group col-md-12"
                                                         </div>
                                                         <label for="creditcardNo1" class="form-label">信用卡卡號:
                                                         </label>
@@ -409,18 +429,9 @@
                                                                 border-radius: 4px; line-height: 3.2; ">
                                                             <label id="lup6" style="color: red; font-size: 15;"></label>
                                                         </div>
-
+                                                        </div>
                                                     </div>
 
-
-
-
-
-                                                    <div class="form-group text-center">
-                                                        <button type="button" class="btn btn-primary w-100" id="btn1">
-                                                            確認修改
-                                                        </button>
-                                                    </div>
 
                                                     <label id="l8" style="color: red; font-size: 15;"></label>
 
@@ -617,44 +628,49 @@
                             //秀出所有資料
                             $.ajax({
                                 type: 'POST',
-                                url: "/CGA101G1/mem/MemSelfInfo",
+                                url: "/mem/jwt/MemSelfInfo",
+                                headers: {
+                                    "Authorization": localStorage.getItem("token") // 在请求头中添加令牌
+                                },
                                 contentType: "application/json",
                                 success: data => {
+                                    console.log(data);
                                     let { memNo, memAccount, memName, memMobile, memEmail,
                                         memCity, memDist, memAdd, memBirth, creditcardNo,
                                         creditcardDate, creditcardSecurityNo, bankAccount,
                                         bankAccountOwner
                                     } = data;
                                     //日期
-                                    $.datetimepicker.setLocale('zh'); // kr ko ja en
-                                    $('#memBirth').datetimepicker({
-                                        theme: '',          //theme: 'dark',
-                                        timepicker: false,   //timepicker: false,
-                                        step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
-                                        format: 'Y-m-d ',
-                                        value: memBirth,
-                                        //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
-                                        //startDate:	        '2022/07/10',  // 起始日
-                                        //minDate:           '-1970-01-01', // 去除今日(不含)之前
-                                        //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-                                    });
-                                    var somedate2 = new Date();
-                                    $('#memBirth').datetimepicker({
-                                        beforeShowDay: function (date) {
-                                            if (date.getYear() > somedate2.getYear() ||
-                                                (date.getYear() == somedate2.getYear() && date.getMonth() > somedate2.getMonth()) ||
-                                                (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-                                            ) {
-                                                return [false, ""]
-                                            }
-                                            return [true, ""];
-                                        }
-                                    });
+                                    // $.datetimepicker.setLocale('zh'); // kr ko ja en
+                                    // $('#memBirth').datetimepicker({
+                                    //     theme: '',          //theme: 'dark',
+                                    //     timepicker: false,   //timepicker: false,
+                                    //     step: 1,            //step: 60 (這是timepicker的預設間隔60分鐘)
+                                    //     format: 'Y-m-d ',
+                                    //     value: memBirth,
+                                    //     //disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+                                    //     //startDate:	        '2022/07/10',  // 起始日
+                                    //     //minDate:           '-1970-01-01', // 去除今日(不含)之前
+                                    //     //maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+                                    // });
+                                    // var somedate2 = new Date();
+                                    // $('#memBirth').datetimepicker({
+                                    //     beforeShowDay: function (date) {
+                                    //         if (date.getYear() > somedate2.getYear() ||
+                                    //             (date.getYear() == somedate2.getYear() && date.getMonth() > somedate2.getMonth()) ||
+                                    //             (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+                                    //         ) {
+                                    //             return [false, ""]
+                                    //         }
+                                    //         return [true, ""];
+                                    //     }
+                                    // });
                                     //給資料
                                     $("#l1").html(memAccount);
                                     $("#memName").val(memName);
                                     $("#memMobile").val(memMobile);
                                     $("#l7").html(memEmail);
+                                    $("#lubMemNo").html(memNo);
 
                                     //居住地
                                     new TwCitySelector({
@@ -669,16 +685,19 @@
                                     $("#memBirth").attr("value", memBirth);
                                     //左上角
                                     $("#Ninf").text(memName);
-                                    $("#Pinf").html(`<img src="/CGA101G1/mem/MemSelfPicServlet?memNo=${memNo}" title="" alt=""
+                                    $("#Pinf").html(`<img src="/mem/MemSelfPicServlet?memNo=${memNo}" title="" alt=""
                                             id="imgPinf">`)
                                     $("#Einf").text(memEmail);
                                     //圖片顯示
                                     $("#divImg").html(
                                         `<label for="myPic" class="form-label" >會員大頭貼: </label>
-                                            <img src="/CGA101G1/mem/MemSelfPicServlet?memNo=${memNo}" id="img1" width="50%" height="50%" class="form-control" style="padding: 0; border: 0" />
+                                            <img src="/mem/MemSelfPicServlet?memNo=${memNo}" id="img1" width="50%" height="50%" class="form-control" style="padding: 0; border: 0" />
                                             <input type="file" name="myPic" id="myPic" onchange="pic()">
                                                 <label id="lup7"></label>`);
-                                }
+                                },
+                                // error:function(){
+                                //     window.location.href = '/CGA101G1/frontend/memLogin/login.html';
+                                // }
 
                             });
 
@@ -727,13 +746,19 @@
                             ) {
                                 $('#l8').text(`尚有欄位未輸入或格式錯誤`);
                             } else {
+                                const lubMemNo = document.getElementById('lubMemNo').innerText;
+                                console.log(lubMemNo)
                                 $.ajax({
-                                    type: 'POST',
-                                    url: "/CGA101G1/mem/MemEditServlet",
+                                    type: 'PUT',
+                                    url: "/mem/memEdit/" + lubMemNo,
                                     contentType: "application/json",
+                                    headers: {
+                                        "Authorization": localStorage.getItem("token") // 在请求头中添加令牌
+                                    },
                                     data:
                                         JSON.stringify({
                                             memAccount: l1.innerText,
+                                            memNo:lubMemNo,
                                             memName: memName.value,
                                             memMobile: memMobile.value,
                                             memAdd: memAdd.value,
@@ -749,24 +774,37 @@
                                             bankAccountOwner: bankAccountOwner.value,
                                         }),
                                     success: data => {
-                                        const { successful, message } = data;
-                                        if (successful) {
-                                            swal(message, "", "success")
-                                                .then(function () {
-                                                    location = "/CGA101G1/frontend/mem/updateMemberData.html";
-                                                })
-                                        } else {
-                                            $("#l8").html(message);
-                                        }
+                                        swal("更新成功", "", "success")
+                                            .then(function () {
+                                                location = "/CGA101G1/frontend/mem/updateMemberData.html";
+                                            })
+                                        // const { successful, message } = data;
+                                        // if (successful) {
+                                        //     swal(message, "", "success")
+                                        //         .then(function () {
+                                        //             location = "/CGA101G1/frontend/mem/updateMemberData.html";
+                                        //         })
+                                        // }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // 請求失敗
+                                        console.log(xhr.responseText);
+                                        console.log(status);
+                                        console.log(error);
                                     }
 
 
                                 });
 
-
-
                             }
                         })
+
+                        $("#btnLogout").click(() => {
+                            localStorage.removeItem('token');
+                            window.location.href = '/CGA101G1/frontend/memLogin/login.html';
+
+                        })
+
 
                     </script>
 

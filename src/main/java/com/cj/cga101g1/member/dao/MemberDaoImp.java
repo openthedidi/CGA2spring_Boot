@@ -60,9 +60,12 @@ public class MemberDaoImp implements MemberDao{
     @Transactional
     @Override
     public Mem newMem(Mem mem) {
+        mem.setUserStatus(1);
+        mem.setMemStatus(1);
+        mem.setMemVrfed(1);
         Mem memResult =memberRepository.save(mem);
         int memNo = memResult.getMemNo();
         System.out.println(memNo+"新註冊ID");
-        return memberRepository.save(mem);
+        return memberRepository.findById(memNo).orElse(null);
     }
 }

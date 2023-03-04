@@ -105,13 +105,15 @@ public class MemberController {
 
 
 
-    @PostMapping("/RegisterServlet")
-    public ResponseEntity<Mem> register(@RequestBody @Valid Mem mem) {
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody @Valid Mem mem) {
         Mem memResult = memberService.newMember(mem);
         if (memResult != null) {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(memResult);
+            JwtTokenUtils jwtToken = new JwtTokenUtils();
+            String token = jwtToken.createToken(memResult.getUsername(), "customer", false); // 取得token
+            return ResponseEntity.ok(token);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(memResult);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("註冊失敗");
         }
     }
 

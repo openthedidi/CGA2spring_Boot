@@ -32,7 +32,8 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="../../../assets/css/style01.css">
     <link rel="stylesheet" href="/CGA101G1/frontend/mem/css/MemStyle.css">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
 
 
 </head>
@@ -169,7 +170,7 @@
 <!--                                        <label id="d1" style="color: red; font-size: 15;"></label>-->
                                         <div class="input-group date" id='date1'>
 
-                                            　　<input type="text" class="form-control" />
+                                            　　<input type="text" class="form-control" id="memBirth"/>
 
                                             　　<span class="input-group-addon">
 
@@ -184,19 +185,8 @@
                                         <div class="form-group mb-3">
                                             <label for="memCity" class="form-label">居住縣市:<span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" id="memCity" class="form-control"
-                                                    placeholder="您的居住縣市">
-<!--                                            <select class="county" id="memCity" class="form-control"></select>-->
+                                            <div role="tw-city-selector"></div>
                                             <label id="s1" style="color: red; font-size: 15;"></label>
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label for="memDist" class="form-label">鄉/鎮/市/區:<span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text" id="memDist" class="form-control"
-                                                    placeholder="您的鄉/鎮/市/區">
-<!--                                            <select class="district" id="memDist" class="form-control"></select>-->
-                                            <label id="s2" style="color: red; font-size: 15;"></label>
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
@@ -214,15 +204,15 @@
                                         checked />
                                     <label class="form-check-label" for="form2Example3"> 記住帳號 </label>
                                 </div> -->
-                                <div class="form-check mb-3">
-                                    <div style="margin: 0 0 0 10;">
-                                        <input class="form-check-input" type="checkbox" value="agree" id="agree" />
-                                        <label class="form-check-label" for="form2Example3"> <span
-                                                class="col ms-auto small text-end"><a
-                                                    href="/CGA101G1/frontend/mem/agree.html">
-                                                    我同意條款內文 </a></span> </label>
-                                    </div>
-                                </div>
+<!--                                <div class="form-check mb-3">-->
+<!--                                    <div style="margin: 0 0 0 10;">-->
+<!--                                        <input class="form-check-input" type="checkbox" value="agree" id="agree" />-->
+<!--                                        <label class="form-check-label" for="form2Example3"> <span-->
+<!--                                                class="col ms-auto small text-end"><a-->
+<!--                                                    href="/CGA101G1/frontend/mem/agree.html">-->
+<!--                                                    我同意條款內文 </a></span> </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="form-group text-center">
                                     <button type="button" class="btn btn-primary w-100" id="btn1">
                                         註冊
@@ -307,15 +297,15 @@
     </footer>
     <!-- End Footer -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.1.1/dist/tw-city-selector.min.js"></script>
 <!--    <link rel="stylesheet" type="text/css" href="/CGA101G1/datetimepicker/jquery.datetimepicker.css" />-->
 <!--    <script src="/CGA101G1/datetimepicker/jquery.js"></script>-->
 <!--    <script src="/CGA101G1/datetimepicker/jquery.datetimepicker.full.js"></script>-->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
+<!--    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
+<!--    <script src="https://unpkg.com/vue@next"></script>-->
 
-
+<!--    <script src="/static/js/tw-city-selector.js"></script>-->
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
@@ -325,6 +315,7 @@
 
 
     <script>
+        new TwCitySelector();
         //日期
         $('#date1').datetimepicker({
             date:null, //一開始輸入框的日期為空
@@ -381,7 +372,7 @@
                     $('#d1').text(`選擇完畢`)
                 }
             })
-        $('#memCity').blur(
+        $('select.county').blur(
             () => {
                 if ($('#memCity').find('option:selected').text().length === 0) {
                     $('#s1').text(`尚未選擇`)
@@ -389,7 +380,7 @@
                     $('#s1').text(`選擇完畢`)
                 }
             })
-        $('#memDist').blur(
+        $('select.district').blur(
             () => {
                 if ($('#memDist').find('option:selected').text().length === 0) {
                     $('#s2').text(`尚未選擇`)
@@ -400,25 +391,27 @@
 
         $('#memAccount').blur(
             () => {
-
+                const account = memAccount.value;
                 $.ajax({
-                    type: 'POST',
-                    url: '/CGA101G1/mem/MemAccountAuthServlet',
-                    data: JSON.stringify({
-                        memAccount: memAccount.value
-                    }),
+                    type: 'Get',
+                    url: '/mem/checkMemberAccount/' + account,
                     success: data => {
-                        let { successful, message } = data;
                         const r1 = /^[A-Za-z\d]{6,12}$/;
-                        if (r1.test($('#memAccount').val()) && successful) {
-                            $('#l1').text(`輸入完畢`)
+                        if (r1.test($('#memAccount').val())) {
+                            $('#l1').text(`帳號名稱驗證通過`)
                         } else if ($('#memAccount').val().length === 0) {
                             $('#l1').text(`尚未輸入`);
-                        } else if (!successful) {
-                            $('#l1').text(message);
                         } else
                             $('#l1').text(`請輸入英文及數字，且帳號長度需大於5小於13字數`);
 
+
+                    },
+                    error: data =>  {
+                        if ($('#memAccount').val().trim().length === 0) {
+                            $('#l1').text(`尚未輸入`);
+                        }else{
+                            $('#l1').text("帳號重複");
+                        }
 
                     }
                 })
@@ -465,37 +458,32 @@
                 if ($('#memAdd').val().length === 0) {
                     $('#l6').text(`尚未輸入`);
                 } else
-                    $('#l6').text(`輸入完畢`);
+                    $('#l6').text(`驗證通過`);
             })
         $('#memEmail').blur(
             () => {
+                const mail = $('#memEmail').val();
                 $.ajax({
-                    type: 'POST',
-                    url: '/CGA101G1/mem/MemEmailAuthServlet',
-                    data: JSON.stringify({
-                        memEmail: memEmail.value
-                    }),
+                    type: 'Get',
+                    url: '/mem/checkMemberEmail/' + mail,
                     success: data => {
-                        let { successful, message } = data;
-                        console.log(successful)
-                        console.log(message)
                         const r1 = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-                        if (r1.test($('#memEmail').val()) && successful) {
-                            $('#l7').text(`輸入完畢`)
-                        } else if ($('#memEmail').val().length === 0) {
-                            $('#l7').text(`尚未輸入`);
-                        } else if (!successful) {
-                            $('#l7').text(message);
+                        if (r1.test($('#memEmail').val())) {
+                            $('#l7').text(`驗證通過`)
                         } else
                             $('#l7').text(`請輸入電子郵件格式`);
-
-
+                    },
+                    error:function (){
+                        if ($('#memEmail').val().trim().length === 0) {
+                            $('#l7').text(`尚未輸入`);
+                        }else{
+                            $('#l7').text("此電子信箱已經註冊了");
+                        }
                     }
                 })
             })
 
         $("#btn1").click(() => {
-            if ($("#agree").prop('checked')) {
                 if ($('#memAccount').val().length === 0 ||
                     $('#memPassword').val().length === 0 ||
                     $('#confirmPassword').val().length === 0 ||
@@ -504,8 +492,8 @@
                     $('#memAdd').val().length === 0 ||
                     $('#memEmail').val().length === 0 ||
                     $('#memBirth').val().length === 0 ||
-                    $('#memCity').val().length === 0 ||
-                    $('#memDist').val().length === 0 ||
+                    $('select.county').val().length === 0 ||
+                    $('select.district').val().length === 0 ||
                     $('#memBirth').val().length === 0
                 ) {
                     $('#l8').text(`輸入有誤或尚有欄位未輸入`);
@@ -531,47 +519,36 @@
                     $('#l8').text(`格式有誤或尚有欄位未輸入`);
                 } else {
                     $('#l8').text('');
-
+                    const passwords = $('#memPassword').val();
+                    const name = $('#memName').val();
+                    const mobile =  $('#memMobile').val();
                     $.ajax({
                         type: 'POST',
-                        url: "/CGA101G1/mem/RegisterServlet",
+                        url: "/mem/register",
                         contentType: "application/json",
                         data: JSON.stringify({
                             memAccount: memAccount.value,
-                            memPassword: memPassword.value,
-                            confirmPassword: confirmPassword.value,
-                            memName: memName.value,
-                            memMobile: memMobile.value,
-                            memAdd: memAdd.value,
-                            memEmail: memEmail.value,
-                            memBirth: memBirth.value,
-                            memCity: memCity.value,
-                            memDist: memDist.value,
+                            memPassword: passwords,
+                            memName: name,
+                            memMobile: mobile,
+                            memAdd:  $('#memAdd').val(),
+                            memEmail: $('#memEmail').val(),
+                            memBirth:  $('#memBirth').val(),
+                            memCity: $('select.county').val(),
+                            memDist: $('select.district').val(),
                         }),
                         success: data => {
-                            const { successful, message } = data;
-                            console.log(successful);
-                            if (successful) {
-                                console.log(message);
-                                swal(message, "", "success")
-                                // .then(function () {
-
-                                // })
-                                // location = "login.html";
-                            } else {
-                                $("#l8").html(message);
-                            }
-
-                            swal(message, "", "success")
-                                .then(function () {
-
-                                })
+                            localStorage.setItem("token", data);
+                                swal("註冊成功", "", "success")
+                                    .then(function () {
+                                        window.location.href = "/CGA101G1/frontend/mem/updateMemberData.html";
+                                    })
+                        },
+                        error:function (data){
+                            swal(data, "", "error")
                         }
                     })
                 }
-            } else {
-                swal("請點擊我同意條款內文，並詳閱，確認後勾選方框!", "", "error")
-            }
         })
 
 

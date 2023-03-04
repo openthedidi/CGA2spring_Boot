@@ -1,5 +1,6 @@
 package com.cj.cga101g1.util.jwt;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,8 +25,10 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
+        System.out.println("requestURL :" + request.getRequestURI());
 
-        String tokenHeader = request.getHeader(JwtTokenUtils.TOKEN_HEADER);
+        String tokenHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        System.out.println("doFilterInternal - tokenHeader:" + tokenHeader);
         //如果請求頭則中沒有授權信息直接放行了
         if (tokenHeader == null || !tokenHeader.startsWith(JwtTokenUtils.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
@@ -47,9 +50,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     //這裡從token中獲取用戶信息並新建一個token
     private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader) throws AuthException {
+        System.out.println("啟動JWTAuthorizationFilter 的UsernamePasswordAuthenticationToken");
         String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
         String username = JwtTokenUtils.getUsername(token);
+        System.out.println("username:" + username);
         String role = JwtTokenUtils.getUserRole(token);
+        System.out.println("role: " + role );
         if (username != null){
             return new UsernamePasswordAuthenticationToken(username, null,
                     Collections.singleton(new SimpleGrantedAuthority(role))

@@ -87,4 +87,9 @@ public class MemberServiceImp implements MemberService{
         }
 
     }
+
+    @Override
+    public Mem getMemByMemAEmail(String email) {
+      return memberDao.getMemByMemEmail(email);
+    }
 }

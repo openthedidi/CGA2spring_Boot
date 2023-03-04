@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.security.auth.message.AuthException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,8 +87,7 @@ public class MemberController {
             return ResponseEntity.status(404).body(e.getMessage());
         }
         JwtTokenUtils jwtToken = new JwtTokenUtils();
-        String token = jwtToken.createToken(memResult.getUsername(), "000", false); // 取得token
-//        token = "token=" + token + "; path=/; secure; HttpOnly";
+        String token = jwtToken.createToken(memResult.getUsername(), "customer", false); // 取得token
         return ResponseEntity.ok(token);
     }
 
@@ -136,14 +133,12 @@ public class MemberController {
      */
     @PostMapping("/jwt/MemSelfInfo")
     public ResponseEntity<Mem> getMemSelfInfoByJwt(@RequestHeader("Authorization") String token) throws AuthException {
-        System.out.println("開始取會員資料");
         JwtTokenUtils jwtToken = new JwtTokenUtils();
         if (jwtToken.validateToken(token)) {
             String memAccount = jwtToken.getUsername(token);
             Mem mem = memberService.getMemSelfInfo(memberService.getMemByMemAccount(memAccount));
             mem.setMessage("成功");
             mem.setSuccessful(true);
-            System.out.println("驗證成功");
             return ResponseEntity.status(HttpStatus.OK).body(mem);
         } else {
             Mem mem = new Mem();
@@ -183,6 +178,34 @@ public class MemberController {
     @PostMapping("/memSessionTest")
     public void memSessionTest(HttpSession session) {
         System.out.println(session.getId());
+    }
+
+    @GetMapping("/checkMemberAccount/{account}")
+    public ResponseEntity<Mem> checkMemberAccount(@PathVariable String account) {
+        Mem mem = memberService.getMemByMemAccount(account);
+        if(mem == null){
+            Mem mem2 = new Mem();
+            mem2.setMessage("可以註冊");
+            return ResponseEntity.status(HttpStatus.OK).body(mem2);
+        }
+        mem.setMessage("帳號名稱重複");
+        mem.setMemPassword("");
+        mem.setMemEmail("");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(mem);
+    }
+
+    @GetMapping("/checkMemberEmail/{email}")
+    public ResponseEntity<Mem> checkMemberEmail(@PathVariable String email) {
+        Mem mem = memberService.getMemByMemAEmail(email);
+        if(mem == null){
+            Mem mem2 = new Mem();
+            mem2.setMessage("可以註冊");
+            return ResponseEntity.status(HttpStatus.OK).body(mem2);
+        }
+        mem.setMessage("信箱重複");
+        mem.setMemPassword("");
+        mem.setMemEmail("");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(mem);
     }
 
 }

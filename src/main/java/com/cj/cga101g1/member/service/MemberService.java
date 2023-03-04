@@ -29,4 +29,6 @@ public interface MemberService {
     Mem getMemSelfInfo(Mem memVO);
     /**  展示會員個人頭貼  **/
     byte[] showMemSelfPic(Integer memNo);
+
+    Mem getMemByMemAEmail(String email);
 }

@@ -400,25 +400,27 @@
 
         $('#memAccount').blur(
             () => {
-
+                const account = memAccount.value;
                 $.ajax({
-                    type: 'POST',
-                    url: '/CGA101G1/mem/MemAccountAuthServlet',
-                    data: JSON.stringify({
-                        memAccount: memAccount.value
-                    }),
+                    type: 'Get',
+                    url: '/mem/checkMemberAccount/' + account,
                     success: data => {
-                        let { successful, message } = data;
                         const r1 = /^[A-Za-z\d]{6,12}$/;
-                        if (r1.test($('#memAccount').val()) && successful) {
+                        if (r1.test($('#memAccount').val())) {
                             $('#l1').text(`輸入完畢`)
                         } else if ($('#memAccount').val().length === 0) {
                             $('#l1').text(`尚未輸入`);
-                        } else if (!successful) {
-                            $('#l1').text(message);
                         } else
                             $('#l1').text(`請輸入英文及數字，且帳號長度需大於5小於13字數`);
 
+
+                    },
+                    error: data =>  {
+                        if ($('#memAccount').val().trim().length === 0) {
+                            $('#l1').text(`尚未輸入`);
+                        }else{
+                            $('#l1').text("帳號重複");
+                        }
 
                     }
                 })
@@ -465,31 +467,27 @@
                 if ($('#memAdd').val().length === 0) {
                     $('#l6').text(`尚未輸入`);
                 } else
-                    $('#l6').text(`輸入完畢`);
+                    $('#l6').text(`驗證通過`);
             })
         $('#memEmail').blur(
             () => {
+                const mail = $('#memEmail').val();
                 $.ajax({
-                    type: 'POST',
-                    url: '/CGA101G1/mem/MemEmailAuthServlet',
-                    data: JSON.stringify({
-                        memEmail: memEmail.value
-                    }),
+                    type: 'Get',
+                    url: '/mem/checkMemberEmail/' + mail,
                     success: data => {
-                        let { successful, message } = data;
-                        console.log(successful)
-                        console.log(message)
                         const r1 = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-                        if (r1.test($('#memEmail').val()) && successful) {
-                            $('#l7').text(`輸入完畢`)
-                        } else if ($('#memEmail').val().length === 0) {
-                            $('#l7').text(`尚未輸入`);
-                        } else if (!successful) {
-                            $('#l7').text(message);
+                        if (r1.test($('#memEmail').val())) {
+                            $('#l7').text(`驗證通過`)
                         } else
                             $('#l7').text(`請輸入電子郵件格式`);
-
-
+                    },
+                    error:function (){
+                        if ($('#memEmail').val().trim().length === 0) {
+                            $('#l7').text(`尚未輸入`);
+                        }else{
+                            $('#l7').text("此電子信箱已經註冊了");
+                        }
                     }
                 })
             })

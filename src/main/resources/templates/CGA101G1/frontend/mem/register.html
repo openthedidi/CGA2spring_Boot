@@ -34,8 +34,11 @@
     <link rel="stylesheet" href="/CGA101G1/frontend/mem/css/MemStyle.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
-
-
+    <style>
+        .input-group {
+            display: flow-root;
+        }
+    </style>
 </head>
 
 <body>
@@ -161,28 +164,8 @@
                                             style="text-transform: none;">
                                         <label id="l7" style="color: red; font-size: 15;"></label>
                                     </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="memBirth" class="form-label">出生年月日:<span
-                                                class="text-danger">*</span></label>
-<!--                                        <input type="text" id="memBirth" class="form-control" placeholder="您的出生年月日"-->
-<!--                                            style="text-transform: none;">-->
-<!--                                        <label id="d1" style="color: red; font-size: 15;"></label>-->
-                                        <div class="input-group date" id='date1'>
-
-                                            　　<input type="text" class="form-control" id="memBirth"/>
-
-                                            　　<span class="input-group-addon">
-
-                                            　　　<i class="glyphicon glyphicon-calendar"></i>
-
-                                            　　</span>
-                                        </div>
-
-
-                                    </div>
                                     <div class="city-selector-set">
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-3" style="height: 63;padding-top: 3">
                                             <label for="memCity" class="form-label">居住縣市:<span
                                                     class="text-danger">*</span></label>
                                             <div role="tw-city-selector"></div>
@@ -193,8 +176,26 @@
                                         <label for="memAdd" class="form-label">地址:<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" id="memAdd" class="form-control" placeholder="您的地址"
-                                            style="text-transform: none;">
+                                               style="text-transform: none;">
                                         <label id="l6" style="color: red; font-size: 15;"></label>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="memBirth" class="form-label">出生年月日:<span
+                                                class="text-danger">*</span></label>
+<!--                                        <input type="text" id="memBirth" class="form-control" placeholder="您的出生年月日"-->
+<!--                                            style="text-transform: none;">-->
+<!--                                        <label id="d1" style="color: red; font-size: 15;"></label>-->
+                                        <div class="input-group date" id='date1'>
+
+                                            　　<input type="text" class="form-control" id="memBirth" style="width: 195"/>
+
+                                            　　<span class="input-group-addon">
+                                            　　　<i class="glyphicon glyphicon-calendar"></i>
+
+                                            　　</span>
+                                        </div>
+
+
                                     </div>
                                 </div>
                                 <!-- </div> -->

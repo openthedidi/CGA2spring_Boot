@@ -17,10 +17,13 @@ public class ProductRowMapper implements RowMapper {
         product.setProductName(rs.getString("ProductName"));
         product.setProductPrice(rs.getInt("ProductPrice"));
 
-        Integer productStatus = rs.getInt("ProductState");
-        product.setProductStatusCategory(ProductStatusCategory.valueOf(productStatus.toString()));
+//        Integer productStatus = rs.getInt("ProductState");
+//        System.out.println(productStatus);
+//        ProductStatusCategory x = ProductStatusCategory.valueOf(productStatus.toString());
+//        System.out.println(x);
+//        product.setProductStatusCategory(ProductStatusCategory.valueOf(productStatus.toString()));
 
-//        product.setProductState(rs.getInt("ProductState"));
+        product.setProductState(rs.getInt("ProductState"));
         product.setItemProdDescription(rs.getString("ItemProdDescription"));
         product.setUpcNum(rs.getString("UpcNum"));
 

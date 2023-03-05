@@ -12,7 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("product")
+@RequestMapping("CGA101G1/product")
 public class ProductPicController {
     @Autowired
     private ProductPic productPic;

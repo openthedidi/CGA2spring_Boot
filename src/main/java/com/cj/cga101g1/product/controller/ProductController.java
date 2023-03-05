@@ -12,12 +12,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 //@RequestMapping("CGA101G1/product")
 ///*** war檔用的網址 ****/
-@RequestMapping("product")
+@RequestMapping("CGA101G1/product")
 @RestController
 @Validated
 public class ProductController {
@@ -119,6 +121,14 @@ public class ProductController {
     @PostMapping("/newProduct")
     public ResponseEntity<Product> newProduct(@RequestBody @Valid Product product){
         return ResponseEntity.ok(productService.createProduct(product));
+    }
+
+    @GetMapping("/showCart")
+    public ResponseEntity<Product> showCart(HttpSession session){
+        List<Product> orderList = ((List<Product>) session.getAttribute("shoppingCart") == null
+                ? new ArrayList<Product>()
+                : (List<Product>) session.getAttribute("shoppingCart"));
+        return null;
     }
 
 }

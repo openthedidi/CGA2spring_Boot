@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("gameplatformtype")
+@RequestMapping("CGA101G1/gameplatformtype")
 public class GamePlatformTypeController {
 
     @Autowired

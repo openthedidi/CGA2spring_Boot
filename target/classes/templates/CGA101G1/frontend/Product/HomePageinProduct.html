@@ -619,10 +619,10 @@
                     totalPrice = (this.$refs.innerComponent.number * this.jsonData.productPrice);
                     productNo = (this.jsonData.productNo);
                     productName = (this.jsonData.productName);
-
+                    console.log(productName);
                     axios({
-                        method: 'post',
-                        url: '/CGA101G1/product/add2ShoppingCart?ProductNo=' + `${productNo}` + '&ProductSales=' + `${productSales}` + '&ProductTotalPrice=' + `${totalPrice}` + '&ProductName=' + `${productName}`,
+                        method: 'Get',
+                        url: '/CGA101G1/orderDetail/add2ShoppingCart?productNo=' + `${productNo}` + '&productSales=' + `${productSales}` + '&productTotalPrice=' + `${totalPrice}` + '&productName=' + `${productName}`,
                         // 請更新
                     })
                         .then((response) => {

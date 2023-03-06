@@ -1,5 +1,6 @@
 package com.cj.cga101g1.product.controller;
 
+import com.cj.cga101g1.orderdetail.util.CartDetail;
 import com.cj.cga101g1.product.model.Product;
 import com.cj.cga101g1.product.service.Method01;
 import com.cj.cga101g1.product.service.ProductService;
@@ -124,11 +125,12 @@ public class ProductController {
     }
 
     @GetMapping("/showCart")
-    public ResponseEntity<Product> showCart(HttpSession session){
-        List<Product> orderList = ((List<Product>) session.getAttribute("shoppingCart") == null
-                ? new ArrayList<Product>()
-                : (List<Product>) session.getAttribute("shoppingCart"));
-        return null;
+    public ResponseEntity<List<CartDetail>> showCart(HttpSession session){
+        List<CartDetail> cartDetailList = ((List<CartDetail>) session.getAttribute("shoppingCart") == null
+                ? new ArrayList<CartDetail>()
+                : (List<CartDetail>) session.getAttribute("shoppingCart"));
+        return ResponseEntity.ok(cartDetailList);
     }
+
 
 }

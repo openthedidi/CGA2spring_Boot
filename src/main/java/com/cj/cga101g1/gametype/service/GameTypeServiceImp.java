@@ -1,7 +1,7 @@
 package com.cj.cga101g1.gametype.service;
 
-import com.cj.cga101g1.gametype.dao.GameTypeDAO;
 import com.cj.cga101g1.gametype.util.GameTypeVO;
+import com.cj.cga101g1.gametype.dao.GameTypeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

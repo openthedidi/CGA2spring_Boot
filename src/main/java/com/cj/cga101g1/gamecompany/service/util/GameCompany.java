@@ -1,4 +1,4 @@
-package com.cj.cga101g1.gamecompany.util;
+package com.cj.cga101g1.gamecompany.service.util;
 
 import org.springframework.stereotype.Component;
 

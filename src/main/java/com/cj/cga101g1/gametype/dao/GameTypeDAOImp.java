@@ -1,8 +1,8 @@
 package com.cj.cga101g1.gametype.dao;
 
+import com.cj.cga101g1.gametype.util.GameTypeVO;
 import com.cj.cga101g1.gametype.util.GameTypeResultSetExtractor;
 import com.cj.cga101g1.gametype.util.GameTypeRowMapper;
-import com.cj.cga101g1.gametype.util.GameTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

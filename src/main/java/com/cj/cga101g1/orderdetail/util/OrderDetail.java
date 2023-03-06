@@ -1,11 +1,25 @@
 package com.cj.cga101g1.orderdetail.util;
 
+
+import com.cj.cga101g1.orders.controller.OrderController;
+import com.cj.cga101g1.orders.dao.OrderDaoImp;
+import com.cj.cga101g1.orders.service.OrderService;
+import com.cj.cga101g1.orders.service.OrderServiceImp;
+import com.cj.cga101g1.orders.util.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.sql.Date;
 
+
+@Entity
+@Table(name = "orderdetail",schema = "cga101g1")
 @Component
 public class OrderDetail {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNo;
     private Integer productNo;
     private Integer productSales;
@@ -68,5 +82,14 @@ public class OrderDetail {
 
     public void setCommentStar(Integer commentStar) {
         CommentStar = commentStar;
+    }
+
+
+
+    public Order findOrderObjByOrderNo(Integer orderNo){
+        System.out.println(" findOrderObjByOrderNo -orderNo: " + orderNo);
+        OrderController orderController = new OrderController();
+        ResponseEntity<Order> responseEntity = orderController.findOrderByOrderNo(orderNo);
+        return responseEntity.getBody();
     }
 }

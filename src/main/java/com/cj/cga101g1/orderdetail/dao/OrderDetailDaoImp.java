@@ -7,16 +7,19 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
-public class OrderDetailDaoImp implements OrderDetailDao{
+public class OrderDetailDaoImp implements OrderDetailDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     @Autowired
     private OrderDetailResultSetExtractor orderDetailResultSetExtractor;
     @Autowired
     private OrderDetail orderDetail;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
 
 
     @Override
@@ -27,4 +30,11 @@ public class OrderDetailDaoImp implements OrderDetailDao{
         Map<String,Object>mapResult = namedParameterJdbcTemplate.query(sql,map,orderDetailResultSetExtractor);
         return mapResult;
     }
+
+    @Override
+    public List<OrderDetail> showOneProductAllComments(Integer productNo) {
+        return orderDetailRepository.showOneProductAllComments(productNo);
+    }
+
+
 }

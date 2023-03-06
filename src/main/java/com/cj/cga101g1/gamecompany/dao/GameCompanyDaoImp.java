@@ -1,7 +1,7 @@
 package com.cj.cga101g1.gamecompany.dao;
 
-import com.cj.cga101g1.gamecompany.util.GameCompany;
-import com.cj.cga101g1.gamecompany.util.GameCompanyRowMapper;
+import com.cj.cga101g1.gamecompany.service.util.GameCompany;
+import com.cj.cga101g1.gamecompany.service.util.GameCompanyRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;

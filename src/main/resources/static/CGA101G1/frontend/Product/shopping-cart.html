@@ -479,8 +479,12 @@
                 this.form = true;
             },
             getMemCoupons() {
-                const apiUrl = '/CGA101G1/order/showMemAllC';
-                axios.get(apiUrl)
+                const apiUrl = '/CGA101G1/memCoupon/getMemAllCoupons';
+                const token = localStorage.getItem('token');
+                const config = {
+                    headers: { Authorization: `${token}` }
+                };
+                axios.get(apiUrl, config)
                     // 一定要用箭頭函示!!!!
                     .then((response) => {
                         console.log("取ProductData的狀態：" + response.status); //狀態碼

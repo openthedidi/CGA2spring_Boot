@@ -30,4 +30,6 @@ public interface MemberRepository extends CrudRepository<Mem,Integer> {
     @Query(value ="update mem set memName = ?1,memMobile = ?2,memEmail = ?3 where MemNo = ?4",nativeQuery = true)
     void editMem(String memName, String memMobile, String memEmail, Integer memNo);
 
+    @Query(value ="select memAccount from mem WHERE MemNo = ?1",nativeQuery = true)
+    String getMemAccountByMemNo(Integer memNo);
 }

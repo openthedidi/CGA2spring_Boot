@@ -36,5 +36,10 @@ public class OrderDetailDaoImp implements OrderDetailDao {
         return orderDetailRepository.showOneProductAllComments(productNo);
     }
 
+    @Override
+    public List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo) {
+        return orderDetailRepository.getCommentsInfosByOneProeduct(productNo);
+    }
+
 
 }

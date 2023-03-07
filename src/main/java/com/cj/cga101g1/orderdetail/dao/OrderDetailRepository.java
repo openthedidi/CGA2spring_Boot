@@ -14,4 +14,9 @@ public interface OrderDetailRepository extends CrudRepository<OrderDetail,Intege
             "select ProductNo,ProductSales, ProductTotalPrice,CommentCotent,CommentTime, CommentStar,OrderNo FROM orderdetail WHERE ProductNo = ?1 and CommentStar >= 0 order by CommentTime desc"
             ,nativeQuery = true)
     List<OrderDetail> showOneProductAllComments(Integer productNo);
+
+    @Query(value =
+            "select * FROM orderdetail WHERE ProductNo = ?1 and CommentStar >= 0 order by CommentTime desc"
+            ,nativeQuery = true)
+    List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo);
 }

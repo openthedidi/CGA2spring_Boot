@@ -5,7 +5,8 @@ import com.cj.cga101g1.member.util.Mem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class MemberServiceImp implements MemberService{
@@ -91,5 +92,20 @@ public class MemberServiceImp implements MemberService{
     @Override
     public Mem getMemByMemAEmail(String email) {
       return memberDao.getMemByMemEmail(email);
+    }
+
+    @Override
+    public Map getShoppingMemInfo(String memAccount) {
+        Map<String,Object> map = new HashMap<>();
+        Mem mem = memberDao.getMemByMemAccount(memAccount);
+        map.put("memNo", mem.getMemNo());
+        map.put("creditcardDate", mem.getCreditcardDate());
+        map.put("creditcardNo", mem.getCreditcardNo());
+        map.put("City", mem.getMemCity());
+        map.put("Dist", mem.getMemDist());
+        map.put("Add", mem.getMemAdd());
+        map.put("memMobile", mem.getMemMobile());
+        map.put("memName", mem.getMemName());
+        return map;
     }
 }

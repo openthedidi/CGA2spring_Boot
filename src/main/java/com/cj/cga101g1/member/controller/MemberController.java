@@ -20,7 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.awt.*;
 import java.io.IOException;
+import java.util.Map;
 
 
 @RequestMapping("mem")
@@ -208,6 +210,25 @@ public class MemberController {
         mem.setMemPassword("");
         mem.setMemEmail("");
         return ResponseEntity.status(HttpStatus.CONFLICT).body(mem);
+    }
+
+    @GetMapping(value = "/getMemPic",produces = MediaType.IMAGE_GIF_VALUE)
+    public @ResponseBody byte[] getMemPic(@RequestParam Integer memNo){
+        return memberService.showMemSelfPic(memNo);
+    }
+
+    @GetMapping("/showShoppingMemInfo")
+    public ResponseEntity<Map> showShoppingMemInfo(@RequestHeader("Authorization") String token) throws AuthException {
+        JwtTokenUtils jwtTokenUtils = new JwtTokenUtils();
+        System.out.println("jwtTokenUtils.validateToken : " + jwtTokenUtils.validateToken(token));
+        if(jwtTokenUtils.validateToken(token)){
+            String memAccount = jwtTokenUtils.getUsername(token);
+            System.out.println(memAccount);
+
+            return ResponseEntity.ok(memberService.getShoppingMemInfo(memAccount));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+        }
     }
 
 }

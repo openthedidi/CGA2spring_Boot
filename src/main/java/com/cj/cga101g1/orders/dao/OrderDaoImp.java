@@ -27,14 +27,12 @@ public class OrderDaoImp implements OrderDao{
 
     @Override
     public Order findOrderByOrderNo(Integer orderNo) {
-//        System.out.println("findOrderByOrderNo- orderNo : " + orderNo);
-//        final String sql = "select * from cga101g1.orders where OrderNo = :orderNo ";
-//        Map<String,Object> paramMap = new HashMap<>();
-//        paramMap.put("orderNo",orderNo);
-//        List<Order> list= namedParameterJdbcTemplate.query(sql, paramMap , ordersRowMapper);
-//        System.out.println(list.get(0).getMemNo());
-//        return list.get(0);
         return orderRepository.findById(orderNo).orElse(null);
+    }
+
+    @Override
+    public Integer getMemNoByOrderNo(Integer orderNo) {
+        return orderRepository.getMemNoByOrderNo(orderNo);
     }
 
 

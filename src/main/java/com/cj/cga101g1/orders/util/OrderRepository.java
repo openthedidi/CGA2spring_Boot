@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepository extends CrudRepository<Order,Integer> {
     @Query(value = "select * from cga101g1.orders where OrderNo = ?1",nativeQuery = true)
     Order findOrderByOrderNo(Integer orderNo);
+
+    @Query(value = "select MEMNO from cga101g1.orders where OrderNo = ?1",nativeQuery = true)
+    Integer getMemNoByOrderNo(Integer orderNo);
+
 }

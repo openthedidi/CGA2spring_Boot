@@ -39,6 +39,7 @@ public class OrderDetailServiceImp implements OrderDetailService{
 
     }
 
+    /** session attribute : shoppingCart*/
     @Override
     public List<CartDetail> setShoppingCart(HttpSession session, String productNo, Integer productSales, Integer productTotalPrice, String productName) {
         List<CartDetail> cartDetailList =
@@ -82,14 +83,31 @@ public class OrderDetailServiceImp implements OrderDetailService{
             Integer orderNo = orderDetailVO.getOrderNo();
             map.put("orderNo", orderNo);
             map.put("productNo", productNo);
-            Order orderVO = orderDao.findOrderByOrderNo(orderNo);
-            Integer memNo= orderVO.getMemNo();
-            Mem memVO =memberDao.getMemByMemNo(memNo);
-            map.put("memAccount", memVO.getMemAccount());
-            map.put("memPicURL","/CGA101G1/mem/MemSelfPicServlet?memNo="+memNo);
+            Integer memNo= orderDao.getMemNoByOrderNo(orderNo);
+            String memAccount =memberDao.getMemAccountByMemNo(memNo);
+            map.put("memAccount", memAccount);
+            map.put("memPicURL","/mem/getMemPic?memNo="+memNo);
             list.add(map);
         }
 
         return list;
+    }
+
+    @Override
+    public Map showProductCaledComment(Integer productNo) {
+        List<OrderDetail> list = orderDetailDao.getCommentsInfosByOneProeduct(productNo);
+        Integer count = list.size();
+        Integer totalStars = 0 ;
+        for(int i = 0 ; i < count ; i++ ){
+            Integer stars = list.get(i).getCommentStar();
+            totalStars += stars;
+        }
+        Integer avgStars = (int) Math.floor(totalStars/count);
+        Map<String,Object> map = new HashMap<>();
+        map.put("countComment", count);
+        map.put("sumCommentStar", totalStars);
+        map.put("avgCommentStar", avgStars);
+
+        return map;
     }
 }

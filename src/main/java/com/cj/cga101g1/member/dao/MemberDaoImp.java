@@ -57,6 +57,11 @@ public class MemberDaoImp implements MemberDao{
         return memberRepository.findMemPicByMemNo(memNo);
     }
 
+    @Override
+    public String getMemAccountByMemNo(Integer memNo) {
+        return memberRepository.getMemAccountByMemNo(memNo);
+    }
+
     @Transactional
     @Override
     public Mem newMem(Mem mem) {

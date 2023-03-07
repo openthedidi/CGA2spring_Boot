@@ -583,7 +583,7 @@
                     let url = new URL(getUrlString);
                     let myURL = url.searchParams.get('ProductNo');
                     // console.log(myURL);
-                    const apiUrl = '/CGA101G1/product/showProductCaledComment?ProductNo=' + myURL;
+                    const apiUrl = '/CGA101G1/orderDetail/showProductCaledComment?productNo=' + myURL;
                     console.log("這是評論的：" + apiUrl);
                     axios.get(apiUrl)
                         // 一定要用箭頭函示!!!!

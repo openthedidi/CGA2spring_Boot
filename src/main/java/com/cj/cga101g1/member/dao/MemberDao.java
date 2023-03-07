@@ -12,4 +12,6 @@ public interface MemberDao {
     Mem getMemByMemAccountAndPassword(String account,String password);
     Mem getMemSelfInfo(Mem mem);
     byte[] showMemSelfPic(Integer memNo);
+
+    String getMemAccountByMemNo(Integer memNo);
 }

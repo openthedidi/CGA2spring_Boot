@@ -15,4 +15,6 @@ public interface OrderDetailService {
     List<CartDetail> setShoppingCart(HttpSession session, String productNo, Integer productSales, Integer productTotalPrice, String productName);
 
     List<Object> showOneProductAllComments(Integer productNo);
+
+    Map showProductCaledComment(Integer productNo);
 }

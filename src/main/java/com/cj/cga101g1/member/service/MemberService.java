@@ -2,6 +2,8 @@ package com.cj.cga101g1.member.service;
 
 import com.cj.cga101g1.member.util.Mem;
 
+import java.util.Map;
+
 public interface MemberService {
     /** 註冊新會員 **/
     Mem newMember(Mem mem);
@@ -31,4 +33,6 @@ public interface MemberService {
     byte[] showMemSelfPic(Integer memNo);
 
     Mem getMemByMemAEmail(String email);
+
+    Map getShoppingMemInfo(String memAccount);
 }

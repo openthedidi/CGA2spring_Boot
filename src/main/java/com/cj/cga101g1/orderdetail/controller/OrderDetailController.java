@@ -4,14 +4,14 @@ package com.cj.cga101g1.orderdetail.controller;
 import com.cj.cga101g1.orderdetail.service.OrderDetailService;
 import com.cj.cga101g1.orderdetail.util.CartDetail;
 import com.cj.cga101g1.orderdetail.util.OrderDetail;
+import com.cj.cga101g1.util.jwt.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class OrderDetailController {
     }
 
 
-    /** 商品放入購物車  *****/
+    /** 商品放入購物車，session attribute : shoppingCart  *****/
     @GetMapping("/add2ShoppingCart")
     public ResponseEntity<List<CartDetail>> add2ShoppingCart(HttpSession session,
                                                              @RequestParam String productNo,
@@ -45,9 +45,27 @@ public class OrderDetailController {
 
     @GetMapping("/showOneProductAllComments")
     public ResponseEntity<List<Object>> showOneProductAllComments(@RequestParam Integer productNo){
-        System.out.println("showOneProductAllComments：productNo:" + productNo );
         List<Object> list = orderDetailService.showOneProductAllComments(productNo);
 
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/showProductCaledComment")
+    public ResponseEntity<Map> showProductCaledComment(@RequestParam Integer productNo){
+        Map map = orderDetailService.showProductCaledComment(productNo);
+        return ResponseEntity.ok(map);
+    }
+
+    @GetMapping("showCart")
+    public ResponseEntity<List> showCart(HttpSession session,
+                                               @RequestHeader("Authorization") String token) throws AuthException {
+        JwtTokenUtils jwtTokenUtils = new JwtTokenUtils();
+        if(jwtTokenUtils.validateToken(token)){
+            List list = (List) session.getAttribute("shoppingCart");
+            return ResponseEntity.ok(list);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+        }
+
     }
 }

@@ -9,4 +9,6 @@ public interface OrderDetailDao {
     Map<String,Object> showCaledCommentByProductNo(Integer productNo);
 
     List<OrderDetail> showOneProductAllComments(Integer productNo);
+
+    List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo);
 }

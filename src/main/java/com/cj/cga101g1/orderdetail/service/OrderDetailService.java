@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderDetailService {
+    List<CartDetail> reduceCart(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName) ;
+
     Map<String,Object> showCaledCommentByProductNo(Integer productNo);
 
     void createOne(Integer orderNo, OrderDetail orderDetail);
@@ -17,4 +19,8 @@ public interface OrderDetailService {
     List<Object> showOneProductAllComments(Integer productNo);
 
     Map showProductCaledComment(Integer productNo);
+
+    void addCart(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName);
+
+    void shoppingCartRemoveAll(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName);
 }

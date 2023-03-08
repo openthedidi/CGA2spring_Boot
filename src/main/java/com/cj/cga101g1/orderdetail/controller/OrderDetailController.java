@@ -6,14 +6,15 @@ import com.cj.cga101g1.orderdetail.util.CartDetail;
 import com.cj.cga101g1.orderdetail.util.OrderDetail;
 import com.cj.cga101g1.util.jwt.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,44 @@ public class OrderDetailController {
         }else{
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
         }
+    }
 
+    @GetMapping("/shoppingCartReduce")
+    public RedirectView shoppingCartReduce(HttpSession session,
+                                           @RequestParam String productNo,
+                                           @RequestParam Integer productSales,
+                                           @RequestParam Integer productTotalPrice,
+                                           @RequestParam String productName){
+        List<CartDetail> existCartList = (List<CartDetail>) session.getAttribute("shoppingCart");
+        orderDetailService.reduceCart(existCartList, productNo, productSales, productTotalPrice, productName);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/CGA101G1/frontend/Product/shopping-cart.html");
+        return redirectView;
+    }
+
+    @GetMapping("/shoppingCartModAdd")
+    public RedirectView shoppingCartModAdd(HttpSession session,
+                                           @RequestParam String productNo,
+                                           @RequestParam Integer productSales,
+                                           @RequestParam Integer productTotalPrice,
+                                           @RequestParam String productName){
+        List<CartDetail> existCartList = (List<CartDetail>) session.getAttribute("shoppingCart");
+        orderDetailService.addCart(existCartList, productNo, productSales, productTotalPrice, productName);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/CGA101G1/frontend/Product/shopping-cart.html");
+        return redirectView;
+    }
+
+    @GetMapping("/shoppingCartRemoveAll")
+    public RedirectView shoppingCartRemoveAll(HttpSession session,
+                                           @RequestParam String productNo,
+                                           @RequestParam Integer productSales,
+                                           @RequestParam Integer productTotalPrice,
+                                           @RequestParam String productName){
+        List<CartDetail> existCartList = (List<CartDetail>) session.getAttribute("shoppingCart");
+        orderDetailService.shoppingCartRemoveAll(existCartList, productNo, productSales, productTotalPrice, productName);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/CGA101G1/frontend/Product/shopping-cart.html");
+        return redirectView;
     }
 }

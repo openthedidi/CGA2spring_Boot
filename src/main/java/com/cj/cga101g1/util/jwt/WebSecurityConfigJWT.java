@@ -41,7 +41,7 @@ public class WebSecurityConfigJWT extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/jwt/**").authenticated()
-                .antMatchers("/jwt/login").permitAll()
+                .antMatchers("/jwt/login","**/assets/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

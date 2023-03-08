@@ -30,6 +30,26 @@ public class OrderDetailServiceImp implements OrderDetailService{
 
 
     @Override
+    public List<CartDetail> reduceCart(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName) {
+            CartDetail cartDetail = new CartDetail();
+            cartDetail.setProductNo(productNo);
+            cartDetail.setProductName(productName);
+            cartDetail.setProductSales(productSales);
+            cartDetail.setProductTotalPrice(productTotalPrice);
+
+            CartDetail existCart = existCartList.get(existCartList.indexOf(cartDetail));
+            Integer resultProductSales = existCart.getProductSales() - cartDetail.getProductSales();
+            Integer resultTotalPrice = existCart.getProductTotalPrice() - cartDetail.getProductTotalPrice();
+            if(resultProductSales == 0){
+                existCartList.remove(existCart);
+            }else {
+                existCart.setProductSales(resultProductSales);
+                existCart.setProductTotalPrice(resultTotalPrice);
+            }
+            return existCartList;
+    }
+
+    @Override
     public Map<String, Object> showCaledCommentByProductNo(Integer productNo) {
         return orderDetailDao.showCaledCommentByProductNo(productNo);
     }
@@ -109,5 +129,32 @@ public class OrderDetailServiceImp implements OrderDetailService{
         map.put("avgCommentStar", avgStars);
 
         return map;
+    }
+
+    @Override
+    public void addCart(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName) {
+        CartDetail cartDetail = new CartDetail();
+        cartDetail.setProductNo(productNo);
+        cartDetail.setProductName(productName);
+        cartDetail.setProductSales(productSales);
+        cartDetail.setProductTotalPrice(productTotalPrice);
+
+        CartDetail existCart = existCartList.get(existCartList.indexOf(cartDetail));
+        Integer resultProductSales = existCart.getProductSales() + cartDetail.getProductSales();
+        Integer resultTotalPrice = existCart.getProductTotalPrice() + cartDetail.getProductTotalPrice();
+        existCart.setProductSales(resultProductSales);
+        existCart.setProductTotalPrice(resultTotalPrice);
+
+    }
+
+    @Override
+    public void shoppingCartRemoveAll(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName) {
+        CartDetail cartDetail = new CartDetail();
+        cartDetail.setProductNo(productNo);
+        cartDetail.setProductName(productName);
+        cartDetail.setProductSales(productSales);
+        cartDetail.setProductTotalPrice(productTotalPrice);
+        existCartList.remove(cartDetail);
+
     }
 }

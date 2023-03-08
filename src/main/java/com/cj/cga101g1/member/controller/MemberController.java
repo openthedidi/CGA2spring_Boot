@@ -6,6 +6,7 @@ import com.cj.cga101g1.member.util.Mem;
 import com.cj.cga101g1.util.jwt.JwtTokenUtils;
 import com.cj.cga101g1.util.jwt.JwtUserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,203 +1,62 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="/frontend/fronthead.jsp" %>
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
+    <!-- Title of The Page -->
+    <title>Fancy Shopping E-commerce HTML Template</title>
+    <!-- Meta Informations -->
+    <meta charset="utf-8">
+    <meta name="description" content="Bootstrap Responsive  Fancy Shopping E-commerce HTML Template">
+    <meta name="keywords"
+        content="Fancy Shopping E-commerce HTML Template,template,bootstrap 5,ui template kit,envato templates,fancy shopping html templates,html,css">
+    <meta name="author" content="Fancy Shopping E-commerce HTML Template">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POP.Game</title>
 
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- custom css file link -->
-    <link rel="stylesheet" href="../../../css/allStyle.css">
-    <link rel="stylesheet" href="../../../css/style.css">
-    <link rel="stylesheet" href="../../../css/headerStyle.css">
-    <link rel="stylesheet" href="../../../css/footerStyle.css">
+    <link rel="stylesheet" href="../mainCss/css/allStyle.css">
+    <link rel="stylesheet" href="../mainCss/css/style.css">
+    <link rel="stylesheet" href="../mainCss/css/headerStyle.css">
+    <link rel="stylesheet" href="../mainCss/css/footerStyle.css">
+
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../../../images/logo.png">
+    <link rel="shortcut icon" href="/CGA101G1/frontend/mainCss/images/logo.png">
     <!-- Fonts CSS -->
-    <link rel="stylesheet" href="../../../assets/vendor/fonts/fonts.css">
+    <link rel="stylesheet" href="../mainCss/assets/vendor/fonts/fonts.css">
     <!-- Bootstrap-icons CSS -->
-    <link rel="stylesheet" href="../../../assets/vendor/bootstrap/icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../mainCss/assets/vendor/bootstrap/icons/bootstrap-icons.css">
     <!--Magnific-Popup CSS -->
-    <link rel="stylesheet" href="../../../assets/vendor/magnific/magnific-popup.css">
+    <link rel="stylesheet" href="../mainCss/assets/vendor/magnific/magnific-popup.css">
     <!-- Slick CSS -->
-    <link rel="stylesheet" href="../../../assets/vendor/slick/slick.css">
+    <link rel="stylesheet" href="../mainCss/assets/vendor/slick/slick.css">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="../../../assets/css/style01.css">
-    <link rel="stylesheet" type="text/css" href="/CGA101G1/datetimepicker/jquery.datetimepicker.css" />
-    <link rel="stylesheet" href="/CGA101G1/frontend/mem/css/MemStyle.css">
+    <link rel="stylesheet" href="../mainCss/assets/css/style01.css">
 </head>
 
 <body>
 
-<!-- header section starts-->
-
-<header>
-
-    <div class="logo-div">
-        <img src="/CGA101G1/frontend/mainCss/images/logo.png" alt="">
-        <a href="/CGA101G1/frontend/HomePage/HomePage.html" class="logo">帕Game</a>
-    </div>
-
-
-    <nav class="navbar">
-        <!-- 上方標籤列 -->
-        <a class="active" href="/CGA101G1/frontend/HomePage/HomePage.html">首頁</a>
-        <a href="/CGA101G1/frontend/Product/HomePageinshop.html" class="nav-link">商品區</a>
-        <a href="/CGA101G1/frontend/bid/listallbid.html" class="nav-link">競標區</a>
-        <a href="/CGA101G1/frontend/forum/forumHomePage.jsp" class="nav-link">討論區</a>
-    </nav>
-
-    <div class="icons">
-        <!--右上方小icon區-->
-        <i class="fas fa-bars" id="menu-bars"></i>
-        <a href="/CGA101G1/frontend/mem/updateMemberData.html" class="fas fa-solid fa-user-astronaut"
-           id="login-icon"></a>
-        <a href="/CGA101G1/frontend/Product/HomePageinProduct-wishlist.jsp" class="fas fa-heart"></a>
-        <a href="/CGA101G1/frontend/Product/shopping-cart.html" class="fas fa-shopping-cart" id="cart"></a>
-    </div>
-
-</header>
-    <!-- Header End -->
-    <!-- Main -->
-    <main>
-        <!-- Breadcrumb -->
-        <div class="py-3 bg-gray-100">
-
-            <div class="container">
-                <div class="row align-items-center">
-<!--                    <div class="col-lg-6 my-2">-->
-<!--                        <h1 class="m-0 h4 text-center text-lg-start">Your Order</h1>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-6 my-2">-->
-<!--                        <ol class="breadcrumb dark-link m-0 small justify-content-center justify-content-lg-end">-->
-<!--                            <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i-->
-<!--                                        class="bi bi-home"></i>Home</a></li>-->
-<!--                            <li class="breadcrumb-item text-nowrap active" aria-current="page">My Account</li>-->
-<!--                        </ol>-->
-<!--                    </div>-->
-                </div>
-            </div>
-        </div>
         <!-- End Breadcrumb -->
         <!-- Table -->
-        <div class="py-6">
-            <div class="container">
-                <div class="row">
-                    <!-- Profile Menu -->
-                    <div class="col-lg-3 pb-4 pb-lg-0 col-xxl-3  pe-xxl-5" style="font-weight: bold; font-size: 16px">
-                        <div class="bg-white border border-bottom-0 shadow-lg">
-                            <div class="d-flex p-3 align-items-center" style="height: 0">
-                                <div class="avatar avatar-lg rounded-circle" id="Pinf">
-                                    <img src="/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt="" id="imgPinf">
-                                </div>
-                                <div class="col ps-3">
-                                    <h6 class="m-0" id="Ninf"></h6>
-                                    <small><a href="javascript:void(0);" id="Einf"></a></small>
-                                </div>
-                            </div>
-                            <div class="bg-gray-200 p-3 border-bottom border-top">
-                                <h6 class="m-0">會員中心</h6>
-                            </div>
-                            <ul class="list-unstyled mb-0 theme-link">
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center active p-3" style="color:black"
-                                       href="/CGA101G1/frontend/Product/account-order.html">
-                                        <i class="bi bi-bag me-2"></i> 我的訂單
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/frontend/Product/HomePageinProduct-wishlist.jsp">
-                                        <i class="bi bi-heart me-2"></i>我的最愛
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/bid/bidApplyListMemNo">
-                                        <i class="bi bi-alarm me-2"></i>出價商品追蹤
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/bid/bidProductWonByMemNo">
-                                        <i class="bi bi-bag me-2"></i>得標商品查詢
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/frontend/bid/addbidapplylist.jsp">
-                                        <i class="bi bi-card-checklist me-2"></i>競標商品申請
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/bid/bidApplyListSeller">
-                                        <i class="bi bi-card-checklist me-2"></i>我的申請單
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/bid/bidProductSeller">
-                                        <i class="bi bi-bell me-2"></i>我的上架中競標商品
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/forum/forumPostCollectionMemNo">
-                                        <i class="bi bi-heart me-2"></i>我的文章收藏
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/forum/forumPostMyPostMemNo">
-                                        <i class="bi bi-heart me-2"></i>我的文章
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/chatroom/banListGetAll">
-                                        <i class="bi bi-emoji-angry me-2"></i>我的忽略會員清單
-                                    </a>
-                                </li>
 
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/frontend/memCoupon/lookUpOneMemCoupon.jsp">
-                                        <i class="bi bi-bookmark me-2"></i>我的優惠卷
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="bg-gray-200 p-3 border-bottom">
-                                <h6 class="m-0">帳戶設定</h6>
-                            </div>
-                            <ul class="list-unstyled mb-0 theme-link">
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                       href="/CGA101G1/frontend/mem/updateMemberData.html">
-                                        <i class="bi bi-person-circle me-2"></i>個人資訊
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
-                                    <!--                                        href="/CGA101G1/mem/logoutServlet">-->
-                                    <!--                                        <i class="bi bi-box-arrow-left me-2"></i>登出-->
-                                    <!--                                    </a>-->
-                                    <button type="button" class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                            id="btnLogout">
-                                        登出
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <!-- Profile Menu -->
+                    
                     <!-- End Profile Menu -->
                     <!-- Content -->
-                    <div class="col-lg-8 col-xxl-9" id="app" style="padding-top: 5%">
+                    <div class="col-lg-8 col-xxl-9" id="app">
                         <h5 style="padding-left: 9%;">訂單搜尋</h5>
                         <div class="shop-sidebar-block" style="width: 30%; margin-bottom: 0%;margin-left: 9%;">
                             <input class="form-control" type="text" name="keysearch" id="" @change="keysearch($event)"
@@ -214,6 +73,16 @@
                                 @skip-page="skipPage" @previous-page="previousPage" @next-page="nextPage">
                             </pagination-list>
                         </nav>
+                <div v-show="loading"
+                    style="position:fixed;left: 40%; top: 40%;background-color: rgb(87, 98, 107); width: 20%;">
+                    <div style="margin-left: 35%; margin-top: 5%">
+                        <h3 style="color: white;">訂單搜尋中</h3>
+                    </div>
+
+                    <div class="spinner-border text-info" style="margin-left: 45%; margin-top: 2%" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
                     </div>
                     <!-- End Content -->
                 </div>
@@ -222,48 +91,7 @@
         <!--Table -->
     </main>
     <!-- End Main -->
-    <!-- Footer -->
-    <section class="footer">
 
-        <div class="box-container">
-
-            <div class="box">
-                <h3>會員專區</h3>
-                <a href="#">會員登入</a>
-                <a href="#">會員註冊</a>
-                <a href="#">訂單管理</a>
-                <a href="#">二手遊戲申請上架單管理</a>
-            </div>
-
-            <div class="box">
-                <h3>快速連結</h3>
-                <a href="#">首頁</a>
-                <a href="#">遊戲商城</a>
-                <a href="#">二手競標商城</a>
-                <a href="#">遊戲討論區</a>
-            </div>
-
-            <div class="box">
-                <h3>聯絡我們</h3>
-                <a href="#">+123-456-7890</a>
-                <a href="#">+111-222-3333</a>
-                <a href="#">shailhanas@gmail.com</a>
-                <a href="#">anasbhai@gmail.com</a>
-            </div>
-
-            <div class="box">
-                <h3>關於我們</h3>
-                <a href="#">管理團隊</a>
-                <a href="#">創始理念</a>
-                <a href="#">insuagram</a>
-                <a href="#">linkedin</a>
-            </div>
-        </div>
-
-        <div class="credit">copyright@2021 by <span>mr .web designer</span></div>
-
-    </section>
-    <!-- End Footer -->
     <!-- jquery -->
     <script src="../mainCss/assets/js/jquery-3.5.1.min.js"></script>
     <!-- appear -->
@@ -300,6 +128,7 @@
                     gametype: [],
                     gameplatform: [],
                     ProductName: [],
+                    loading: true,
                     //驗證表單用
 
 
@@ -321,8 +150,10 @@
                             )
                         );
                     }
+                    this.loading=false;
                 },
                 getOrderData() {
+                	
                     const apiUrl = '/CGA101G1/product/showAllOrderAndDetailsByMemNo';
                     axios.get(apiUrl)
                         // 一定要用箭頭函示!!!!
@@ -336,6 +167,7 @@
                                 this.temp.push(e);
                             }
                             this.renderingPage();
+                            
 
 
 
@@ -429,7 +261,9 @@
                 }
             },
             created() {
+            	
                 this.getOrderData();
+               
 
             }
         })
@@ -481,27 +315,28 @@
                                 </tbody>
                             </table>
                             
-                            <div v-show="item.openOrderDetail" style="width: 75%;">
+                            <div v-show="item.openOrderDetail" style="width: 63%;">
                                 <table class="table table-bordered table-hover mb-0">
                                     <thead class="text-700 bg-gray-200">
                                         <tr>
                                             
-                                            <th class="fw-600" style="width:34.9%">遊戲名稱</th>
-                                            <th class="fw-600" style="width:10.5%">數量</th>
-                                            <th class="fw-600" style="width:5%">總價</th>
-                                            <th class="fw-600" style="width:49%">發表評論</th>
+                                        <th class="fw-600" style="width:40%">遊戲名稱</th>
+                                        <th class="fw-600" style="width:15%">數量</th>
+                                        <th class="fw-600" style="width:15%">總價</th>
+                                        <th class="fw-600" style="width:30%">發表評論</th>
                                         </tr>
                                     </thead>
                                     <tbody v-for="(orderDetails, index) in item.orderDetail" :key="index">
                                         <tr>
                                             
-                                            <td class="p-3">{{orderDetails.productName}}</td>
+                                            <td class="p-3"><a :href="`+ "`" + `/CGA101G1/frontend/Product/HomePageinProduct.html?ProductNo=` + "`" + "+" + "orderDetails.productNo" + `">{{orderDetails.productName}}</a></td>
                                             <td class="p-3">{{orderDetails.productSales}}</td>
                                             <td class="p-3"><span
                                                     class="badge bg-info m-0">{{orderDetails.productTotalPrice}}</span>
                                             </td>
                                             
                                             <td class="p-3">
+                                            
                                                 <a v-show="(item.orderState == 2 && orderDetails.CommentStar == 0 ? true:false)" :href="`+ "`" + `/CGA101G1/frontend/Product/postComment.html?ProductNo=` + "`" + "+" + "orderDetails.productNo" + "+" + "`" + `&OrderNo=` + "`" + "+" + "orderDetails.orderNo" + `">我要發表遊戲評論</a>
     
                                             </td>
@@ -551,3 +386,4 @@
 <!-- end body -->
 
 </html>
+<%@include file="/frontend/frontfoot.jsp" %>

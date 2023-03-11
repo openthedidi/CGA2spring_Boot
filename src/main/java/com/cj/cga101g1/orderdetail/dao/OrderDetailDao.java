@@ -11,4 +11,6 @@ public interface OrderDetailDao {
     List<OrderDetail> showOneProductAllComments(Integer productNo);
 
     List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo);
+
+    void newOrderDetail(Integer newOrderNo, Integer productTotalPrice, Integer sales, String productNo);
 }

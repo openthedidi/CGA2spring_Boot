@@ -1,5 +1,6 @@
 package com.cj.cga101g1.orderdetail.dao;
 import com.cj.cga101g1.orderdetail.util.OrderDetail;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,8 @@ public interface OrderDetailRepository extends CrudRepository<OrderDetail,Intege
             "select * FROM orderdetail WHERE ProductNo = ?1 and CommentStar >= 0 order by CommentTime desc"
             ,nativeQuery = true)
     List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo);
+
+    @Modifying
+    @Query(value = "INSERT INTO orderdetail (OrderNo, ProductNo, ProductSales, ProductTotalPrice) VALUES (?1, ?4, ?3, ?2)", nativeQuery = true)
+    void newOrderDetail(Integer newOrderNo, Integer productTotalPrice, Integer sales, String productNo);
 }

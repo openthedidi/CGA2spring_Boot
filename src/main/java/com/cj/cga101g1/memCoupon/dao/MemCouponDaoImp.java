@@ -22,4 +22,9 @@ public class MemCouponDaoImp implements MemCouponDao{
     public List<MemCoupon> getMemAllCoupons(Integer memNo) {
         return memCouponRepository.getMemAllCoupons(memNo);
     }
+
+    @Override
+    public void changeState( Integer memCouponNo) {
+        memCouponRepository.changeState( memCouponNo);
+    }
 }

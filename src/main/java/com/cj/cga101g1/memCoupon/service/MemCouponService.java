@@ -9,4 +9,6 @@ public interface MemCouponService {
     MemCoupon findByMemNo(Integer memCouponNo);
 
     List<Object> getMemAllCoupons(Integer memNo);
+
+    void changeState(Integer memCouponNo);
 }

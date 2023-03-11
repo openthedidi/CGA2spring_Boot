@@ -10,4 +10,6 @@ public interface MemCouponDao {
     MemCoupon findByMemNo(Integer memCouponNo);
 
     List<MemCoupon> getMemAllCoupons(Integer memNo);
+
+    void changeState(Integer memCouponNo);
 }

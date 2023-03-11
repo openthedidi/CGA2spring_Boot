@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 
 @Component
 public class OrderDaoImp implements OrderDao{
@@ -33,6 +33,22 @@ public class OrderDaoImp implements OrderDao{
     @Override
     public Integer getMemNoByOrderNo(Integer orderNo) {
         return orderRepository.getMemNoByOrderNo(orderNo);
+    }
+
+    @Override
+    public Integer newOrder(Integer memNo, Integer memCouponNo,
+                            Integer orderTotalPrice, Integer pickupMethod, Integer shippingFee,
+                            String receiverName, String receiverAddress, String receiverPhone) {
+       orderRepository.newOrder(memNo, memCouponNo, orderTotalPrice, 0, pickupMethod, shippingFee, receiverName, receiverAddress, receiverPhone);
+       return orderRepository.findMaxOrderNo();
+    }
+
+    @Override
+    public Integer newOrderWithoutCoupon(Integer memNo, Integer orderTotalPrice,
+                                         Integer pickupMethod, Integer shippingFee,
+                                         String receiverName, String receiverAddress, String receiverPhone) {
+        orderRepository.newOrderWithoutCoupon(memNo, orderTotalPrice, 0, pickupMethod, shippingFee, receiverName, receiverAddress, receiverPhone);
+        return orderRepository.findMaxOrderNo();
     }
 
 

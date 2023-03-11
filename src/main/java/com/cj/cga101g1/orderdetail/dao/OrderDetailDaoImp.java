@@ -41,5 +41,10 @@ public class OrderDetailDaoImp implements OrderDetailDao {
         return orderDetailRepository.getCommentsInfosByOneProeduct(productNo);
     }
 
+    @Override
+    public void newOrderDetail(Integer newOrderNo, Integer productTotalPrice, Integer sales, String productNo) {
+        orderDetailRepository.newOrderDetail(newOrderNo, productTotalPrice, sales, productNo);
+    }
+
 
 }

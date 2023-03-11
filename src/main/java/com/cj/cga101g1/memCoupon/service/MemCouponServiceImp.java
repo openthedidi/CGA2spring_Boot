@@ -47,4 +47,9 @@ public class MemCouponServiceImp implements MemCouponService{
         }
         return list;
     }
+
+    @Override
+    public void changeState(Integer memCouponNo) {
+        memCouponDao.changeState(memCouponNo);
+    }
 }

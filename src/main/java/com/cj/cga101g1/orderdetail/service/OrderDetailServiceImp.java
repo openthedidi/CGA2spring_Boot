@@ -157,4 +157,14 @@ public class OrderDetailServiceImp implements OrderDetailService{
         existCartList.remove(cartDetail);
 
     }
+
+    @Override
+    public void newOrderDetail(Integer newOrderNo, List<CartDetail> cartDetailList) {
+        for (CartDetail cartDetail:cartDetailList) {
+            Integer productTotalPrice = cartDetail.getProductTotalPrice();
+            Integer sales = cartDetail.getProductSales();
+            String productNo = cartDetail.getProductNo();
+            orderDetailDao.newOrderDetail(newOrderNo, productTotalPrice, sales, productNo);
+        }
+    }
 }

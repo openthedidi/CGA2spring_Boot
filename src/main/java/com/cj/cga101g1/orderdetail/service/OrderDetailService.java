@@ -23,4 +23,6 @@ public interface OrderDetailService {
     void addCart(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName);
 
     void shoppingCartRemoveAll(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName);
+
+    void newOrderDetail(Integer newOrderNo, List<CartDetail> cartDetailList);
 }

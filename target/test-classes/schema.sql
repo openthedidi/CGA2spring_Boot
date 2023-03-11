@@ -67,19 +67,20 @@ CREATE TABLE IF NOT exists CGA101G1.product (
 --                            CONSTRAINT `GameTypeNo_product` FOREIGN KEY (`GameTypeNo`) REFERENCES `gametype` (`GameTypeNo`)
 );
 
--- CREATE TABLE CGA101G1.order (
---                          `OrderNo` int NOT NULL AUTO_INCREMENT,
---                          `MemNo` int NOT NULL,
---                          `MemCouponNo` int DEFAULT NULL,
---                          `TranTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
---                          `OrderTotalPrice` int NOT NULL COMMENT,
---                          `OrderState` int NOT NULL COMMENT,
---                          `PickupMethod` int DEFAULT NULL COMMENT,
---                          `ShippingFee` int DEFAULT NULL COMMENT ,
---                          `TrackingNum` varchar(15) DEFAULT NULL,
---                          `ReceiverName` varchar(10) NOT NULL,
---                          `ReceiverAddress` varchar(100) DEFAULT NULL,
---                          `ReceiverPhone` varchar(10) NOT NULL,
---                          `PickupTime` timestamp NULL DEFAULT NULL,
---                          PRIMARY KEY (`OrderNo`)
--- };
+CREATE TABLE CGA101G1.orders
+(
+    `OrderNo`         int          NOT NULL AUTO_INCREMENT,
+    `MemNo`           int          NOT NULL,
+    `MemCouponNo`     int,
+    `TranTime`        timestamp,
+    `OrderTotalPrice` int          NOT NULL,
+    `OrderState`      int          NOT NULL,
+    `PickupMethod`    int,
+    `ShippingFee`     int,
+    `TrackingNum`     varchar(150),
+    `ReceiverName`    varchar(100) NOT NULL,
+    `ReceiverAddress` varchar(100),
+    `ReceiverPhone`   varchar(100) NOT NULL,
+    `PickupTime`      timestamp,
+    PRIMARY KEY (`OrderNo`)
+);

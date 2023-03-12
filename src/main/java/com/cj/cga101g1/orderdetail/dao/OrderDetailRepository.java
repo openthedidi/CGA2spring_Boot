@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -24,4 +25,13 @@ public interface OrderDetailRepository extends CrudRepository<OrderDetail,Intege
     @Modifying
     @Query(value = "INSERT INTO orderdetail (OrderNo, ProductNo, ProductSales, ProductTotalPrice) VALUES (?1, ?4, ?3, ?2)", nativeQuery = true)
     void newOrderDetail(Integer newOrderNo, Integer productTotalPrice, Integer sales, String productNo);
+
+
+    @Modifying
+    @Query(value = "UPDATE orderdetail SET CommentCotent = ?3, CommentTime = now(),  CommentStar = ?4 WHERE (OrderNo = ?2) and (ProductNo = ?1 )", nativeQuery = true)
+    void addCommit(Integer productNo, Integer orderNo, String commentCotent, Integer commentStar);
+
+
+//    @Query(value = "select * FROM orderdetail where (OrderNo = 24099 and productNo = 21046) or (OrderNo = 24099 and productNo = 21044)",nativeQuery = true)
+//    List<OrderDetail> getAllDetailByOrderNo(Integer orderNo);
 }

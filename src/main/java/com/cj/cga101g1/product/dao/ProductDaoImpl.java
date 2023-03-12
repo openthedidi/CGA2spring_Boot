@@ -5,18 +5,20 @@ import com.cj.cga101g1.gameplatformtype.dao.GamePlatformTypeDAO;
 import com.cj.cga101g1.gametype.dao.GameTypeDAO;
 import com.cj.cga101g1.orderdetail.service.OrderDetailService;
 import com.cj.cga101g1.product.model.Product;
+import com.cj.cga101g1.product.model.ProductRepository;
 import com.cj.cga101g1.product.model.ProductResultSetExtractor;
 import com.cj.cga101g1.product.model.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Component
-public class ProductDaoImpl implements  ProductDao{
+public class ProductDaoImpl implements ProductDao{
 
     @Autowired
     @Qualifier("namedParameterJdbcTemplate")
@@ -24,6 +26,8 @@ public class ProductDaoImpl implements  ProductDao{
 
     @Autowired
     private ProductResultSetExtractor productResultSetExtractor;
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -178,5 +182,20 @@ public class ProductDaoImpl implements  ProductDao{
         map.put("productState", productVO.getProductState());
         map.put("upcNum", productVO.getUpcNum());
         namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public List showAllProductsName() {
+        List<Product> list = new ArrayList<>();
+        List<String> result = productRepository.showAllProductsName();
+        for (String string: result) {
+            Product product = new Product();
+            Integer productNo = Integer.valueOf(string.split(",")[0]);
+            String productName = string.split(",")[1];
+            product.setProductNo(productNo);
+            product.setProductName(productName);
+            list.add(product);
+        }
+        return list;
     }
 }

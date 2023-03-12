@@ -25,4 +25,8 @@ public interface OrderDetailService {
     void shoppingCartRemoveAll(List<CartDetail> existCartList, String productNo, Integer productSales, Integer productTotalPrice, String productName);
 
     void newOrderDetail(Integer newOrderNo, List<CartDetail> cartDetailList);
+
+    List<OrderDetail> getAllDetailByOrderNo(Integer orderNo);
+
+    void addCommit(Integer productNo, Integer orderNo, String commentCotent, Integer commentStar);
 }

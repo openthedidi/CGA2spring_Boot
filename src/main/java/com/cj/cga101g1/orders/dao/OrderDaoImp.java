@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 @Component
@@ -49,6 +50,11 @@ public class OrderDaoImp implements OrderDao{
                                          String receiverName, String receiverAddress, String receiverPhone) {
         orderRepository.newOrderWithoutCoupon(memNo, orderTotalPrice, 0, pickupMethod, shippingFee, receiverName, receiverAddress, receiverPhone);
         return orderRepository.findMaxOrderNo();
+    }
+
+    @Override
+    public List<Order> getAllByMemNo(Integer memNo) {
+        return orderRepository.getAllByMemNo(memNo);
     }
 
 

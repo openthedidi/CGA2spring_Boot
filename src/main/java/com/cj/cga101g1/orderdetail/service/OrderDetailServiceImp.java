@@ -167,4 +167,14 @@ public class OrderDetailServiceImp implements OrderDetailService{
             orderDetailDao.newOrderDetail(newOrderNo, productTotalPrice, sales, productNo);
         }
     }
+
+    @Override
+    public List<OrderDetail> getAllDetailByOrderNo(Integer orderNo) {
+        return orderDetailDao.getAllDetailByOrderNo(orderNo);
+    }
+
+    @Override
+    public void addCommit(Integer productNo, Integer orderNo, String commentCotent, Integer commentStar) {
+        orderDetailDao.addCommit(productNo,orderNo, commentCotent, commentStar);
+    }
 }

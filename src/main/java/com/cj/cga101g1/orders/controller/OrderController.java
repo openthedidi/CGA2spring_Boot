@@ -5,12 +5,14 @@ import com.cj.cga101g1.orders.service.OrderService;
 import com.cj.cga101g1.orders.util.Order;
 import com.cj.cga101g1.util.jwt.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("CGA101G1/order")
@@ -39,12 +41,19 @@ public class OrderController {
                                        HttpSession session) {
             orderService.addtoOrderAndOrderlist(memCouponNo, orderTotalPrice, pickupMethod, city,
                     dist, rod, receiverName, receiverPhone, memNo, session);
-
             return new RedirectView("/CGA101G1/frontend/Product/account-order.html");
-
-
     }
 
-
+    @GetMapping("showAllOrderAndDetailsByMemNo")
+    public ResponseEntity<List> showAllOrderAndDetailsByMemNo(@RequestHeader("Authorization") String token) throws AuthException {
+        JwtTokenUtils jwtTokenUtils = new JwtTokenUtils();
+        if(jwtTokenUtils.validateToken(token)){
+            System.out.println("驗證通過");
+            Integer memNo = memberService.getMemByMemAccount(jwtTokenUtils.getUsername(token)).getMemNo();
+            return ResponseEntity.ok(orderService.showAllOrderAndDetailsByMemNo(memNo));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+        }
+    }
 
 }

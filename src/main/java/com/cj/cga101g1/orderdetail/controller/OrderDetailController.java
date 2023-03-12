@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpSession;
 
@@ -105,6 +106,25 @@ public class OrderDetailController {
         orderDetailService.shoppingCartRemoveAll(existCartList, productNo, productSales, productTotalPrice, productName);
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/CGA101G1/frontend/Product/shopping-cart.html");
+        return redirectView;
+    }
+
+
+    @GetMapping("/getAllDetailByOrderNo/{orderNo}")
+    public ResponseEntity<List> getAllDetailByOrderNo(@PathVariable Integer orderNo){
+        System.out.println(orderNo);
+
+        return ResponseEntity.ok(orderDetailService.getAllDetailByOrderNo(orderNo));
+    }
+
+    @PostMapping("/addCommit")
+    public RedirectView addCommit(@RequestParam Integer productNo,
+                                          @RequestParam Integer orderNo,
+                                          @RequestParam String commentCotent,
+                                          @RequestParam Integer commentStar){
+        System.out.println("addCommit");
+        orderDetailService.addCommit(productNo, orderNo, commentCotent, commentStar);
+        RedirectView redirectView = new RedirectView("/CGA101G1/frontend/Product/HomePageinProduct.html?ProductNo=" + productNo);
         return redirectView;
     }
 }

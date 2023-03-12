@@ -20,7 +20,9 @@ import java.sql.Date;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "OrderNo")
     private Integer orderNo;
+    @Column(name = "ProductNo")
     private Integer productNo;
     private Integer productSales;
     private Integer productTotalPrice;

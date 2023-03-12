@@ -13,4 +13,8 @@ public interface OrderDetailDao {
     List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo);
 
     void newOrderDetail(Integer newOrderNo, Integer productTotalPrice, Integer sales, String productNo);
+
+    List<OrderDetail> getAllDetailByOrderNo(Integer orderNo);
+
+    void addCommit(Integer productNo, Integer orderNo, String commentCotent, Integer commentStar);
 }

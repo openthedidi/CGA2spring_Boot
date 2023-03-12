@@ -81,4 +81,9 @@ public class ProductServiceImp implements ProductService{
         productDao.createProduct(product);
         return product;
     }
+
+    @Override
+    public List showAllProductsName() {
+        return productDao.showAllProductsName();
+    }
 }

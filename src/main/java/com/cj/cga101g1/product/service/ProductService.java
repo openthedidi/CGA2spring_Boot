@@ -36,4 +36,6 @@ public interface ProductService {
 
     /**** 新增商品 ****/
     Product createProduct(Product product);
+
+    List showAllProductsName();
 }

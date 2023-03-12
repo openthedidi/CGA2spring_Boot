@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OrderRepository extends CrudRepository<Order,Integer> {
     @Query(value = "select * from cga101g1.orders where OrderNo = ?1",nativeQuery = true)
@@ -23,4 +25,7 @@ public interface OrderRepository extends CrudRepository<Order,Integer> {
     @Modifying
     @Query(value = "INSERT INTO cga101g1.orders (MemNo,OrderTotalPrice,OrderState,PickupMethod,ShippingFee,ReceiverName,ReceiverAddress,ReceiverPhone) VALUES (?1,?2,?3,?4,?5,?6,?7,?8)",nativeQuery= true)
     void newOrderWithoutCoupon(Integer memNo, Integer orderTotalPrice, Integer orderState, Integer pickupMethod, Integer shippingFee, String receiverName, String receiverAddress, String receiverPhone);
+
+    @Query(value = "select * from cga101g1.orders where memNo = ?1 order by TranTime desc",nativeQuery = true)
+    List<Order> getAllByMemNo(Integer memNo);
 }

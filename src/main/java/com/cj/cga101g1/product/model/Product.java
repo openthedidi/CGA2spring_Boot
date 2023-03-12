@@ -2,15 +2,21 @@ package com.cj.cga101g1.product.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.hibernate.annotations.GeneratorType;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+@Table(name = "product")
 public class Product extends ProductErrorMessage implements Serializable {
 //    @JsonProperty("productNumber")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productNo;
     @NotNull
     private Integer gameTypeNo;

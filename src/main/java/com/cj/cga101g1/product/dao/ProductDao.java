@@ -28,4 +28,6 @@ public interface ProductDao {
     List<Object> showSellProductByKeyWord(String keyWord, Integer page);
 
     void createProduct(Product product);
+
+    List showAllProductsName();
 }

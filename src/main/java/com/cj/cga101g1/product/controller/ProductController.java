@@ -132,5 +132,11 @@ public class ProductController {
         return ResponseEntity.ok(cartDetailList);
     }
 
+    @GetMapping("/showAllProductsName")
+    public ResponseEntity<List> showAllProductsName(){
+;
+        return ResponseEntity.ok(productService.showAllProductsName());
+    }
+
 
 }

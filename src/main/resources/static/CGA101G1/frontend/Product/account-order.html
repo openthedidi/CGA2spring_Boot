@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POP.Game</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -93,7 +95,7 @@
                         <div class="bg-white border border-bottom-0 shadow-lg">
                             <div class="d-flex p-3 align-items-center" style="height: 0">
                                 <div class="avatar avatar-lg rounded-circle" id="Pinf">
-                                    <img src="/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt="" id="imgPinf">
+<!--                                    <img src="/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt="" id="imgPinf">-->
                                 </div>
                                 <div class="col ps-3">
                                     <h6 class="m-0" id="Ninf"></h6>
@@ -265,21 +267,21 @@
     </section>
     <!-- End Footer -->
     <!-- jquery -->
-    <script src="../mainCss/assets/js/jquery-3.5.1.min.js"></script>
-    <!-- appear -->
-    <script src="../mainCss/assets/vendor/appear/jquery.appear.js"></script>
-    <!--bootstrap-->
-    <script src="../mainCss/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- owl-carousel -->
-    <script src="../mainCss/assets/vendor/slick/slick.min.js"></script>
-    <!-- magnific -->
-    <script src="../mainCss/assets/vendor/magnific/jquery.magnific-popup.min.js"></script>
-    <!-- isotope -->
-    <script src="../mainCss/assets/vendor/isotope/isotope.pkgd.min.js"></script>
-    <!-- count-down -->
-    <script src="../mainCss/assets/vendor/count-down/jquery.countdown.min.js"></script>
-    <!-- Theme Js -->
-    <script src="../mainCss/assets/js/custom.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+<!-- appear -->
+<script src="../../../assets/vendor/appear/jquery.appear.js"></script>
+<!--bootstrap-->
+<script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- owl-carousel -->
+<script src="../../../assets/vendor/slick/slick.min.js"></script>
+<!-- magnific -->
+<script src="../../../assets/vendor/magnific/jquery.magnific-popup.min.js"></script>
+<!-- isotope -->
+<script src="../../../assets/vendor/isotope/isotope.pkgd.min.js"></script>
+<!-- count-down -->
+<script src="../../../assets/vendor/count-down/jquery.countdown.min.js"></script>
+<!-- Theme Js -->
+<script src="../../../assets/js/custom.js"></script>
 
 
 
@@ -323,8 +325,12 @@
                     }
                 },
                 getOrderData() {
-                    const apiUrl = '/CGA101G1/product/showAllOrderAndDetailsByMemNo';
-                    axios.get(apiUrl)
+                    const apiUrl = '/CGA101G1/order/showAllOrderAndDetailsByMemNo';
+                    const token = localStorage.getItem('token');
+                    const config = {
+                        headers: { Authorization: `${token}` }
+                    };
+                    axios.get(apiUrl, config)
                         // 一定要用箭頭函示!!!!
                         .then((response) => {
                             console.log("取ProductData的狀態：" + response.status); //狀態碼
@@ -352,16 +358,16 @@
 
 
                             for (i = 0; i < this.datastore.length; i++) {
-                                // console.log("遊戲名稱:" + this.datastore[i].orderDetail[0].productNo);
+                                console.log("遊戲名稱:" + this.datastore[i].orderDetail[0].productNo);
                                 for (j = 0; j < this.datastore[i].orderDetail.length; j++) {
-                                    // console.log("這是明細的遊戲編號:" + this.datastore[i].orderDetail[j].productNo);
+                                    console.log("這是明細的遊戲編號:" + this.datastore[i].orderDetail[j].productNo);
                                     this.datastore[i].orderDetail[j].productName = '';
-                                    // console.log(this.datastore[i].orderDetail[j].productName);
+                                    console.log(this.datastore[i].orderDetail[j].productName);
                                     //名字放不進去
                                     for (k = 0; k < this.ProductName.length; k++) {
-                                        // console.log("這是遊戲名稱的遊戲編號" + this.ProductName[k].productNo);
+                                        console.log("這是遊戲名稱的遊戲編號" + this.ProductName[k].productNo);
                                         if (this.datastore[i].orderDetail[j].productNo == this.ProductName[k].productNo) {
-                                            // console.log("開始換遊戲名稱")
+                                            console.log("開始換遊戲名稱" + this.ProductName[k].productName)
                                             this.datastore[i].orderDetail[j].productName = this.ProductName[k].productName;
                                         }
                                     }
@@ -502,7 +508,7 @@
                                             </td>
                                             
                                             <td class="p-3">
-                                                <a v-show="(item.orderState == 2 && orderDetails.CommentStar == 0 ? true:false)" :href="`+ "`" + `/CGA101G1/frontend/Product/postComment.html?ProductNo=` + "`" + "+" + "orderDetails.productNo" + "+" + "`" + `&OrderNo=` + "`" + "+" + "orderDetails.orderNo" + `">我要發表遊戲評論</a>
+                                                <a v-show="(item.orderState == 2 && orderDetails.commentStar == 0 ? true:false)" :href="`+ "`" + `/CGA101G1/frontend/Product/postComment.html?ProductNo=` + "`" + "+" + "orderDetails.productNo" + "+" + "`" + `&OrderNo=` + "`" + "+" + "orderDetails.orderNo" + `">我要發表遊戲評論</a>
     
                                             </td>
                                         </tr>

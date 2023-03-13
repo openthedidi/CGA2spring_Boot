@@ -4,11 +4,13 @@
 
 
 作品說明
-1. 使用自學的Spring_Boot框架改寫養成班專案的商城區部分，再利用GCP上的ubuntu作業系統，
+
+1.使用自學的Spring_Boot框架改寫養成班專案的商城區部分與會員區，再利用GCP上的ubuntu作業系統，
 安裝docker後，進行佈署。
 
+2.撰寫單元測試：分別測試Spring MVC架構，包含controller層、service層及modle層，使用H2DB搭配初始化的.sql檔進行測試。
 
-2. 撰寫單元測試：分別測試Spring MVC架構，包含controller層、service層及modle層，使用H2DB搭配初始化的.sql檔進行測試。
+3.作品網站連結: http://35.221.248.179:8999/CGA101G1/frontend/Product/HomePageinshop.html
 
 
 

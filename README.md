@@ -14,10 +14,22 @@
 
 
 資料夾說明
-1. controller--依照RESTful API風格提供API給予前端(實作範圍：gameplatformtype、gametype、product、productPic)。
-2. dao--藉由連接GCP上的MySQL，使用SQL語法或是spring data jpa進行資料處理(實作範圍：gameplatformtype、gametype、gamecompany、product、productPic、orderdetail)。
-3. model--pojo部分。
-4. service --接續model層級controller層。
+
+    |-- src
+        |-- main // 程式資料夾
+            |-- java
+                |-- com.cj.cga101g1
+                    |-- 服務名稱
+                        |--controller
+                        |--dao
+                        |--service
+                        |--util
+
+
+1. controller--依照RESTful API風格提供API給予前端。
+2. dao       --藉由連接GCP上的MySQL，使用spring data jpa進行資料處理。
+3. service   --接續dao層及controller層，處理商業邏輯。
+4. util      --放置pojo。
 
 
 

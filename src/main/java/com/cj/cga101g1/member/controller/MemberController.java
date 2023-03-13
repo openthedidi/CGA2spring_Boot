@@ -169,6 +169,7 @@ public class MemberController {
         JwtTokenUtils jwtToken = new JwtTokenUtils();
         if (jwtToken.validateToken(token)) {
             System.out.println("token 驗證通過");
+            System.out.println(" mem.getMemAdd() : " + mem.getMemAdd());
             Mem memResult = memberService.memEdit(memNo, mem);
             return ResponseEntity.status(HttpStatus.OK).body(memResult);
         } else {

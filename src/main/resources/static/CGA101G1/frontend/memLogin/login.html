@@ -41,16 +41,17 @@
 
         <div class="logo-div">
             <img src="../../../images/logo.png" alt="">
-            <a href="/CGA101G1/frontend/HomePage/HomePage.html" class="logo">帕Game</a>
+            <a href="/CGA101G1/frontend/Product/HomePageinshop.html" class="logo">帕Game</a>
         </div>
 
 
         <nav class="navbar">
             <!-- 上方標籤列 -->
-            <a class="active" href="/CGA101G1/frontend/HomePage/HomePage.html">首頁</a>
-            <a href="/CGA101G1/frontend/Product/HomePageinshop.html" class="nav-link">商品區</a>
-            <a href="/CGA101G1/frontend/bid/listallbid.html" class="nav-link">競標區</a>
-            <a href="/CGA101G1/frontend/forum/forumHomePage.jsp" class="nav-link">討論區</a>
+            <!--            <a class="active" href="/CGA101G1/frontend/HomePage/HomePage.html">首頁</a>-->
+            <a href="/CGA101G1/frontend/Product/HomePageinshop.html">商品區</a>
+            <!-- <a href="#news">遊戲新聞</a> -->
+            <!--            <a href="/CGA101G1/frontend/bid/listallbid.html">競標區</a>-->
+            <!--            <a href="/CGA101G1/frontend/forum/forumHomePage.jsp">討論區</a>-->
         </nav>
 
         <div class="icons">
@@ -106,11 +107,11 @@
                             </div>
 
 
-                            <label for="choose" class="form-label"> 選擇登入方式:<span class="text-danger"></span></label>
-                            <div style="margin: 0 0 0 10; display: flex; ">
-                                <input type="radio" value="username" v-model="loginType">帳號
-                                <input type="radio" value="email" v-model="loginType">信箱
-                            </div>
+<!--                            <label for="choose" class="form-label"> 選擇登入方式:<span class="text-danger"></span></label>-->
+<!--                            <div style="margin: 0 0 0 10; display: flex; ">-->
+<!--                                <input type="radio" value="username" v-model="loginType">帳號-->
+<!--                                <input type="radio" value="email" v-model="loginType">信箱-->
+<!--                            </div>-->
 
 
                             <template v-if="loginType==='username'">
@@ -119,26 +120,27 @@
                                         <label for="memAccount" class="form-label">帳號:<span
                                                 class="text-danger">*</span></label> <input
                                             style="text-transform: none;" v-model="memAccount" type="text"
-                                            id="memAccount" class="form-control" placeholder="輸入帳號" key="username">
+                                            id="memAccount" class="form-control" placeholder="測試帳號：bbb" key="username">
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="row align-items-center">
                                             <label class="form-label col" for="memPassword">密碼:<span
                                                     class="text-danger">*</span></label>
                                         </div>
-                                        <input type="password" class="form-control" id="memPassword" placeholder="輸入密碼"
+                                        <input type="password" class="form-control" id="memPassword" placeholder="測試密碼：bbb"
                                             v-model="memPassword1" style="text-transform: none;" key="upassword"> <span
                                             class="col ms-auto small text-end">
-                                            <a href="/CGA101G1/frontend/mem/EmailForChangePassword.jsp">
-                                                忘記密碼?</a></span>
+<!--                                            <a href="/CGA101G1/frontend/mem/EmailForChangePassword.jsp">-->
+<!--                                                忘記密碼?</a>-->
+                                    </span>
                                     </div>
 
                                     <!-- Checkbox -->
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" value="remember1" id="remember1"
-                                            v-model="isChecked1" />
-                                        <label class="form-check-label" for="form2Example3"> 記住帳號 </label>
-                                    </div>
+<!--                                    <div class="form-check mb-3">-->
+<!--                                        <input class="form-check-input" type="checkbox" value="remember1" id="remember1"-->
+<!--                                            v-model="isChecked1" style="height: 12;width: 12"/>-->
+<!--                                        <label class="form-check-label" for="form2Example3"> 記住帳號 </label>-->
+<!--                                    </div>-->
                                     <div class="form-group text-center">
                                         <button type="button" class="btn btn-primary w-100" id="btn1"
                                             @click="checkAccount" key="b1">

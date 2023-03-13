@@ -39,17 +39,18 @@
     <header>
 
         <div class="logo-div">
-            <img src="/CGA101G1/frontend/mainCss/images/logo.png" alt="">
-            <a href="/CGA101G1/frontend/HomePage/HomePage.html" class="logo">帕Game</a>
+            <img src="../../../images/logo.png" alt="">
+            <a href="/CGA101G1/frontend/Product/HomePageinshop.html" class="logo">帕Game</a>
         </div>
 
 
         <nav class="navbar">
             <!-- 上方標籤列 -->
-            <a class="active" href="/CGA101G1/frontend/HomePage/HomePage.html">首頁</a>
-            <a href="/CGA101G1/frontend/Product/HomePageinshop.html" class="nav-link">商品區</a>
-            <a href="/CGA101G1/frontend/bid/listallbid.html" class="nav-link">競標區</a>
-            <a href="/CGA101G1/frontend/forum/forumHomePage.jsp" class="nav-link">討論區</a>
+            <!--            <a class="active" href="/CGA101G1/frontend/HomePage/HomePage.html">首頁</a>-->
+            <a href="/CGA101G1/frontend/Product/HomePageinshop.html">商品區</a>
+            <!-- <a href="#news">遊戲新聞</a> -->
+            <!--            <a href="/CGA101G1/frontend/bid/listallbid.html">競標區</a>-->
+            <!--            <a href="/CGA101G1/frontend/forum/forumHomePage.jsp">討論區</a>-->
         </nav>
 
         <div class="icons">
@@ -102,15 +103,15 @@
                     <!-- Profile Menu -->
                     <div class="col-lg-3 pb-4 pb-lg-0 col-xxl-3  pe-xxl-5" style="font-weight: bold; font-size: 16px">
                         <div class="bg-white border border-bottom-0 shadow-lg">
-                            <div class="d-flex p-3 align-items-center">
-                                <div class="avatar avatar-lg rounded-circle" id="Pinf">
-                                    <img src="/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt="" id="imgPinf">
-                                </div>
-                                <div class="col ps-3">
-                                    <h6 class="m-0" id="Ninf"></h6>
-                                    <small><a href="javascript:void(0);" id="Einf"></a></small>
-                                </div>
-                            </div>
+<!--                            <div class="d-flex p-3 align-items-center">-->
+<!--                                <div class="avatar avatar-lg rounded-circle" id="Pinf">-->
+<!--                                    <img src="/mem/MemSelfPicServlet?memNo=${memVO.memNo}" title="" alt="" id="imgPinf">-->
+<!--                                </div>-->
+<!--                                <div class="col ps-3">-->
+<!--                                    <h6 class="m-0" id="Ninf"></h6>-->
+<!--                                    <small><a href="javascript:void(0);" id="Einf"></a></small>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="bg-gray-200 p-3 border-bottom border-top">
                                 <h6 class="m-0">會員中心</h6>
                             </div>
@@ -121,67 +122,67 @@
                                         <i class="bi bi-bag me-2"></i> 我的訂單
                                     </a>
                                 </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/frontend/Product/HomePageinProduct-wishlist.jsp">
-                                        <i class="bi bi-heart me-2"></i>我的最愛
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/bid/bidApplyListMemNo">
-                                        <i class="bi bi-alarm me-2"></i>出價商品追蹤
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/bid/bidProductWonByMemNo">
-                                        <i class="bi bi-bag me-2"></i>得標商品查詢
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/frontend/bid/addbidapplylist.jsp">
-                                        <i class="bi bi-card-checklist me-2"></i>競標商品申請
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/bid/bidApplyListSeller">
-                                        <i class="bi bi-card-checklist me-2"></i>我的申請單
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/bid/bidProductSeller">
-                                        <i class="bi bi-bell me-2"></i>我的上架中競標商品
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/forum/forumPostCollectionMemNo">
-                                        <i class="bi bi-heart me-2"></i>我的文章收藏
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/forum/forumPostMyPostMemNo">
-                                        <i class="bi bi-heart me-2"></i>我的文章
-                                    </a>
-                                </li>
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/chatroom/banListGetAll">
-                                        <i class="bi bi-emoji-angry me-2"></i>我的忽略會員清單
-                                    </a>
-                                </li>
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/frontend/Product/HomePageinProduct-wishlist.jsp">-->
+<!--                                        <i class="bi bi-heart me-2"></i>我的最愛-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/bid/bidApplyListMemNo">-->
+<!--                                        <i class="bi bi-alarm me-2"></i>出價商品追蹤-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/bid/bidProductWonByMemNo">-->
+<!--                                        <i class="bi bi-bag me-2"></i>得標商品查詢-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/frontend/bid/addbidapplylist.jsp">-->
+<!--                                        <i class="bi bi-card-checklist me-2"></i>競標商品申請-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/bid/bidApplyListSeller">-->
+<!--                                        <i class="bi bi-card-checklist me-2"></i>我的申請單-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/bid/bidProductSeller">-->
+<!--                                        <i class="bi bi-bell me-2"></i>我的上架中競標商品-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/forum/forumPostCollectionMemNo">-->
+<!--                                        <i class="bi bi-heart me-2"></i>我的文章收藏-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/forum/forumPostMyPostMemNo">-->
+<!--                                        <i class="bi bi-heart me-2"></i>我的文章-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/chatroom/banListGetAll">-->
+<!--                                        <i class="bi bi-emoji-angry me-2"></i>我的忽略會員清單-->
+<!--                                    </a>-->
+<!--                                </li>-->
 
-                                <li class="border-bottom mb-0">
-                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"
-                                        href="/CGA101G1/frontend/memCoupon/lookUpOneMemCoupon.jsp">
-                                        <i class="bi bi-bookmark me-2"></i>我的優惠卷
-                                    </a>
-                                </li>
+<!--                                <li class="border-bottom mb-0">-->
+<!--                                    <a class="nav-link-style d-flex align-items-center p-3" style="color:black"-->
+<!--                                        href="/CGA101G1/frontend/memCoupon/lookUpOneMemCoupon.jsp">-->
+<!--                                        <i class="bi bi-bookmark me-2"></i>我的優惠卷-->
+<!--                                    </a>-->
+<!--                                </li>-->
                             </ul>
                             <div class="bg-gray-200 p-3 border-bottom">
                                 <h6 class="m-0">帳戶設定</h6>
@@ -225,22 +226,22 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-5"></div>
-                                                    <div class="col-md-3">
-                                                        <!-- 圖片 -->
-                                                        <div class="forimg">
-                                                            <div id="divImg" style="width: 50%;">
-                                                                <label for="myPic" class="form-label">會員大頭貼:</label>
-                                                                <img src="" id="img1" />
-                                                                <input type="file" name="myPic" accept="image/*"
-                                                                    id="myPic" class="form-control"
-                                                                    style="text-transform: none;">
-                                                                <label id="lup7"></label>
-                                                            </div>
-                                                            <div id="catch">
-                                                                <input type="hidden" id="reader">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        &lt;!&ndash; 圖片 &ndash;&gt;-->
+<!--                                                        <div class="forimg">-->
+<!--                                                            <div id="divImg" style="width: 50%;">-->
+<!--                                                                <label for="myPic" class="form-label">會員大頭貼:</label>-->
+<!--                                                                <img src="" id="img1" />-->
+<!--                                                                <input type="file" name="myPic" accept="image/*"-->
+<!--                                                                    id="myPic" class="form-control"-->
+<!--                                                                    style="text-transform: none;">-->
+<!--                                                                <label id="lup7"></label>-->
+<!--                                                            </div>-->
+<!--                                                            <div id="catch">-->
+<!--                                                                <input type="hidden" id="reader">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
                                                     <div class="col-md-4"></div>
 
                                                     <!-- <div class="col-md-6"> -->
@@ -253,13 +254,6 @@
                                                             <label id="l1"
                                                                 style="color: darkkhaki; font-size: 20;  text-transform: none;"
                                                                 class="form-control"></label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="memPassword" class="form-label">密碼: </label>
-                                                            <a href="/CGA101G1/frontend/mem/passwordChange.jsp" id="a1"
-                                                                style="color: blue; font-size: 20; "
-                                                                class="form-control">更改密碼</a>
-                                                            <label id="l2"></label>
                                                         </div>
 
                                                         <div>
@@ -316,6 +310,13 @@
                                                                 確認修改
                                                             </button>
                                                         </div>
+                                                        <div style="visibility: hidden">
+                                                            <label for="memPassword" class="form-label">密碼: </label>
+                                                            <a href="/CGA101G1/frontend/mem/passwordChange.jsp" id="a1"
+                                                               style="color: blue; font-size: 20; "
+                                                               class="form-control">更改密碼</a>
+                                                            <label id="l2"></label>
+                                                        </div>
 
 
 
@@ -337,7 +338,7 @@
                                                         <!--                                                                 class="form-control" style="text-transform: none;"> -->
                                                         <!--                                                             <label id="l7" style="color: red; font-size: 15;"></label> -->
                                                         <!--                                                         </div> -->
-                                                        <div>
+                                                        <div style="visibility: hidden">
                                                             <label for="memBirth" class="form-label">出生年月日:
                                                             </label>
                                                             <input type="text" name="memBirth" id="memBirth"
@@ -725,21 +726,21 @@
                         }
 
                         $("#btn1").click(() => {
-                            if ($('#reader').val().length !== 0) {
-                                //對base64做切割處理
-                                let imageBase64 = $('#reader').val();
-                                let index = imageBase64.indexOf(',');
-                                index = index + 1
-                                let str1 = imageBase64.substr(0, index);
-                                imageBase64 = imageBase64.replace(str1, "");
-                                //送資料到後端
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "/CGA101G1/mem/MemPicEditServlet",
-                                    contentType: "application/json",
-                                    data: imageBase64
-                                })
-                            }
+                            // if ($('#reader').val().length !== 0) {
+                            //     //對base64做切割處理
+                            //     let imageBase64 = $('#reader').val();
+                            //     let index = imageBase64.indexOf(',');
+                            //     index = index + 1
+                            //     let str1 = imageBase64.substr(0, index);
+                            //     imageBase64 = imageBase64.replace(str1, "");
+                            //     //送資料到後端
+                            //     $.ajax({
+                            //         type: 'POST',
+                            //         url: "/CGA101G1/mem/memPicEdit",
+                            //         contentType: "application/json",
+                            //         data: imageBase64
+                            //     })
+                            // }
                             if ($('#l5').text() === '請輸入行動電話為09開頭，共10位數字號碼' ||
                                 $('#l5').text() === '尚未輸入' || $('#memName').val().length === 0 ||
                                 $('#memMobile').val().length === 0
@@ -747,7 +748,7 @@
                                 $('#l8').text(`尚有欄位未輸入或格式錯誤`);
                             } else {
                                 const lubMemNo = document.getElementById('lubMemNo').innerText;
-                                console.log(lubMemNo)
+                                console.log(lubMemNo);
                                 $.ajax({
                                     type: 'PUT',
                                     url: "/mem/memEdit/" + lubMemNo,
@@ -761,11 +762,11 @@
                                             memNo:lubMemNo,
                                             memName: memName.value,
                                             memMobile: memMobile.value,
-                                            memAdd: memAdd.value,
+                                            memAdd: document.getElementById('memAdd').value,
                                             memEmail: l7.innerText,
                                             memBirth: memBirth.value,
-                                            memCity: memCity.value,
-                                            memDist: memDist.value,
+                                            memCity: document.getElementById('memCity').value,
+                                            memDist: document.getElementById('memDist').value,
                                             memBirth: memBirth.value,
                                             creditcardNo: creditcardNo1.value + creditcardNo2.value + creditcardNo3.value + creditcardNo4.value,
                                             creditcardDate: creditcardDate1.value + creditcardDate2.value,

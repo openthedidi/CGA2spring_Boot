@@ -16,7 +16,7 @@
 
 3.作品網站連結: http://35.221.248.179:8999/CGA101G1/frontend/Product/HomePageinshop.html
 
-4.版本：JDK-17
+4.版本：JDK-17。
 
 
 資料夾說明

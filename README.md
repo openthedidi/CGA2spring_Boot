@@ -18,8 +18,7 @@
 
 4.版本：JDK-17。
 
-
-資料夾說明
+5.資料夾說明
 
     |-- src
         |-- main // 程式資料夾
@@ -40,7 +39,7 @@
 
 
 
-測試資料夾說明
+6.測試資料夾說明
 1. controller--利用MockMvc測試controller層的查詢 / 新增 / 修改 / 刪除 功能 API(實作範圍：gameplatformtype)。
 2. service--利用Mockito進行service層的查詢 / 新增/ 修改 / 刪除之測試(實作範圍：gameplatformtype)。
 3. model--測試modle層的新增 / 修改 / 刪除功能。

@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
-
+/**
+ *  優惠券的種類包含不同名稱與折價
+ *  ，資料庫table名稱為coupontype
+ * */
 @Getter
 @Setter
 @Entity

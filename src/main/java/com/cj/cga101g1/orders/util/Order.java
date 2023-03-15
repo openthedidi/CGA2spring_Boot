@@ -1,10 +1,5 @@
 package com.cj.cga101g1.orders.util;
 
-
-import com.cj.cga101g1.member.dao.MemberDao;
-import com.cj.cga101g1.member.dao.MemberDaoImp;
-import com.cj.cga101g1.member.service.MemberService;
-import com.cj.cga101g1.member.util.Mem;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -12,12 +7,14 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
-
+/**
+ *  會員下的訂單，資料庫table名稱為order
+ * */
 @Getter
 @Setter
 @Component
 @Entity
-@Table(name = "orders",schema = "cga101g1")
+@Table(name = "order",schema = "cga101g1")
 public class Order {
 
     @Id
@@ -49,9 +46,4 @@ public class Order {
     @Column(name = "PickupTime")
     private Date pickupTime;
 
-
-    public Mem findMemByMemNo(Integer memNo){
-        MemberDaoImp memberDaoImp = new MemberDaoImp();
-        return memberDaoImp.getMemByMemNo(memNo);
-    }
 }

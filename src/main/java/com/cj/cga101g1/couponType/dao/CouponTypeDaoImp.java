@@ -9,7 +9,7 @@ public class CouponTypeDaoImp implements CouponTypeDao{
     @Autowired
     private CouponTypeRepository couponTypeRepository;
 
-
+    /** 利用couponTypeNo取得CouponType的pojo **/
     @Override
     public CouponType getCouponTypeByID(Integer couponTypeNo) {
         return couponTypeRepository.findById(couponTypeNo).orElse(null);

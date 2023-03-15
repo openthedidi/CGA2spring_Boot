@@ -18,6 +18,7 @@ public class GameCompanyDaoImp implements GameCompanyDao{
     @Autowired
     private GameCompany gameCompany;
 
+    /** 利用gameCompanyNo取得GameCompany的pojo **/
     @Override
     public GameCompany findByNo(Integer gameCompanyNo) {
         final String sql = "select GameCompanyNo,GameCompanyName from gamecompany where GameCompanyNo = :GameCompanyNo;";

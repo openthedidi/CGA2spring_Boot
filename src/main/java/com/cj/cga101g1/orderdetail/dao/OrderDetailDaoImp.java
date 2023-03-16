@@ -40,6 +40,7 @@ public class OrderDetailDaoImp implements OrderDetailDao {
         return orderDetailRepository.showOneProductAllComments(productNo);
     }
 
+    @Transactional
     @Override
     public List<OrderDetail> getCommentsInfosByOneProeduct(Integer productNo) {
         return orderDetailRepository.getCommentsInfosByOneProeduct(productNo);
@@ -52,7 +53,6 @@ public class OrderDetailDaoImp implements OrderDetailDao {
 
     @Override
     public List<OrderDetail> getAllDetailByOrderNo(Integer orderNo) {
-        System.out.println(orderNo);
         final String sql = "select * from orderdetail where orderNo = :orderNo";
         Map<String, Object> map = new HashMap<>();
         map.put("orderNo", orderNo);

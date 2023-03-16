@@ -112,8 +112,6 @@ public class OrderDetailController {
 
     @GetMapping("/getAllDetailByOrderNo/{orderNo}")
     public ResponseEntity<List> getAllDetailByOrderNo(@PathVariable Integer orderNo){
-        System.out.println(orderNo);
-
         return ResponseEntity.ok(orderDetailService.getAllDetailByOrderNo(orderNo));
     }
 

@@ -2,6 +2,8 @@ package com.cj.cga101g1.util.jwt;
 
 
 import io.jsonwebtoken.*;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.stereotype.Component;
 
 import javax.security.auth.message.AuthException;
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.HashMap;
 /**
  * JWT參數設定
  */
+@Component
 public class JwtTokenUtils {
 
     public static final String TOKEN_HEADER = "Authorization";
@@ -54,7 +57,7 @@ public class JwtTokenUtils {
         return getTokenBody(token).getExpiration().before(new Date());
     }
 
-    private static Claims getTokenBody(String token) {
+    static Claims getTokenBody(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET)
                 .parseClaimsJws(token)

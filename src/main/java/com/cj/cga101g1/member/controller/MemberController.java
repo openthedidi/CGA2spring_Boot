@@ -36,50 +36,6 @@ public class MemberController {
     private JwtUserSecurityService jwtUserSecurityService;
 
 
-    @PostMapping("/LoginServlet")
-    public ResponseEntity<Mem> login(@RequestBody Mem mem, HttpSession session) {
-        Mem memResult = new Mem();
-        if (memberService.getMemByMemAccount(mem.getMemAccount()) == null) {
-            memResult.setMessage("查無此會員");
-            memResult.setSuccessful(false);
-            return ResponseEntity.status(400).body(memResult);
-        }
-
-        memResult = memberService.login(mem);
-        //如果帳密錯誤即立刻回傳
-        if ("帳號或密碼錯誤".equals(memResult.getMessage())) {
-            return ResponseEntity.status(404).body(mem);
-        }
-        //如果尚未驗證即立刻回傳
-        if (memResult.getMemVrfed() == 0) {
-            memResult.setMessage("尚未驗證，請至信箱點取驗證超連結");
-            memResult.setSuccessful(false);
-            return ResponseEntity.status(401).body(memResult);
-        }
-        //帳號遭停權則回傳
-        if (memResult.getMemStatus() == 0) {
-            memResult.setMessage("帳號已被停權，如有疑問請洽詢客服");
-            memResult.setSuccessful(false);
-            return ResponseEntity.status(403).body(memResult);
-        }
-        //驗證成功設定session
-        if (memResult.isSuccessful()) {
-            if (session.getAttribute("memVo") != null) {
-                session.getId();
-            }
-            session.setAttribute("loggedin", true);
-            session.setAttribute("memVO", memResult);
-        }
-
-        String init = (String) session.getAttribute("initlocationMem");
-        if (init != null) {
-            session.removeAttribute("initlocationMem");
-            memResult.setInitlocation(init);
-        }
-        System.out.println(session.getId());
-        return ResponseEntity.status(200).body(memResult);
-    }
-
     @PostMapping("/jwt/login")
     public ResponseEntity<String> loginByJWT(@RequestBody Mem mem) {
         Mem memResult;

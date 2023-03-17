@@ -27,6 +27,8 @@ public class WebSecurityConfigJWT extends WebSecurityConfigurerAdapter {
     private AuthenticationSuccessHandler jwtAuthenticationSuccessHandler;
     @Autowired
     private AuthenticationFailureHandler jwtAuthenticationFailHandler;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     //設置BCrypt密碼編輯器
     @Bean
@@ -40,8 +42,9 @@ public class WebSecurityConfigJWT extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/jwt/**").authenticated()
-                .antMatchers("/jwt/login","**/assets/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/CGA101G1/order/showAllOrderAndDetailsByMemNo").authenticated()
+                .antMatchers(HttpMethod.GET,"/mem/jwt/MemSelfInfo").authenticated()
+                .antMatchers("/jwt/login","**/assets/**","**/html").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -86,7 +89,14 @@ public class WebSecurityConfigJWT extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(JwtUserSecurityService()).passwordEncoder(new BCryptPasswordEncoder() {
-        });
+        System.out.println("呼叫WebSecurityConfigJWT - configure2進行使用者驗證");
+        auth.userDetailsService(userDetailsService);
+
+//        auth
+//                .userDetailsService(userDetailsService)
+//                .passwordEncoder(new BCryptPasswordEncoder());
+//                ↑↑↑↑
+//                如果資料庫使用的密碼有加密，
+//                使用BCryptPasswordEncoder與資料庫中使用者的已加密密碼進行比對。
     }
 }

@@ -52,6 +52,13 @@ public class OrderDetailController {
         return ResponseEntity.ok(list);
     }
 
+    @GetMapping("/jwt/showOneProductAllComments")
+    public ResponseEntity<List<Object>> showOneProductAllCommentsJWT(@RequestParam Integer productNo){
+        List<Object> list = orderDetailService.showOneProductAllComments(productNo);
+
+        return ResponseEntity.ok(list);
+    }
+
     @GetMapping("/showProductCaledComment")
     public ResponseEntity<Map> showProductCaledComment(@RequestParam Integer productNo){
         Map map = orderDetailService.showProductCaledComment(productNo);

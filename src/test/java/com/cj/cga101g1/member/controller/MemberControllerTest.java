@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -28,6 +29,7 @@ class MemberControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Transactional
     @Test
     void getMemSelfInfo() throws Exception {
         Mem mem =new Mem();

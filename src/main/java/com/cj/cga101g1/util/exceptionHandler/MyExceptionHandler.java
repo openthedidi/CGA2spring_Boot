@@ -79,15 +79,16 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
 
 
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<String> exceptionDemo(RuntimeException e){
-//        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-//                .body("RuntimeException"+e.getMessage());
-//    }
-//
-//    @ExceptionHandler(IllegalArgumentException.class)
-//    public ResponseEntity<String> exceptionDemo(IllegalArgumentException e){
-//        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-//                .body("IllegalArgumentException"+e.getMessage());
-//    }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> exceptionDemo(RuntimeException e){
+        System.out.println("啟動 MyExceptionHandler - exceptionDemo -RuntimeException");
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                .body("RuntimeException"+e.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> exceptionDemo(IllegalArgumentException e){
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                .body("IllegalArgumentException"+e.getMessage());
+    }
 }

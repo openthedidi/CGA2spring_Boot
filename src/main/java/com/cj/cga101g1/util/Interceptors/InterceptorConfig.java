@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**設定Interceptor的bean**/
+/** 將客製化的Interceptor class進行生效的設定 **/
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
     @Autowired
@@ -15,6 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        System.out.println("啟動addInterceptors");
         registry.addInterceptor(myInterceptor).addPathPatterns("/ExceptionHandlDemo2");
 
         /**

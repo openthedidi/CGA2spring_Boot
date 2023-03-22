@@ -15,7 +15,7 @@ public class  LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (request.getSession().getAttribute("memVO") == null) {
-            response.setStatus(302);
+            response.setStatus(406);
             return false;
         }
         return true;

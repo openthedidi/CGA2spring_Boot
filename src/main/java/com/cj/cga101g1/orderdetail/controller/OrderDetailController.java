@@ -47,6 +47,7 @@ public class OrderDetailController {
 
     @GetMapping("/showOneProductAllComments")
     public ResponseEntity<List<Object>> showOneProductAllComments(@RequestParam Integer productNo){
+        System.out.println("showOneProductAllComments :" + productNo);
         List<Object> list = orderDetailService.showOneProductAllComments(productNo);
 
         return ResponseEntity.ok(list);

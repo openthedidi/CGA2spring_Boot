@@ -5,6 +5,12 @@ import com.cj.cga101g1.member.service.MemberService;
 import com.cj.cga101g1.member.util.Mem;
 import com.cj.cga101g1.util.jwt.JwtTokenUtils;
 import com.cj.cga101g1.util.jwt.JwtUserSecurityService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
@@ -27,7 +33,8 @@ import java.util.Map;
 
 
 @RequestMapping("mem")
-@Controller
+@RestController
+@Tag(name = "Member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
@@ -37,6 +44,8 @@ public class MemberController {
 
 
     @PostMapping("/jwt/login")
+    @SecurityRequirement(name = "login")
+    @Operation(summary = "利用JWT登入")
     public ResponseEntity<String> loginByJWT(@RequestBody Mem mem) {
         Mem memResult;
         try {
@@ -52,6 +61,7 @@ public class MemberController {
 
 
     @GetMapping("/logoutServlet")
+    @Hidden
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.getSession().removeAttribute("memVO");
@@ -65,6 +75,10 @@ public class MemberController {
 
 
     @PostMapping("/register")
+    @Operation(summary = "利用form表單進行註冊", responses = {
+            @ApiResponse(responseCode = "200" , description = "註冊成功"),
+            @ApiResponse (responseCode = "503",description = "註冊失敗")
+    })
     public ResponseEntity<String> register(@RequestBody @Valid Mem mem) {
         Mem memResult = memberService.newMember(mem);
         if (memResult != null) {
@@ -93,7 +107,11 @@ public class MemberController {
      * 再進行驗證。
      */
     @PostMapping("/jwt/MemSelfInfo")
-    public ResponseEntity<Mem> getMemSelfInfoByJwt(@RequestHeader("Authorization") String token) throws AuthException {
+    @Operation(summary = "獲取會員資料", responses = {
+            @ApiResponse(responseCode = "200", description = "通過驗證"),
+            @ApiResponse(responseCode = "400", description = "沒有通過驗證")
+    })
+    public ResponseEntity<Mem> getMemSelfInfoByJwt(@RequestHeader("Authorization") @Parameter(description = "JWT") String token) throws AuthException {
         JwtTokenUtils jwtToken = new JwtTokenUtils();
         if (jwtToken.validateToken(token)) {
             String memAccount = jwtToken.getUsername(token);

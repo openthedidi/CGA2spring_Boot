@@ -38,8 +38,11 @@ public class Product extends ProductErrorMessage implements Serializable {
     @NotNull
     @Schema(description = "商品狀態")
     private Integer productState;
+
+    @Transient
     @Schema(description = "商品狀態種類")
     private ProductStatusCategory productStatusCategory;
+
     @Schema(description = "賣出時間")
     private Timestamp soldTime;
     @Schema(description = "運送到達時間")

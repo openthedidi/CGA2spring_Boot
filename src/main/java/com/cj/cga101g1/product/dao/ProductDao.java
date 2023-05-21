@@ -1,6 +1,9 @@
 package com.cj.cga101g1.product.dao;
 
 import com.cj.cga101g1.product.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +11,9 @@ import java.util.Map;
 public interface ProductDao {
 
     Map<String,Object> findByPrimaryKey(Integer ProductNo);
+
     String showSelledCount();
+
     List<Object> getPageInSellByMap(Integer page);
 
     String showSelledCountByPlatFormType(Integer gamePlatformNo);
@@ -30,4 +35,8 @@ public interface ProductDao {
     void createProduct(Product product);
 
     List showAllProductsName();
+
+    Page<Product> findAll(Pageable pageable);
+
+    Page<Product> showProductByPageAndPageSize(Specification<Product> spec, Pageable pageable);
 }

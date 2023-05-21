@@ -1,6 +1,7 @@
 package com.cj.cga101g1.product.service;
 
 import com.cj.cga101g1.product.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -38,4 +39,7 @@ public interface ProductService {
     Product createProduct(Product product);
 
     List showAllProductsName();
+
+
+    Page<Product> showProductByPageAndPageSize(Integer page, Integer pageSize, String gamePlatformNo, String gameTypeNo, String lowPrice, String highPrice, String keyWord);
 }

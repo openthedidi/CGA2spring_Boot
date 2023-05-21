@@ -7,8 +7,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +60,23 @@ public class ProductController {
             Integer page = Integer.valueOf(Page);
             List<Object> list = productService.getAllSelledProductsByMap(page);
             return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @GetMapping("/showProductByPageAndPageSize")
+    @Operation(summary = "取頁數產品藉由關鍵字")
+    public ResponseEntity<Page<Product>> showProductByPageAndPageSize(@RequestParam (required = false) String Page,
+                                                                      @RequestParam (required = false) String pageSize,
+                                                                      @RequestParam (required = false) String gamePlatformNo,
+                                                                      @RequestParam (required = false) String gameTypeNo,
+                                                                      @RequestParam (required = false) String lowPrice,
+                                                                      @RequestParam (required = false) String highPrice,
+                                                                      @RequestParam (required = false) String keyWord){
+
+        Integer page = StringUtils.isNumeric(Page)? Integer.parseInt(Page): 1;
+        Integer pageSizeInt = StringUtils.isNumeric(pageSize)? Integer.parseInt(pageSize): 9;
+        Page<Product> list = productService.showProductByPageAndPageSize(page, pageSizeInt, gamePlatformNo, gameTypeNo,
+                lowPrice, highPrice, keyWord);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping("/showPageProduct/redis")

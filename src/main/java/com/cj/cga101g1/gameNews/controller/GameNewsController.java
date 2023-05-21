@@ -3,12 +3,12 @@ package com.cj.cga101g1.gameNews.controller;
 
 import com.cj.cga101g1.gameNews.model.GameNews;
 import com.cj.cga101g1.gameNews.service.GameNewsService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +25,17 @@ public class GameNewsController {
             @RequestParam(required = false) String gameNewsContent,
             @RequestParam(required = false) String gameNewsTitle) {
         List<GameNews> list = gameNewsService.findGameNewsByMultiKey(gameNewsContent, gameNewsTitle);
-        return ResponseEntity.ok(list);
+        if(list != null){
+            return ResponseEntity.ok(list);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+    }
+
+    @GetMapping(value = "getPicUrl", produces = MediaType.IMAGE_GIF_VALUE)
+    public @ResponseBody byte[] getPicUrl(@RequestParam Integer gameNewsNo){
+        return gameNewsService.getPicUrl(gameNewsNo);
     }
 
 }

@@ -10,6 +10,9 @@ import com.cj.cga101g1.product.model.ProductResultSetExtractor;
 import com.cj.cga101g1.product.model.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
@@ -197,5 +200,15 @@ public class ProductDaoImpl implements ProductDao{
             list.add(product);
         }
         return list;
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> showProductByPageAndPageSize(Specification<Product> spec, Pageable pageable) {
+        return productRepository.findAll(spec, pageable);
     }
 }

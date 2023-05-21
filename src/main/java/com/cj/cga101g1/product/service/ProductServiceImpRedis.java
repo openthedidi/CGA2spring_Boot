@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -85,6 +86,11 @@ public class ProductServiceImpRedis implements ProductService{
 
     @Override
     public List showAllProductsName() {
+        return null;
+    }
+
+    @Override
+    public Page<Product> showProductByPageAndPageSize(Integer page, Integer pageSize, String gamePlatformNo, String gameTypeNo, String lowPrice, String highPrice, String keyWord) {
         return null;
     }
 }

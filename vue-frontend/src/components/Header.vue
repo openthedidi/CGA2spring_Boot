@@ -9,8 +9,8 @@
         <!-- 上方標籤列 -->
         <router-link class="active" to="/">首頁</router-link>
         <router-link to="/product/shop" class="nav-link">商品區</router-link>
-        <a href="/CGA101G1/frontend/bid/listallbid.html" class="nav-link">競標區</a>
-        <a href="/CGA101G1/frontend/forum/forumHomePage.jsp" class="nav-link">討論區</a>
+        <a href="/frontend/bid/listallbid.html" class="nav-link">競標區</a>
+        <a href="/frontend/forum/forumHomePage.jsp" class="nav-link">討論區</a>
     </nav>
 
     <div class="icons">

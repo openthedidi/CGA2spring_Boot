@@ -215,7 +215,7 @@ const getProductData = async () => {
     if (!productId) return
 
     try {
-        const res = await axios.get(`/CGA101G1/product/OneProductDetail?ProductNo=${productId}`)
+        const res = await axios.get(`/product/OneProductDetail?ProductNo=${productId}`)
         jsonData.value = res.data
         jsonData.value.Pics = []
         getPicData(productId)
@@ -226,7 +226,7 @@ const getProductData = async () => {
 
 const getPicData = async (productId) => {
     try {
-        const res = await axios.get(`/CGA101G1/product/ProductPicAll?ProductNo=${productId}`)
+        const res = await axios.get(`/product/ProductPicAll?ProductNo=${productId}`)
         jsonData.value.Pics = res.data
     } catch (e) {
         console.error(e)
@@ -238,7 +238,7 @@ const getCommentsData = async () => {
     if (!productId) return
 
     try {
-        const res = await axios.get(`/CGA101G1/product/showOneProductAllComments?ProductNo=${productId}`)
+        const res = await axios.get(`/product/showOneProductAllComments?ProductNo=${productId}`)
         commentsData.value = res.data
         if (commentsData.value.length !== 0) {
             reviewShow.value = true
@@ -254,7 +254,7 @@ const getCaledCommentsData = async () => {
     if (!productId) return
 
     try {
-        const res = await axios.get(`/CGA101G1/product/showProductCaledComment?ProductNo=${productId}`)
+        const res = await axios.get(`/product/showProductCaledComment?ProductNo=${productId}`)
         caledCommentsData.value = res.data
     } catch (e) {
         console.error(e)
@@ -264,7 +264,7 @@ const getCaledCommentsData = async () => {
 const addToCart = async () => {
     try {
         const totalPrice = quantity.value * jsonData.value.productPrice
-        await axios.post(`/CGA101G1/product/add2ShoppingCart?ProductNo=${jsonData.value.productNo}&ProductSales=${quantity.value}&ProductTotalPrice=${totalPrice}&ProductName=${jsonData.value.productName}`)
+        await axios.post(`/product/add2ShoppingCart?ProductNo=${jsonData.value.productNo}&ProductSales=${quantity.value}&ProductTotalPrice=${totalPrice}&ProductName=${jsonData.value.productName}`)
         swal("加入成功", `${jsonData.value.productName} 已加入購物車`, "success")
     } catch (e) {
         console.error(e)
@@ -273,7 +273,7 @@ const addToCart = async () => {
 
 const addToFavorites = async () => {
     try {
-        const res = await axios.post(`/CGA101G1/product/AddProduct2FavFromAlone?ProductNo=${jsonData.value.productNo}`)
+        const res = await axios.post(`/product/AddProduct2FavFromAlone?ProductNo=${jsonData.value.productNo}`)
         if (res.data == 0) swal("系統訊息", "請先登入會員唷", "warning")
         else if (res.data == 1) swal("系統訊息", "商品已成功添加至我的最愛", "success")
         else if (res.data == 2) swal("系統訊息", "我的最愛清單上已經有這個商品囉", "info")

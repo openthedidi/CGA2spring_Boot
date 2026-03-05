@@ -77,7 +77,7 @@ const loading = ref(true)
 const getFavoritesData = async () => {
   loading.value = true
   try {
-    const res = await axios.get('/CGA101G1/product/ShowMemFavoritelist')
+    const res = await axios.get('/product/ShowMemFavoritelist')
     jsonData.value = res.data
   } catch (error) {
     console.error(error)
@@ -88,7 +88,7 @@ const getFavoritesData = async () => {
 
 const removeFromFavorites = async (productNo) => {
   try {
-    await axios.get(`/CGA101G1/product/deleteMemFavor?ProductNo=${productNo}`)
+    await axios.get(`/product/deleteMemFavor?ProductNo=${productNo}`)
     getFavoritesData()
   } catch (error) {
     console.error(error)
@@ -97,7 +97,7 @@ const removeFromFavorites = async (productNo) => {
 
 const addToCart = async (item) => {
   try {
-    await axios.post(`/CGA101G1/product/add2ShoppingCart?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${item.productPrice}&ProductName=${item.productName}`)
+    await axios.post(`/product/add2ShoppingCart?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${item.productPrice}&ProductName=${item.productName}`)
     swal("加入成功", `${item.productName} 已加入購物車`, "success")
   } catch (error) {
     console.error(error)

@@ -41,7 +41,7 @@
                       <label class="form-label col" for="memPassword">密碼:<span class="text-danger">*</span></label>
                     </div>
                     <input type="password" class="form-control" id="memPassword" placeholder="輸入密碼" v-model="memPassword1" style="text-transform: none;" key="upassword">
-                    <span class="col ms-auto small text-end"><a href="/CGA101G1/frontend/mem/EmailForChangePassword.jsp">忘記密碼?</a></span>
+                    <span class="col ms-auto small text-end"><a href="/frontend/mem/EmailForChangePassword.jsp">忘記密碼?</a></span>
                   </div>
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" id="remember1" v-model="isChecked1" />
@@ -65,7 +65,7 @@
                       <label class="form-label col" for="memPassword2">密碼:<span class="text-danger">*</span></label>
                     </div>
                     <input type="password" class="form-control" id="memPassword2" placeholder="輸入密碼" style="text-transform: none;" key="epassword" v-model="memPassword2">
-                    <span class="col ms-auto small text-end"><a href="/CGA101G1/frontend/mem/EmailForChangePassword.jsp">忘記密碼?</a></span>
+                    <span class="col ms-auto small text-end"><a href="/frontend/mem/EmailForChangePassword.jsp">忘記密碼?</a></span>
                   </div>
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" id="remember2" v-model="isChecked2" />
@@ -79,7 +79,7 @@
               </template>
 
               <div class="pt-4 pb-4 text-center">
-                <span class="text-muted"><a href="/CGA101G1/frontend/mem/register.html">還沒有加入會員嗎? 點選這裡前往註冊!!</a></span>
+                <span class="text-muted"><a href="/frontend/mem/register.html">還沒有加入會員嗎? 點選這裡前往註冊!!</a></span>
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@ const checkEmail = async () => {
   }
 
   try {
-    const response = await axios.post('/CGA101G1/mem/EamilLoginServlet', {
+    const response = await axios.post('/mem/EamilLoginServlet', {
       memEmail: email.value,
       memPassword: memPassword2.value
     })

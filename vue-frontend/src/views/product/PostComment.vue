@@ -100,7 +100,7 @@ const getProductData = async () => {
   }
 
   try {
-    const res = await axios.get(`/CGA101G1/product/OneProductDetail?ProductNo=${productNo}`)
+    const res = await axios.get(`/product/OneProductDetail?ProductNo=${productNo}`)
     datastore.value = res.data
   } catch (error) {
     console.error("取ProductData失敗：", error)
@@ -129,7 +129,7 @@ const submitComment = async () => {
         formData.append('commentCotent', commentContent.value)
         formData.append('CommentStar', commentStar.value)
 
-        await axios.post('/CGA101G1/orderDetail/addCommit', formData)
+        await axios.post('/orderDetail/addCommit', formData)
         
         swal("成功", "評論已送出", "success").then(() => {
             router.push('/product/order')

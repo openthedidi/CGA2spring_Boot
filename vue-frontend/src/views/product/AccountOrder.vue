@@ -111,7 +111,7 @@ const totalPage = computed(() => {
 
 const getOrderData = async () => {
     try {
-        const res = await axios.get('/CGA101G1/product/showAllOrderAndDetailsByMemNo')
+        const res = await axios.get('/product/showAllOrderAndDetailsByMemNo')
         datastore.value = res.data.map(order => ({ ...order, openOrderDetail: false }))
         await getProductName()
 
@@ -137,7 +137,7 @@ const getOrderData = async () => {
 
 const getProductName = async () => {
     try {
-        const res = await axios.get('/CGA101G1/product/showAllProductsName')
+        const res = await axios.get('/product/showAllProductsName')
         productNames.value = res.data
     } catch (e) {
         console.error(e)

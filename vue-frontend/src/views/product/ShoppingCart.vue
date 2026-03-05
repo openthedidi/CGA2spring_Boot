@@ -227,7 +227,7 @@ const finalPrice = computed(() => {
 
 const getProductData = async () => {
     try {
-        const res = await axios.get('/CGA101G1/product/showCart')
+        const res = await axios.get('/product/showCart')
         datastore.value = res.data
         totalPrice.value = 0
         datastore.value.forEach(element => {
@@ -250,7 +250,7 @@ const getPostData = async () => {
 
 const getMemData = async () => {
     try {
-        const res = await axios.get('/CGA101G1/product/showShoppingMemInfo')
+        const res = await axios.get('/product/showShoppingMemInfo')
         if (res.data) {
            memInfo.value = res.data
            validateForm()
@@ -262,7 +262,7 @@ const getMemData = async () => {
 
 const getMemCoupons = async () => {
     try {
-        const res = await axios.get('/CGA101G1/order/showMemAllC')
+        const res = await axios.get('/order/showMemAllC')
         coupons.value = res.data
     } catch (e) {
         console.error(e)
@@ -299,7 +299,7 @@ watch(() => memInfo.value.Dist, (newDist) => {
 const modifyCart = async (item, action) => {
     try {
         const singlePrice = item.productTotalPrice / item.productSales
-        const url = action === 'add' ? '/CGA101G1/product/shoppingCartModAdd' : '/CGA101G1/product/shoppingCartReduce'
+        const url = action === 'add' ? '/product/shoppingCartModAdd' : '/product/shoppingCartReduce'
         await axios.get(`${url}?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${singlePrice}&ProductName=${item.productName}`)
         getProductData()
     } catch (e) {
@@ -310,7 +310,7 @@ const modifyCart = async (item, action) => {
 const removeFromCart = async (item) => {
     try {
         const singlePrice = item.productTotalPrice / item.productSales
-        await axios.get(`/CGA101G1/product/shoppingCartRemoveAll?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${singlePrice}&ProductName=${item.productName}`)
+        await axios.get(`/product/shoppingCartRemoveAll?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${singlePrice}&ProductName=${item.productName}`)
         getProductData()
     } catch(e) {
         console.error(e)
@@ -396,12 +396,12 @@ const submitOrder = async () => {
         formData.append('couponTypeNo', selectCouponNo.value)
         formData.append('OrderTotalPrice', finalPrice.value)
         
-        // await axios.post('/CGA101G1/order/addtoOrderAndOrderlist', formData)
+        // await axios.post('/order/addtoOrderAndOrderlist', formData)
         
         // Temporary window.location substitution pattern since the original used a native form action
         const formObj = document.createElement('form')
         formObj.method = "POST"
-        formObj.action = "/CGA101G1/order/addtoOrderAndOrderlist"
+        formObj.action = "/order/addtoOrderAndOrderlist"
         
         for (const [key, value] of formData.entries()) {
             const input = document.createElement('input')

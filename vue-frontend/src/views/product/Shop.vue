@@ -184,36 +184,36 @@ const moneyFliter = ref(false)
 
 const displayData = computed(() => temp.value.length === 0 ? jsonData.value : temp.value)
 
-// Assuming API endpoints start with '/CGA101G1/product/'
+// Assuming API endpoints start with '/product/'
 const fetchProductData = async () => {
     loading.value = true
     try {
         const { gameTypeNo, gamePlatformNo, lowPrice, highPrice, keyword } = route.query
         
         if (!gameTypeNo && !gamePlatformNo && !lowPrice && !keyword) {
-            const pagesRes = await axios.get('/CGA101G1/product/showSelledCount')
+            const pagesRes = await axios.get('/product/showSelledCount')
             pages.value = pagesRes.data
-            const productRes = await axios.get(`/CGA101G1/product/showPageProduct?Page=${page.value}`)
+            const productRes = await axios.get(`/product/showPageProduct?Page=${page.value}`)
             jsonData.value = productRes.data
         } else if (gamePlatformNo) {
-            const pagesRes = await axios.get(`/CGA101G1/product/showSellAndPlatFormTypeProductPages?gamePlatformNo=${gamePlatformNo}`)
+            const pagesRes = await axios.get(`/product/showSellAndPlatFormTypeProductPages?gamePlatformNo=${gamePlatformNo}`)
             pages.value = pagesRes.data
-            const productRes = await axios.get(`/CGA101G1/product/showSellAndPlatformProduct?gamePlatformNo=${gamePlatformNo}&Page=${page.value}`)
+            const productRes = await axios.get(`/product/showSellAndPlatformProduct?gamePlatformNo=${gamePlatformNo}&Page=${page.value}`)
             temp.value = productRes.data
         } else if (gameTypeNo) {
-             const pagesRes = await axios.get(`/CGA101G1/product/showSellAndGameTypeProductPages?gameTypeNo=${gameTypeNo}`)
+             const pagesRes = await axios.get(`/product/showSellAndGameTypeProductPages?gameTypeNo=${gameTypeNo}`)
              pages.value = pagesRes.data
-             const productRes = await axios.get(`/CGA101G1/product/showSellAndGameTypeProduct?gameTypeNo=${gameTypeNo}&Page=${page.value}`)
+             const productRes = await axios.get(`/product/showSellAndGameTypeProduct?gameTypeNo=${gameTypeNo}&Page=${page.value}`)
              temp.value = productRes.data
         } else if (lowPrice) {
-             const pagesRes = await axios.get(`/CGA101G1/product/showSellCountByMoney?lowPrice=${lowPrice}&highPrice=${highPrice}`)
+             const pagesRes = await axios.get(`/product/showSellCountByMoney?lowPrice=${lowPrice}&highPrice=${highPrice}`)
              pages.value = pagesRes.data
-             const productRes = await axios.get(`/CGA101G1/product/showInSellByMapAndMoney?lowPrice=${lowPrice}&highPrice=${highPrice}&Page=${page.value}`)
+             const productRes = await axios.get(`/product/showInSellByMapAndMoney?lowPrice=${lowPrice}&highPrice=${highPrice}&Page=${page.value}`)
              temp.value = productRes.data
         } else if (keyword) {
-             const pagesRes = await axios.get(`/CGA101G1/product/showSellProductByKeyWordPages?keyWord=${keyword}`)
+             const pagesRes = await axios.get(`/product/showSellProductByKeyWordPages?keyWord=${keyword}`)
              pages.value = pagesRes.data
-             const productRes = await axios.get(`/CGA101G1/product/showSellProductByKeyWord?keyWord=${keyword}&Page=${page.value}`)
+             const productRes = await axios.get(`/product/showSellProductByKeyWord?keyWord=${keyword}&Page=${page.value}`)
              temp.value = productRes.data
         }
     } catch (e) {
@@ -225,9 +225,9 @@ const fetchProductData = async () => {
 
 const getPlatformAndTypeData = async () => {
     try {
-        const platRes = await axios.get('/CGA101G1/gameplatformtype/getAllGamePlatformType')
+        const platRes = await axios.get('/gameplatformtype/getAllGamePlatformType')
         gamePlatformTypeData.value = platRes.data
-        const typeRes = await axios.get('/CGA101G1/gametype/getAllGameType')
+        const typeRes = await axios.get('/gametype/getAllGameType')
         gameTypeData.value = typeRes.data
     } catch (e) {
         console.error(e)
@@ -274,7 +274,7 @@ const previousPage = () => {
 
 const addToCart = async (item) => {
     try {
-        await axios.post(`/CGA101G1/product/add2ShoppingCart?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${item.productPrice}&ProductName=${item.productName}`)
+        await axios.post(`/product/add2ShoppingCart?ProductNo=${item.productNo}&ProductSales=1&ProductTotalPrice=${item.productPrice}&ProductName=${item.productName}`)
         swal("加入成功", `${item.productName} 已加入購物車`, "success")
     } catch (e) {
         console.error(e)
@@ -283,7 +283,7 @@ const addToCart = async (item) => {
 
 const addToFavorites = async (productNo) => {
     try {
-        const res = await axios.post(`/CGA101G1/product/AddProduct2Fav?ProductNo=${productNo}`)
+        const res = await axios.post(`/product/AddProduct2Fav?ProductNo=${productNo}`)
         if (res.data == 0) swal("系統訊息", "請先登入會員", "warning")
         else if (res.data == 1) swal("系統訊息", "成功加入我的最愛", "success")
         else if (res.data == 2) swal("系統訊息", "已經在清單中", "info")

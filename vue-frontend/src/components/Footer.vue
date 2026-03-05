@@ -8,7 +8,7 @@
                           <div class="box">
                               <h3>會員專區</h3>
                               <router-link to="/mem/login">會員登入</router-link> 
-                              <a href="/CGA101G1/frontend/mem/register.html">會員註冊</a> 
+                              <a href="/frontend/mem/register.html">會員註冊</a> 
                               <router-link to="/product/order">訂單管理</router-link> 
                               <a href="#">二手遊戲申請上架單管理</a>
                           </div>
@@ -17,8 +17,8 @@
                               <h3>快速連結</h3>
                               <router-link to="/">首頁</router-link> 
                               <router-link to="/product/shop">遊戲商城</router-link> 
-                              <a href="/CGA101G1/frontend/bid/listallbid.html">二手競標商城</a> 
-                              <a href="/CGA101G1/frontend/forum/forumHomePage.jsp">遊戲討論區</a>
+                              <a href="/frontend/bid/listallbid.html">二手競標商城</a> 
+                              <a href="/frontend/forum/forumHomePage.jsp">遊戲討論區</a>
                           </div>
 
                           <div class="box">

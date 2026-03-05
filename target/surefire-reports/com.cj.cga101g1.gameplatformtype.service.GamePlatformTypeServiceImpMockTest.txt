@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.cj.cga101g1.gameplatformtype.service.GamePlatformTypeServiceImpMockTest
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.551 s <<< FAILURE! - in com.cj.cga101g1.gameplatformtype.service.GamePlatformTypeServiceImpMockTest
-newPlatformType  Time elapsed: 0.029 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <556688> but was: <5588>
-	at com.cj.cga101g1.gameplatformtype.service.GamePlatformTypeServiceImpMockTest.newPlatformType(GamePlatformTypeServiceImpMockTest.java:49)
-

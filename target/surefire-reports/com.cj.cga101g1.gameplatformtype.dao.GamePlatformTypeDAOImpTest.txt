@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.cj.cga101g1.gameplatformtype.dao.GamePlatformTypeDAOImpTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.325 s - in com.cj.cga101g1.gameplatformtype.dao.GamePlatformTypeDAOImpTest
